@@ -1,0 +1,94 @@
+luminous, online store that sell household goods
+
+color: #0853a6, #eee
+
+page
+-home
+-store
+-product (not in the nav bar)
+-login
+-signup
+-cart
+
+home page:
+-nav bar
+    logo
+    home
+    store
+    login
+    signup
+    cart
+-header
+    left: shop name, text("live comfortably with luminous"), button("shop now")
+    right: products photos
+-luminous living, ("luminous help people to find their best will in household")
+-trending now: 7(la-z-sofa, side table, neck pillow, hand blender, bean bag)
+-footer: about, faqs, contact us, copyright
+
+store page:
+-nav bar(inherit)
+-search input
+-input value
+categories(furniture, kitchen, bedroom, bathroom)
+-products gird (product card = (picture, name, price))
+-footer(inherit)
+
+product page:
+-nav bar(inherit)
+-product card (picture, name, quantity, price , button(add to cart))
+-footer(inherit)
+
+login-signup page:
+-form
+    header(store name)
+    login(email or username, password, button(login), already)
+    signup(username, email, password, confirm password, button(signup), already)
+
+cart pop up: 
+-header
+    "Shopping cart()"
+    close button
+-items
+-footer
+    -total price
+    -checkout button
+
+products
+-chair
+    midback office chair v
+    la-z-Sofa v
+    rocking chair v
+-table
+    end table v
+    writing desk v
+    side table v
+-bed
+    spring bed v
+    memory foam v
+    latex bed v
+-carpet
+    polypropylene v
+    vinyl carpet v 
+-pillow
+    neck pillow v
+    bean bag v
+-plate
+    soup plate v
+    dessert plate v
+-spoon
+    tea spoon v
+    salad spoon v
+-knife
+    slicing knife v
+    boning knife v
+-microwave
+    basic microwave v
+    grill microwave v
+-blender
+    hand blender
+    full size blender
+
+tech stack:
+-tailwindcss
+-reactjs
+
