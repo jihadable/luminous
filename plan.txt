@@ -1,4 +1,4 @@
-luminous, online store that sell household goods
+luminous, online store that sell household things
 
 color: #0853a6, #eee
 
