@@ -27,7 +27,7 @@ function Navbar(props){
     const [mobileMenu, mobileMenuBtn, shoppingCartBtn, shoppingCartBtnMobile] = [useRef(), useRef(), useRef(), useRef()]
 
     return (
-        <nav className="navbar fixed left-0 right-0 top-0 px-[7%] py-3 flex items-center bg-white justify-between z-50 mobile:p-2 mobile:px-[5%] tablet:px-[5%]">
+        <nav className="navbar fixed left-0 right-0 top-0 px-[10vw] py-3 flex items-center bg-white justify-between z-50 mobile:p-2 mobile:px-[5%] tablet:px-[5%]">
             <a href="/" className="navbar-logo flex items-center gap-2">
                 <img src={luminousLogo} alt="" className="w-12" />
                 <span className="text-[1.3rem]">Luminous</span>
@@ -179,7 +179,7 @@ function ShoppingCart(props){
     }
     
     return (
-        <div className={`shopping-cart absolute top-[90%] right-0 ${(showShoppingCart) ? "" : "scale-x-0"} bg-white h-[100vh] py-4 px-1  text-xl flex flex-col items-center gap-4 origin-right transition duration-75 ${(cartItems.length === 0) ? "w-[372px]" : ""} mobile:w-full tablet:h-fit tablet:rounded-bl-md`} ref={shoppingCart}>
+        <div className={`shopping-cart absolute top-[90%] right-0 ${(showShoppingCart) ? "" : "scale-x-0"} bg-white h-[100vh] py-4 px-1 text-xl flex flex-col items-center gap-4 origin-right transition duration-75 ${(cartItems.length === 0) ? "w-[372px]" : ""} mobile:w-full tablet:h-fit tablet:rounded-bl-md`} ref={shoppingCart}>
             <div className="shopping-cart-header px-2 w-full text-center flex items-center justify-between">
                 <span className="text-xl">{`Shopping cart (${cartItems.length})`}</span>
                 <span className="close-shopping-cart-btn cursor-pointer flex justify-center items-center p-1 rounded hover:bg-hov" onClick={() => setShowShoppingCart(false)}>
