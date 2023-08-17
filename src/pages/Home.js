@@ -25,17 +25,19 @@ function Home(){
 // home header
 function HomeHeader(){
     return (
-        <header className="flex h-[100vh] items-center justify-evenly mobile:flex-col-reverse mobile:justify-center tablet:flex-col-reverse tablet:justify-center tablet:gap-4">
-            <div className="header-left flex flex-col gap-2">
-                <div className="shop-name text-4xl font-bold">Luminous</div>
-                <div className="tagline text-2xl">live comfortably with Luminous</div>
-                <a href="/store" className="w-fit py-1 px-2 rounded bg-primary text-white text-xl">Shop now</a>
+        <header className="flex h-[100vh] w-[80vw] mx-auto pt-8 items-center gap-4 mobile:flex-col mobile:w-[90vw] mobile:pt-20 mobile:mb-20 mobile:h-fit tablet:h-fit tablet:flex-col tablet:items-center tablet:pt-32 tablet:mb-20 tablet:w-[90vw]">
+            <div className="header-left w-[calc((80vw-.5rem)/2)] h-[calc((80vw-.5rem)/2)] bg-cover flex items-end mobile:w-full mobile:h-[90vw] tablet:w-full tablet:h-[70vw]">
+                <div className="flex flex-col gap-4 w-full p-8 bg-[rgb(0,0,0,.5)]">
+                    <div className="shop-name text-4xl font-bold text-white-prim">Luminous</div>
+                    <div className="tagline text-2xl text-white-prim">live comfortably with Luminous</div>
+                    <a href="/store" className="w-fit py-1 px-2 rounded bg-primary text-white text-xl">Shop now</a>
+                </div>
             </div>
-            <div className="header-right flex items-center gap-4 p-4">
-                <img src={spoon} alt="Spoon" className="spoon-img h-[400px] shadow-med cursor-pointer rounded-xl mobile:h-[90vw] tablet:h-[60vw]" />
-                <div className="img2 flex flex-col gap-4">
-                    <img src={chair} alt="Chair" className="chair-img w-[200px] shadow-med cursor-pointer rounded-xl mobile:w-[45vw] tablet:w-[30vw]" />
-                    <img src={table} alt="Table" className="tabler-img w-[200px] shadow-med cursor-pointer rounded-xl mobile:w-[45vw] tablet:w-[30vw]" />
+            <div className="header-right w-[calc((80vw-.5rem)/2)] h-[calc((80vw-.5rem)/2)] flex mobile:w-full mobile:h-[90vw] tablet:w-full tablet:h-[90vw]">
+                <img src={spoon} alt="Spoon" className="spoon-img h-full mobile:h-[90vw]" />
+                <div className="img2 flex flex-col">
+                    <img src={chair} alt="Chair" className="chair-img h-full w-full" />
+                    <img src={table} alt="Table" className="tabler-img h-full w-full" />
                 </div>
             </div>
         </header>
@@ -47,8 +49,8 @@ function HomeTag(){
 
     return (
         <section className="home-tag flex items-center justify-center m-auto relative">
-            <img src={household} alt="HouseHold" className="w-[60vw] rounded-md mobile:w-[90vw] tablet:w-[90vw]" />
-            <div className="home-tag-content backdrop-blur shadow-med flex flex-col gap-3 absolute p-10 rounded-xl w-[40vw] mobile:w-[90vw] mobile:h-full mobile:backdrop-blur-sm mobile:rounded-md tablet:w-[70vw]">
+            <img src={household} alt="HouseHold" className="w-[80vw] rounded-md mobile:w-[90vw] tablet:w-[90vw]" />
+            <div className="home-tag-content backdrop-blur shadow-med flex flex-col gap-3 absolute p-10 rounded-xl w-[60%] mobile:w-[90vw] mobile:h-full mobile:backdrop-blur-sm mobile:rounded-md tablet:w-[70vw]">
                 <div className="home-tag-header text-3xl font-bold mobile:text-2xl">Luminous Living</div>
                 <div className="home-tag-tagline text-xl mobile:text-base">Luminous help people to find their best will in household. Our products are all made to standard sizes so that you can mix and match them freely</div>
                 <a href="/store" className="w-fit py-1 px-2 rounded bg-primary text-white text-xl mobile:text-base">Shop now</a>
@@ -94,9 +96,9 @@ export function HomeTrendingNow(){
     ]
 
     return (
-        <section className="trending-now flex flex-col items-center gap-6 p-8 my-32 mx-auto mobile:w-[100vw]">
+        <section className="trending-now flex flex-col items-center gap-6 p-8 my-32 mx-auto mobile:w-full">
             <div className="trending-now-header text-3xl font-semibold">Trending Now</div>
-            <div className="trending-now-items w-[90vw] grid grid-cols-5 gap-5 mobile:grid-cols-2 tablet:grid-cols-4">
+            <div className="trending-now-items w-[80vw] grid grid-cols-5 gap-5 mobile:w-[90vw] mobile:grid-cols-2 tablet:w-[90vw] tablet:grid-cols-4">
                 {
                     trendingItems.map((item, index) => {
                         return (
@@ -177,13 +179,13 @@ function Payments(){
 // home contact us
 function HomeContactUs(){
     return (
-        <section className="contact-us w-fit mx-auto mt-20 flex flex-col gap-6 items-center mobile:w-full">
+        <section className="contact-us w-[80vw] mx-auto mt-20 flex flex-col gap-6 items-center mobile:w-full">
             <div className="contact-header text-3xl font-semibold">Contact Us</div>
-            <div className="contact-content mb-10 rounded flex items-center justify-center gap-6 p-10 overflow-hidden bg-white-prim mobile:flex-col mobile:p-0 mobile:pt-6 mobile:w-full mobile:gap-4 mobile:rounded-none tablet:flex-col tablet:w-[90vw]">
-                <div className="location shadow-med tablet:w-full">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63245.983719494!2d110.33364490508032!3d-7.803163418805134!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a5787bd5b6bc5%3A0x21723fd4d3684f71!2sYogyakarta%2C%20Kota%20Yogyakarta%2C%20Daerah%20Istimewa%20Yogyakarta!5e0!3m2!1sid!2sid!4v1684329849117!5m2!1sid!2sid" title="Location" loading="lazy" referrerpolicy="no-referrer-when-downgrade" className="w-[600px] h-[450px] mobile:w-[90vw] tablet:w-full"></iframe>
+            <div className="contact-content w-full mb-10 rounded flex justify-center gap-10 p-10 overflow-hidden bg-white-prim mobile:flex-col mobile:px-[5vw] mobile:pt-6 mobile:w-full mobile:gap-4 mobile:rounded-none tablet:flex-col tablet:w-[90vw]">
+                <div className="location w-3/5 shadow-med mobile:w-full tablet:w-full">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63245.983719494!2d110.33364490508032!3d-7.803163418805134!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a5787bd5b6bc5%3A0x21723fd4d3684f71!2sYogyakarta%2C%20Kota%20Yogyakarta%2C%20Daerah%20Istimewa%20Yogyakarta!5e0!3m2!1sid!2sid!4v1684329849117!5m2!1sid!2sid" title="Location" loading="lazy" referrerpolicy="no-referrer-when-downgrade" className="w-full h-[450px] mobile:w-[90vw] tablet:w-full"></iframe>
                 </div>
-                <form action="" className="contact-form flex flex-col gap-4 p-6 tablet:w-full tablet:p-0">
+                <form action="" className="contact-form w-2/5 flex flex-col gap-4 mobile:w-full tablet:w-full tablet:p-0">
                     <div className="name flex items-center gap-3 p-3 bg-white shadow-med rounded-md mobile:w-[90vw] tablet:w-full">
                         <label htmlFor="name" className="flex justify-center items-center">
                             <span class="material-symbols-rounded">person</span>

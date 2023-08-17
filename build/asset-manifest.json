@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.c96521c1.css",
-    "main.js": "/static/js/main.71f7ee8d.js",
+    "main.css": "/static/css/main.846933eb.css",
+    "main.js": "/static/js/main.eb22c9bb.js",
     "static/media/lazy-sofa.jpg": "/static/media/lazy-sofa.0c15d56023bd018cebbc.jpg",
     "static/media/spring-bed.jpg": "/static/media/spring-bed.8ef672d3730533d360fe.jpg",
     "static/media/chair.jpg": "/static/media/chair.65102e1d45816a92eca4.jpg",
@@ -9,7 +9,6 @@
     "static/media/household.jpg": "/static/media/household.afe9c04509943f628721.jpg",
     "static/media/table.jpg": "/static/media/table.2878b6d94740b8929eb8.jpg",
     "static/media/memory-foam.jpg": "/static/media/memory-foam.397e763377334de2fc89.jpg",
-    "static/media/spoon.jpg": "/static/media/spoon.73b7e0b570500981e688.jpg",
     "static/media/grill-microwave.jpg": "/static/media/grill-microwave.6862a489eaa269e597f4.jpg",
     "static/media/tea-spoon.jpg": "/static/media/tea-spoon.46bdc2fe8f0307c1705c.jpg",
     "static/media/side-table.jpg": "/static/media/side-table.b2f0f081ba175a6d2394.jpg",
@@ -21,9 +20,11 @@
     "static/media/spay.png": "/static/media/spay.5da722d172fa9105ef2e.png",
     "static/media/neck-pillow.jpg": "/static/media/neck-pillow.4700855aacb61eae6592.jpg",
     "static/media/vinyl-carpet.jpg": "/static/media/vinyl-carpet.daff88396d13ab1d6bdb.jpg",
+    "static/media/home.jpg": "/static/media/home.641b14bce4d802e40fb9.jpg",
     "static/media/bri.png": "/static/media/bri.b891ad31da3404c9c276.png",
     "static/media/mandiri.png": "/static/media/mandiri.ab7a8aa4ad8a45fa0b05.png",
     "static/media/carla-sofia.jpg": "/static/media/carla-sofia.aab3e97eadd760b7e593.jpg",
+    "static/media/spoon.jpg": "/static/media/spoon.7598d4ecec961031b77b.jpg",
     "static/media/daniel-bone.jpg": "/static/media/daniel-bone.56b4db2b96fa9dd5545f.jpg",
     "static/media/latex-bed.jpg": "/static/media/latex-bed.0e42865eb37ae8c1284b.jpg",
     "static/media/boning-knife.jpg": "/static/media/boning-knife.ea30007d42441f83139c.jpg",
@@ -36,11 +37,11 @@
     "static/media/hand-blender.jpg": "/static/media/hand-blender.f383df36806257774b3a.jpg",
     "static/media/soup-plate.jpg": "/static/media/soup-plate.80cef3e7347a7122d721.jpg",
     "index.html": "/index.html",
-    "main.c96521c1.css.map": "/static/css/main.c96521c1.css.map",
-    "main.71f7ee8d.js.map": "/static/js/main.71f7ee8d.js.map"
+    "main.846933eb.css.map": "/static/css/main.846933eb.css.map",
+    "main.eb22c9bb.js.map": "/static/js/main.eb22c9bb.js.map"
   },
   "entrypoints": [
-    "static/css/main.c96521c1.css",
-    "static/js/main.71f7ee8d.js"
+    "static/css/main.846933eb.css",
+    "static/js/main.eb22c9bb.js"
   ]
 }
