@@ -95,7 +95,7 @@ export function HomeTrendingNow(){
 
     return (
         <section className="trending-now flex flex-col items-center gap-6 p-8 my-32 mx-auto mobile:w-[100vw]">
-            <div className="trending-now-header text-3xl">Trending Now</div>
+            <div className="trending-now-header text-3xl font-semibold">Trending Now</div>
             <div className="trending-now-items w-[90vw] grid grid-cols-5 gap-5 mobile:grid-cols-2 tablet:grid-cols-4">
                 {
                     trendingItems.map((item, index) => {
@@ -135,7 +135,7 @@ function HomeReview(){
 
     return (
         <section className="reviews w-[80vw] mx-auto my-32 flex flex-col items-center gap-6 mobile:w-[90vw] tablet:w-[90vw]">
-            <div className="reviews-header text-3xl">Reviews</div>
+            <div className="reviews-header text-3xl font-semibold">Reviews</div>
             <div className="review-slide flex gap-8 mobile:flex-col tablet:gap-4">
                     {
                         reviews.map((review, index) => {
@@ -162,7 +162,7 @@ function Payments(){
 
     return (
         <section className="payments mx-auto my-32 w-[80vw] flex flex-col gap-6 items-center">
-            <div className="payments-header text-3xl">Payment methods</div>
+            <div className="payments-header text-3xl font-semibold">Payment methods</div>
             <div className="payments-content flex items-center flex-wrap gap-4">
             {
                 payments.map((payment, index) => {
@@ -178,7 +178,7 @@ function Payments(){
 function HomeContactUs(){
     return (
         <section className="contact-us w-fit mx-auto mt-20 flex flex-col gap-6 items-center mobile:w-full">
-            <div className="contact-header text-3xl">Contact Us</div>
+            <div className="contact-header text-3xl font-semibold">Contact Us</div>
             <div className="contact-content mb-10 rounded flex items-center justify-center gap-6 p-10 overflow-hidden bg-white-prim mobile:flex-col mobile:p-0 mobile:pt-6 mobile:w-full mobile:gap-4 mobile:rounded-none tablet:flex-col tablet:w-[90vw]">
                 <div className="location shadow-med tablet:w-full">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63245.983719494!2d110.33364490508032!3d-7.803163418805134!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a5787bd5b6bc5%3A0x21723fd4d3684f71!2sYogyakarta%2C%20Kota%20Yogyakarta%2C%20Daerah%20Istimewa%20Yogyakarta!5e0!3m2!1sid!2sid!4v1684329849117!5m2!1sid!2sid" title="Location" loading="lazy" referrerpolicy="no-referrer-when-downgrade" className="w-[600px] h-[450px] mobile:w-[90vw] tablet:w-full"></iframe>

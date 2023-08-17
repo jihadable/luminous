@@ -49,7 +49,7 @@ function Navbar(props){
                     </svg>
                     {
                         cartItems.length > 0 &&
-                        <div className="cart-notify absolute flex justify-center items-center -top-2 -right-2 w-5 h-5 rounded-full text-white-prim bg-red-500">{cartItems.length}</div>
+                        <div className="cart-notify absolute flex justify-center items-center -top-2 -right-2 px-2 py-0 rounded-full text-white-prim text-sm bg-red-500">{cartItems.length}</div>
                     }
                 </span>
             </div>
@@ -70,7 +70,7 @@ function Navbar(props){
                     <span>Cart</span>
                     {
                         cartItems.length > 0 &&
-                        <div className="cart-notify absolute flex justify-center items-center -top-2 -left-2 w-5 h-5 rounded-full text-white-prim bg-red-500">{cartItems.length}</div>
+                        <div className="cart-notify absolute flex justify-center items-center -top-2 -left-2 px-2 py-0 rounded-full text-white-prim text-sm bg-red-500">{cartItems.length}</div>
                     }
                 </span>
             </div>
@@ -85,7 +85,7 @@ function Navbar(props){
                 </svg>
                 {
                     cartItems.length > 0 &&
-                    <div className={`cart-notify absolute ${showMobileMenu ? "hidden" : "flex"} justify-center items-center -top-2 -right-2 w-5 h-5 rounded-full text-white-prim bg-red-500`}>{cartItems.length}</div>
+                    <div className={`cart-notify absolute ${showMobileMenu ? "hidden" : "flex"} justify-center items-center -top-2 -right-2 px-2 py-0 rounded-full text-white-prim text-sm bg-red-500`}>{cartItems.length}</div>
                 }
             </span>
 
@@ -185,6 +185,19 @@ function ShoppingCart(props){
                 <span className="close-shopping-cart-btn cursor-pointer flex justify-center items-center p-1 rounded hover:bg-hov" onClick={() => setShowShoppingCart(false)}>
                     <span className="material-symbols-rounded">close</span>
                 </span>
+            </div>
+            <div className="remove-all self-end flex justify-end px-2">
+                <div className="remove-all-btn flex items-center gap-2 p-1 rounded cursor-pointer hover:bg-hov" onClick={() => {setCartItems([])}}>
+                    <span>Empty Cart</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
+                        <path d="M13 17h-7v-14h-2"></path>
+                        <path d="M6 5l14 1l-1 7h-13"></path>
+                        <path d="M22 22l-5 -5"></path>
+                        <path d="M17 22l5 -5"></path>
+                    </svg>
+                </div>
             </div>
             {
                 cartItems.length > 0 &&

@@ -349,7 +349,7 @@ function StoreSearch(){
 
     return (
         <>
-            <header className="text-3xl mt-36">Find your best will</header>
+            <header className="text-3xl mt-36 font-semibold">Find your best will</header>
             <div className="category-search relative">
                 <input type="text" value={searchValue} placeholder="Search..." className="category-search-input text-xl w-[50vw] p-2 rounded outline-none bg-white-prim border-2 border-white-prim focus:border-primary mobile:w-[90vw] tablet:w-[80vw]" onChange={e => setSearchValue(e.target.value)} onKeyUp={e => clickEnterOnSearchInput(e)} autoComplete={false} />
                 <span className="category-search-btn absolute right-0 top-0 bottom-0 flex justify-center items-center p-2 px-3 rounded-r cursor-pointer bg-primary text-white-prim" onClick={() => changeGoods(searchValue, false)}>

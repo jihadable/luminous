@@ -68,7 +68,7 @@ function Product(props){
                     <img src={img} alt={name} />
                 </div>
                 <div className="product-info bg-white-prim flex flex-col items-center gap-8 p-5 rounded text-xl w-[50vw] h-fit mobile:w-full tablet:w-[70%]">
-                    <div className="product-name text-3xl">{name}</div>
+                    <div className="product-name text-3xl font-semibold">{name}</div>
                     <div className="product-explanation">{explanation}</div>
                     <div className="product-shape text-base w-full flex items-center justify-evenly mobile:justify-between mobile:flex-wrap">
                         <span className="product-texture rounded-sm p-2 bg-white shadow-med mobile:flex mobile:flex-col"><span>Texture:</span> {texture}</span>
