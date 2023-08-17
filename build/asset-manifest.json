@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.edbc4286.css",
-    "main.js": "/static/js/main.4be30591.js",
+    "main.css": "/static/css/main.a151ebb2.css",
+    "main.js": "/static/js/main.80f335d6.js",
     "static/media/lazy-sofa.jpg": "/static/media/lazy-sofa.0c15d56023bd018cebbc.jpg",
     "static/media/spring-bed.jpg": "/static/media/spring-bed.8ef672d3730533d360fe.jpg",
     "static/media/chair.jpg": "/static/media/chair.65102e1d45816a92eca4.jpg",
@@ -18,8 +18,11 @@
     "static/media/salad-spoon.jpg": "/static/media/salad-spoon.d767e18d1d610acacaaa.jpg",
     "static/media/dessert-plate.jpg": "/static/media/dessert-plate.53ef5da789b08488eaff.jpg",
     "static/media/bean-bag.jpg": "/static/media/bean-bag.f9681d016833439cbe89.jpg",
+    "static/media/spay.png": "/static/media/spay.5da722d172fa9105ef2e.png",
     "static/media/neck-pillow.jpg": "/static/media/neck-pillow.4700855aacb61eae6592.jpg",
     "static/media/vinyl-carpet.jpg": "/static/media/vinyl-carpet.daff88396d13ab1d6bdb.jpg",
+    "static/media/bri.png": "/static/media/bri.b891ad31da3404c9c276.png",
+    "static/media/mandiri.png": "/static/media/mandiri.ab7a8aa4ad8a45fa0b05.png",
     "static/media/carla-sofia.jpg": "/static/media/carla-sofia.aab3e97eadd760b7e593.jpg",
     "static/media/daniel-bone.jpg": "/static/media/daniel-bone.56b4db2b96fa9dd5545f.jpg",
     "static/media/latex-bed.jpg": "/static/media/latex-bed.0e42865eb37ae8c1284b.jpg",
@@ -27,15 +30,17 @@
     "static/media/full-size-blender.jpg": "/static/media/full-size-blender.ba54bd7152ce879a2ca0.jpg",
     "static/media/john-kean.jpg": "/static/media/john-kean.1ca943d88cbd6469d07a.jpg",
     "static/media/midback-chair.jpg": "/static/media/midback-chair.44eb3452bcf7d99d0858.jpg",
+    "static/media/bni.png": "/static/media/bni.2d452ea5cf3e84cf0e15.png",
+    "static/media/dana.png": "/static/media/dana.ac049cb930a676143358.png",
     "static/media/basic-microwave.jpg": "/static/media/basic-microwave.2e8aaa86f6fa461e0e09.jpg",
     "static/media/hand-blender.jpg": "/static/media/hand-blender.f383df36806257774b3a.jpg",
     "static/media/soup-plate.jpg": "/static/media/soup-plate.80cef3e7347a7122d721.jpg",
     "index.html": "/index.html",
-    "main.edbc4286.css.map": "/static/css/main.edbc4286.css.map",
-    "main.4be30591.js.map": "/static/js/main.4be30591.js.map"
+    "main.a151ebb2.css.map": "/static/css/main.a151ebb2.css.map",
+    "main.80f335d6.js.map": "/static/js/main.80f335d6.js.map"
   },
   "entrypoints": [
-    "static/css/main.edbc4286.css",
-    "static/js/main.4be30591.js"
+    "static/css/main.a151ebb2.css",
+    "static/js/main.80f335d6.js"
   ]
 }

@@ -15,6 +15,7 @@ function Home(){
             <HomeTag />
             <HomeTrendingNow />
             <HomeReview />
+            <Payments />
             <HomeContactUs />
             <Footer />
         </>
@@ -93,7 +94,7 @@ export function HomeTrendingNow(){
     ]
 
     return (
-        <section className="trending-now flex flex-col items-center gap-6 p-8 pb-16 m-auto mt-5 mobile:w-[100vw]">
+        <section className="trending-now flex flex-col items-center gap-6 p-8 my-32 mx-auto mobile:w-[100vw]">
             <div className="trending-now-header text-3xl">Trending Now</div>
             <div className="trending-now-items w-[90vw] grid grid-cols-5 gap-5 mobile:grid-cols-2 tablet:grid-cols-4">
                 {
@@ -133,7 +134,7 @@ function HomeReview(){
     ]
 
     return (
-        <section className="reviews w-[80vw] m-auto mb-16 flex flex-col items-center gap-6 mobile:w-[90vw] tablet:w-[90vw]">
+        <section className="reviews w-[80vw] mx-auto my-32 flex flex-col items-center gap-6 mobile:w-[90vw] tablet:w-[90vw]">
             <div className="reviews-header text-3xl">Reviews</div>
             <div className="review-slide flex gap-8 mobile:flex-col tablet:gap-4">
                     {
@@ -154,10 +155,29 @@ function HomeReview(){
     )
 }
 
+// home payments
+function Payments(){
+
+    const payments = [require("../assets/ovo.png"), require("../assets/mandiri.png"), require("../assets/dana.png"), require("../assets/bri.png"), require("../assets/linkaja.png"), require("../assets/spay.png"), require("../assets/bni.png")]
+
+    return (
+        <section className="payments mx-auto my-32 w-[80vw] flex flex-col gap-6 items-center">
+            <div className="payments-header text-3xl">Payment methods</div>
+            <div className="payments-content flex items-center flex-wrap gap-4">
+            {
+                payments.map((payment, index) => {
+                    return <img src={payment} alt="Payment" className="w-24 h-fit mobile:w-16" key={index} />
+                })
+            }
+            </div>
+        </section>
+    )
+}
+
 // home contact us
 function HomeContactUs(){
     return (
-        <section className="contact-us w-fit m-auto flex flex-col gap-6 items-center mobile:w-[100vw]">
+        <section className="contact-us w-fit mx-auto mt-20 flex flex-col gap-6 items-center mobile:w-full">
             <div className="contact-header text-3xl">Contact Us</div>
             <div className="contact-content mb-10 rounded flex items-center justify-center gap-6 p-10 overflow-hidden bg-white-prim mobile:flex-col mobile:p-0 mobile:pt-6 mobile:w-full mobile:gap-4 mobile:rounded-none tablet:flex-col tablet:w-[90vw]">
                 <div className="location shadow-med tablet:w-full">
