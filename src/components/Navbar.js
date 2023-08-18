@@ -36,6 +36,10 @@ function Navbar(props){
                 <a href="/" className={`border-b-2 text-xl ${props.link === "home" ? "border-primary" : "border-white hover:border-primary"}`} >Home</a>
                 <a href="/store" className={`border-b-2 text-xl ${props.link === "home" ? "border-white hover:border-primary" : "border-primary"}`} >Store</a>
             </div>
+            {
+                showShoppingCart &&
+                <div className="overlay fixed z-[51] left-0 right-0 top-0 h-[100vh] bg-[rgb(0,0,0,.5)] mobile:hidden"></div>
+            }
             <div className="navbar-extra flex items-center gap-6 text-lg mobile:hidden">
                 <a href="/login" className="text-xl border-b-2 border-white hover:border-primary" >Login</a>
                 <a href="/signup" className="py-1 px-2 bg-primary rounded text-white">Sign Up</a>
@@ -179,24 +183,23 @@ function ShoppingCart(props){
     }
     
     return (
-        <div className={`shopping-cart absolute top-[90%] right-0 ${(showShoppingCart) ? "" : "scale-x-0"} bg-white h-[100vh] py-4 px-1 text-xl flex flex-col items-center gap-4 origin-right transition duration-75 ${(cartItems.length === 0) ? "w-[372px]" : ""} mobile:w-full tablet:h-fit tablet:rounded-bl-md`} ref={shoppingCart}>
+        <div className={`shopping-cart z-[60] absolute top-0 right-0 ${(showShoppingCart) ? "" : "scale-x-0"} bg-white h-[100vh] py-4 px-1 text-xl flex flex-col items-center gap-4 origin-right transition duration-75 ${(cartItems.length === 0) ? "w-[372px]" : ""} mobile:w-full tablet:h-fit tablet:rounded-bl-md`} ref={shoppingCart}>
             <div className="shopping-cart-header px-2 w-full text-center flex items-center justify-between">
                 <span className="text-xl">{`Shopping cart (${cartItems.length})`}</span>
-                <span className="close-shopping-cart-btn cursor-pointer flex justify-center items-center p-1 rounded hover:bg-hov" onClick={() => setShowShoppingCart(false)}>
-                    <span className="material-symbols-rounded">close</span>
-                </span>
-            </div>
-            <div className="remove-all self-end flex justify-end px-2">
-                <div className="remove-all-btn flex items-center gap-2 p-1 rounded cursor-pointer hover:bg-hov" onClick={() => {setCartItems([])}}>
-                    <span>Empty Cart</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                        <path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
-                        <path d="M13 17h-7v-14h-2"></path>
-                        <path d="M6 5l14 1l-1 7h-13"></path>
-                        <path d="M22 22l-5 -5"></path>
-                        <path d="M17 22l5 -5"></path>
-                    </svg>
+                <div className="btns flex gap-2">
+                    <div className="remove-all-btn flex items-center justify-center gap-2 p-1 rounded cursor-pointer bg-red-200" onClick={() => {setCartItems([])}}>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
+                            <path d="M13 17h-7v-14h-2"></path>
+                            <path d="M6 5l14 1l-1 7h-13"></path>
+                            <path d="M22 22l-5 -5"></path>
+                            <path d="M17 22l5 -5"></path>
+                        </svg>
+                    </div>
+                    <span className="close-shopping-cart-btn cursor-pointer flex justify-center items-center p-1 rounded hover:bg-hov" onClick={() => setShowShoppingCart(false)}>
+                        <span className="material-symbols-rounded">close</span>
+                    </span>
                 </div>
             </div>
             {
