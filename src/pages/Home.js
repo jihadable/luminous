@@ -27,9 +27,9 @@ function HomeHeader(){
     return (
         <header className="flex h-[100vh] w-[80vw] mx-auto pt-8 items-center gap-4 mobile:flex-col mobile:w-[90vw] mobile:pt-20 mobile:mb-20 mobile:h-fit tablet:h-fit tablet:flex-col tablet:items-center tablet:pt-32 tablet:mb-20 tablet:w-[90vw]">
             <div className="header-left w-[calc((80vw-.5rem)/2)] h-[calc((80vw-.5rem)/2)] bg-cover flex items-end mobile:w-full mobile:h-[90vw] tablet:w-full tablet:h-[70vw]">
-                <div className="flex flex-col gap-4 w-full p-8 bg-[rgb(0,0,0,.5)]">
-                    <div className="shop-name text-4xl font-bold text-white-prim">Luminous</div>
-                    <div className="tagline text-2xl text-white-prim">live comfortably with Luminous</div>
+                <div className="flex flex-col gap-4 w-full p-8 bg-[rgb(255,255,255,.3) backdrop-blur-[5px]">
+                    <div className="shop-name text-4xl font-bold">Luminous</div>
+                    <div className="tagline text-2xl">live comfortably with Luminous</div>
                     <a href="/store" className="w-fit py-1 px-2 rounded bg-primary text-white text-xl">Shop now</a>
                 </div>
             </div>

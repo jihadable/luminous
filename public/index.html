@@ -42,6 +42,16 @@
         .scrollbar-hide::-webkit-scrollbar {
             display: none;
         }
+
+        .shopping-cart{
+          right: -100%;
+          transform-origin: right;
+          transition: all .2s;
+        }
+
+        .shopping-cart.active{
+          right: 0;
+        }
     </style>
   </head>
   <body>

@@ -181,87 +181,87 @@ function ShoppingCart(props){
 
         setCartItems(locatItem)
     }
-    
+
     return (
-        <div className={`shopping-cart z-[60] absolute top-0 right-0 ${(showShoppingCart) ? "" : "scale-x-0"} bg-white h-[100vh] py-4 px-1 text-xl flex flex-col items-center gap-4 origin-right transition duration-75 ${(cartItems.length === 0) ? "w-[372px]" : ""} mobile:w-full tablet:h-fit tablet:rounded-bl-md`} ref={shoppingCart}>
-            <div className="shopping-cart-header px-2 w-full text-center flex items-center justify-between">
-                <span className="text-xl">{`Shopping cart (${cartItems.length})`}</span>
-                <div className="btns flex gap-2">
-                    <div className="remove-all-btn flex items-center justify-center gap-2 p-1 rounded cursor-pointer bg-red-200" onClick={() => {setCartItems([])}}>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
-                            <path d="M13 17h-7v-14h-2"></path>
-                            <path d="M6 5l14 1l-1 7h-13"></path>
-                            <path d="M22 22l-5 -5"></path>
-                            <path d="M17 22l5 -5"></path>
-                        </svg>
-                    </div>
-                    <span className="close-shopping-cart-btn cursor-pointer flex justify-center items-center p-1 rounded hover:bg-hov" onClick={() => setShowShoppingCart(false)}>
+        <div className={`shopping-cart z-[60] w-[30vw] h-[100vh] flex flex-col absolute top-0 ${showShoppingCart ? "active" : ""} bg-white text-xl mobile:w-full tablet:w-[70vw] tablet:h-[70vh]`} ref={shoppingCart}>
+            <div className="header flex items-center justify-between p-2">
+                <div className="info">{`Shopping cart (${cartItems.length})`}</div>
+                <div className="btns flex gap-2 items-center">
+                    {
+                        cartItems.length > 0 &&
+                        <div className="remove-all-btn flex items-center justify-center gap-2 p-1 rounded cursor-pointer bg-red-200" onClick={() => {setCartItems([])}} title="Empty cart">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
+                                <path d="M13 17h-7v-14h-2"></path>
+                                <path d="M6 5l14 1l-1 7h-13"></path>
+                                <path d="M22 22l-5 -5"></path>
+                                <path d="M17 22l5 -5"></path>
+                            </svg>
+                        </div>
+                    }
+                    <span className="close-shopping-cart-btn cursor-pointer flex justify-center items-center p-1 rounded hover:bg-hov" onClick={() => setShowShoppingCart(false)} title="Close cart">
                         <span className="material-symbols-rounded">close</span>
                     </span>
                 </div>
             </div>
-            {
-                cartItems.length > 0 &&
-                <>
-                <div className={`items p-3 flex flex-col items-center gap-3 h-[400px] overflow-y-auto scrollbar-hide`}>
-                    {cartItems.map((item, index) => {
-                        return (
-                            <div className="item bg-white p-2 flex items-center gap-6 rounded-md shadow-med" key={index}>
-                                <div className="item-img">
-                                    <img src={item.img} alt="Item" className="w-[100px]" />
-                                </div>
-                                <div className="item-info h-[100px] flex flex-col justify-between">
-                                    <div className="item-info-header w-[200px] flex items-center justify-between">
-                                        <span className="item-name">{item.name}</span>
-                                        <span className="remove-item-btn flex justify-center items-center cursor-pointer p-1 rounded hover:bg-hov" onClick={() => {removeItem(item.name)}}>
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                <path d="M4 7l16 0"></path>
-                                                <path d="M10 11l0 6"></path>
-                                                <path d="M14 11l0 6"></path>
-                                                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
-                                                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
-                                            </svg>
-                                        </span>
-                                    </div>
-                                    <div className="item-info-footer w-[200px] flex items-center justify-between">
-                                        <span className="add-minus-item select-none">
-                                            <span className="add-item cursor-pointer px-2 bg-primary text-white" onClick={() => {minusProduct(item.name, item.price)}}>-</span>
-                                            <span className="px-2 bg-white-prim">{item.sum}</span>
-                                            <span className="minus-item cursor-pointer px-2 bg-primary text-white" onClick={() => {addProduct(item.name, item.price)}}>+</span>
-                                        </span>
-                                        <span className="item-total-price">{`$${item.price}`}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        )
-                    })}
-                </div>
-                <div className="shopping-cart-footer border-t-2 border-black py-4 px-2 w-full flex items-center justify-between">
-                    <span className="total-price">
-                        <p>
-                            Total: <span>
-                                {
-                                    `$${sumPrice(cartItems)}`
-                                }
-                            </span>
-                        </p>
-                    </span>
-                    <button type="button" className="p-1 px-2 rounded bg-primary text-white text-base">Checkout</button>
-                </div>
-                </>
-            }
-            {
-                cartItems.length === 0 && 
-                <>
+            <div className={`content flex flex-1 ${cartItems.length > 0 ? "overflow-y-auto scrollbar-hide p-2" : "justify-center items-center"}`}>
+                {
+                    cartItems.length === 0 &&
                     <div className="empty-cart flex flex-col items-center gap-2 h-3/4 justify-center">
                         <img src={emptyCart} alt="Empty cart" className="w-[100px]" />
                         <div>Your cart is empty</div>
                         <div>Keep browsing</div>
                     </div>
-                </>
+                }
+                {
+                    cartItems.length > 0 &&
+                    <div className="items flex flex-col gap-2">
+                    {
+                        cartItems.map((item, index) => {
+                            return (
+                                <div className="item w-full flex gap-2 p-2 bg-white rounded border-2 border-[#ccc]" key={index}>
+                                    <div className="item-img w-2/5">
+                                        <img src={item.img} alt="Item" />
+                                    </div>
+                                    <div className="item-info w-3/5 h-full flex flex-col justify-between">
+                                        <div className="header flex items-center justify-between">
+                                            <span className="item-name font-bold">{item.name}</span>
+                                            <span className="remove-item-btn flex justify-center items-center cursor-pointer p-1 rounded hover:bg-hov" onClick={() => {removeItem(item.name)}} title="Remove item">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                    <path d="M4 7l16 0"></path>
+                                                    <path d="M10 11l0 6"></path>
+                                                    <path d="M14 11l0 6"></path>
+                                                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+                                                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <div className="footer flex items-center justify-between">
+                                            <span className="add-minus-item select-none">
+                                                <span className="add-item cursor-pointer px-2 bg-primary text-white" onClick={() => {minusProduct(item.name, item.price)}}>-</span>
+                                                <span className="px-2 bg-white-prim">{item.sum}</span>
+                                                <span className="minus-item cursor-pointer px-2 bg-primary text-white" onClick={() => {addProduct(item.name, item.price)}}>+</span>
+                                            </span>
+                                            <span className="item-total-price">{`$${item.price}`}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
+                    </div>
+                }
+            </div>
+            {
+                cartItems.length > 0 &&
+                <div className="footer flex items-center justify-between p-2 mt-2 border-t-2 border-black">
+                    <span className="total-price">
+                        <p>{`Total: $${sumPrice(cartItems)}`}</p>
+                    </span>
+                    <button type="button" className="p-1 px-2 rounded bg-primary text-white text-base">Checkout</button>
+                </div>
             }
         </div>
     )
