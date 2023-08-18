@@ -158,8 +158,8 @@ function ShoppingCart(props){
         let locatItem = JSON.parse(localStorage.getItem("cartItems"))
 
         locatItem.forEach(function(item){
-            itemPrice = itemPrice / item["sum"]
             if (item["name"] === itemName){
+                itemPrice = itemPrice / item["sum"]
                 item["sum"] += 1
                 item["price"] += itemPrice
             }
@@ -172,8 +172,8 @@ function ShoppingCart(props){
         let locatItem = JSON.parse(localStorage.getItem("cartItems"))
 
         locatItem.forEach(function(item){
-            itemPrice = itemPrice / item["sum"]
-            if (item["name"] === itemName && item["sum"] > 1){
+            if ((item["name"] === itemName) && item["sum"] > 1){
+                itemPrice = itemPrice / item["sum"]
                 item["sum"] -= 1
                 item["price"] -= itemPrice
             }
