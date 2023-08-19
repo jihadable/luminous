@@ -256,7 +256,7 @@ function ShoppingCart(props){
             </div>
             {
                 cartItems.length > 0 &&
-                <div className="footer flex items-center justify-between p-2 mt-2 border-t-2 border-black">
+                <div className="footer flex items-center justify-between p-2 mt-2 border-t-2 border-black border-dashed">
                     <span className="total-price">
                         <p>{`Total: $${sumPrice(cartItems)}`}</p>
                     </span>

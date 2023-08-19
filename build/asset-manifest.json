@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.7f693497.css",
-    "main.js": "/static/js/main.5cc1b0f8.js",
+    "main.js": "/static/js/main.854774ec.js",
     "static/media/lazy-sofa.jpg": "/static/media/lazy-sofa.0c15d56023bd018cebbc.jpg",
     "static/media/spring-bed.jpg": "/static/media/spring-bed.8ef672d3730533d360fe.jpg",
     "static/media/chair.jpg": "/static/media/chair.65102e1d45816a92eca4.jpg",
@@ -38,10 +38,10 @@
     "static/media/soup-plate.jpg": "/static/media/soup-plate.80cef3e7347a7122d721.jpg",
     "index.html": "/index.html",
     "main.7f693497.css.map": "/static/css/main.7f693497.css.map",
-    "main.5cc1b0f8.js.map": "/static/js/main.5cc1b0f8.js.map"
+    "main.854774ec.js.map": "/static/js/main.854774ec.js.map"
   },
   "entrypoints": [
     "static/css/main.7f693497.css",
-    "static/js/main.5cc1b0f8.js"
+    "static/js/main.854774ec.js"
   ]
 }
