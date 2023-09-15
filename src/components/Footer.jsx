@@ -32,7 +32,7 @@ function Footer(){
     const footerLink = ["About", "FAQs", "Help Center"]
 
     return (
-        <footer className="p-4 flex flex-col items-center gap-3 bg-primary text-white-prim w-full">
+        <footer className="p-4 mt-12 flex flex-col items-center gap-3 bg-primary text-white-prim w-full">
             <div className="footer-link flex items-center gap-6">
                 {
                     footerLink.map((link, index) => {

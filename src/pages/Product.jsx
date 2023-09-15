@@ -63,7 +63,7 @@ function Product(props){
     return (
         <>
             <Navbar link="store" cartItems={cartItems} />
-            <section className="product mt-32 flex w-[80vw] gap-2 mobile:w-[90vw] mobile:flex-col mobile:items-center tablet:w-[90vw]">
+            <section className="product mt-32 flex w-[80vw] mx-auto gap-2 mobile:w-[90vw] mobile:flex-col mobile:items-center tablet:w-[90vw]">
                 <div className="product-img w-[30vw] h-fit rounded overflow-hidden mobile:w-full tablet:w-[30%]">
                     <img src={img} alt={name} />
                 </div>

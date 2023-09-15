@@ -1,6 +1,11 @@
 import luminousLogo from "../assets/luminous-logo.png"
 import emptyCart from "../assets/empty-cart.png"
 import { useState, useRef, useEffect } from "react"
+import { IconShoppingCart } from "@tabler/icons-react"
+import { IconMenu2 } from "@tabler/icons-react"
+import { IconShoppingCartX } from "@tabler/icons-react"
+import { IconTrash } from "@tabler/icons-react"
+import { IconX } from "@tabler/icons-react"
 
 function Navbar(props){
 
@@ -44,13 +49,7 @@ function Navbar(props){
                 <a href="/login" className="text-xl border-b-2 border-white hover:border-primary" >Login</a>
                 <a href="/signup" className="py-1 px-2 bg-primary rounded text-white">Sign Up</a>
                 <span className="shopping-cart-btn flex justify-center items-center relative p-1 rounded cursor-pointer hover:bg-[rgb(0,0,0,.1)]" onClick={() => {setShowShoppingCart(!showShoppingCart)}} ref={shoppingCartBtn}>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                        <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
-                        <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
-                        <path d="M17 17h-11v-14h-2"></path>
-                        <path d="M6 5l14 1l-1 7h-13"></path>
-                    </svg>
+                    <IconShoppingCart stroke={1.5} />
                     {
                         cartItems.length > 0 &&
                         <div className="cart-notify absolute flex justify-center items-center -top-2 -right-2 px-2 py-0 rounded-full text-white-prim text-sm bg-red-500">{cartItems.length}</div>
@@ -64,13 +63,7 @@ function Navbar(props){
                 <a href="/store" className={props.link === "home" ? "border-b-2 border-white hover:border-primary" : "border-b-2 border-primary"} >Store</a>  
                 <a href="/login" className="border-b-2 border-white hover:border-primary" >Login</a>
                 <span className="shopping-cart-btn-mobile relative flex items-center gap-1 border-b-2 border-white hover:border-primary" onClick={() => {setShowShoppingCart(!showShoppingCart)}} ref={shoppingCartBtnMobile}>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                        <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
-                        <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
-                        <path d="M17 17h-11v-14h-2"></path>
-                        <path d="M6 5l14 1l-1 7h-13"></path>
-                    </svg>
+                    <IconShoppingCart stroke={1.5} />
                     <span>Cart</span>
                     {
                         cartItems.length > 0 &&
@@ -81,12 +74,7 @@ function Navbar(props){
 
             {/* mobile menu button */}
             <span className="mobile-menu-btn relative hidden justify-center items-center p-1 rounded cursor-pointer hover:bg-hov mobile:flex" onClick={() => {setShowMobileMenu(!showMobileMenu)}} ref={mobileMenuBtn}>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-menu-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                    <path d="M4 6l16 0"></path>
-                    <path d="M4 12l16 0"></path>
-                    <path d="M4 18l16 0"></path>
-                </svg>
+                <IconMenu2 stroke={1.5} />
                 {
                     cartItems.length > 0 &&
                     <div className={`cart-notify absolute ${showMobileMenu ? "hidden" : "flex"} justify-center items-center -top-2 -right-2 px-2 py-0 rounded-full text-white-prim text-sm bg-red-500`}>{cartItems.length}</div>
@@ -190,18 +178,11 @@ function ShoppingCart(props){
                     {
                         cartItems.length > 0 &&
                         <div className="remove-all-btn flex items-center justify-center gap-2 p-1 rounded cursor-pointer bg-red-200" onClick={() => {setCartItems([])}} title="Empty cart">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                <path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path>
-                                <path d="M13 17h-7v-14h-2"></path>
-                                <path d="M6 5l14 1l-1 7h-13"></path>
-                                <path d="M22 22l-5 -5"></path>
-                                <path d="M17 22l5 -5"></path>
-                            </svg>
+                            <IconShoppingCartX stroke={1.5} />
                         </div>
                     }
                     <span className="close-shopping-cart-btn cursor-pointer flex justify-center items-center p-1 rounded hover:bg-hov" onClick={() => setShowShoppingCart(false)} title="Close cart">
-                        <span className="material-symbols-rounded">close</span>
+                        <IconX stroke={1.5} />
                     </span>
                 </div>
             </div>
@@ -228,14 +209,7 @@ function ShoppingCart(props){
                                         <div className="header flex items-center justify-between">
                                             <span className="item-name font-bold">{item.name}</span>
                                             <span className="remove-item-btn flex justify-center items-center cursor-pointer p-1 rounded hover:bg-hov" onClick={() => {removeItem(item.name)}} title="Remove item">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                    <path d="M4 7l16 0"></path>
-                                                    <path d="M10 11l0 6"></path>
-                                                    <path d="M14 11l0 6"></path>
-                                                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
-                                                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
-                                                </svg>
+                                                <IconTrash stroke={1.5} />
                                             </span>
                                         </div>
                                         <div className="footer flex items-center justify-between">

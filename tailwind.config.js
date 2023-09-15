@@ -1,24 +1,25 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: [
-    "./**/*.{html,astro,js,jsx,ts,tsx}"
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}"
   ],
   theme: {
     extend: {
-        colors: {
-            "primary": "#0853a6",
-            "white-prim": "#eee",
-            "hov": "rgb(0,0,0,.1)"
-        },
-        boxShadow: {
-            'med': '0 5px 30px -2px rgba(0,0,0,.2)',
-        },
-        screens: {
-            'mobile': {'max': '600px'},
-            
-            'tablet': {"min": "601px", 'max': '1024px'},
-        }
-    }
+      colors: {
+        "primary": "#0853a6",
+        "white-prim": "#eee",
+        "hov": "rgb(0,0,0,.1)"
+      },
+      boxShadow: {
+          'med': '0 5px 30px -2px rgba(0,0,0,.2)',
+      },
+      screens: {
+          'mobile': {'max': '480px'},
+          
+          'tablet': {"min": "481px", 'max': '1023px'},
+      }
+    },
   },
   plugins: [],
 }

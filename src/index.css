@@ -2,15 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  margin: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+*{
+  font-family: 'Blinker', sans-serif;;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+#root{
+  width: 100%;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.shopping-cart{
+  right: -100%;
+  transform-origin: right;
+  transition: all .2s;
+}
+
+.shopping-cart.active{
+  right: 0;
 }
 
 .header-left{

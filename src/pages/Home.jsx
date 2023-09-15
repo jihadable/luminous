@@ -4,6 +4,25 @@ import chair from "../assets/chair.jpg"
 import table from "../assets/table.jpg"
 import spoon from "../assets/spoon.jpg"
 import household from "../assets/household.jpg"
+import lazySofa from "../assets/lazy-sofa.jpg"
+import sideTable from "../assets/side-table.jpg"
+import neckPillow from "../assets/neck-pillow.jpg"
+import handBlender from "../assets/hand-blender.jpg"
+import beanBag from "../assets/bean-bag.jpg"
+import johnKean from "../assets/john-kean.jpg"
+import danielBone from "../assets/daniel-bone.jpg"
+import carlaSofia from "../assets/carla-sofia.jpg"
+import dana from "../assets/dana.png"
+import mandiri from "../assets/mandiri.png"
+import ovo from "../assets/ovo.png"
+import bri from "../assets/bri.png"
+import bni from "../assets/bni.png"
+import linkaja from "../assets/linkaja.png"
+import spay from "../assets/spay.png"
+import { IconUser } from "@tabler/icons-react"
+import { IconMail } from "@tabler/icons-react"
+import { IconMessage2 } from "@tabler/icons-react"
+import { IconChevronRight } from "@tabler/icons-react"
 
 // home
 function Home(){
@@ -27,11 +46,6 @@ function HomeHeader(){
     return (
         <header className="flex h-[100vh] w-[80vw] mx-auto pt-8 items-center gap-4 mobile:flex-col mobile:w-[90vw] mobile:pt-20 mobile:mb-20 mobile:h-fit tablet:h-fit tablet:flex-col tablet:items-center tablet:pt-32 tablet:mb-20 tablet:w-[90vw]">
             <div className="header-left w-[calc((80vw-.5rem)/2)] h-[calc((80vw-.5rem)/2)] bg-cover flex items-end mobile:w-full mobile:h-[90vw] tablet:w-full tablet:h-[70vw]">
-                <div className="flex flex-col gap-4 w-full p-8 bg-[rgb(255,255,255,.3) backdrop-blur-[5px]">
-                    <div className="shop-name text-4xl font-bold">Luminous</div>
-                    <div className="tagline text-2xl">live comfortably with Luminous</div>
-                    <a href="/store" className="w-fit py-1 px-2 rounded bg-primary text-white text-xl">Shop now</a>
-                </div>
             </div>
             <div className="header-right w-[calc((80vw-.5rem)/2)] h-[calc((80vw-.5rem)/2)] flex mobile:w-full mobile:h-[90vw] tablet:w-full tablet:h-[90vw]">
                 <img src={spoon} alt="Spoon" className="spoon-img h-full mobile:h-[90vw]" />
@@ -66,31 +80,31 @@ export function HomeTrendingNow(){
         {
             id: 2,
             name: "La-Z-Sofa",
-            img: require ("../assets/lazy-sofa.jpg"),
+            img: lazySofa,
             price: 120
         },
         {
             id: 5,
             name: "Side Table",
-            img: require ("../assets/side-table.jpg"),
+            img: sideTable,
             price: 150
         },
         {
             id: 11,
             name: "Neck Pillow",
-            img: require ("../assets/neck-pillow.jpg"),
+            img: neckPillow,
             price: 50
         },
         {
             id: 21,
             name: "Hand Blender",
-            img: require ("../assets/hand-blender.jpg"),
+            img: handBlender,
             price: 215
         },
         {
             id: 12,
             name: "Bean Bag",
-            img: require ("../assets/bean-bag.jpg"),
+            img: beanBag,
             price: 120
         },
     ]
@@ -120,18 +134,18 @@ function HomeReview(){
     const reviews = [
         {
             name: "John Kean",
-            img: require ("../assets/john-kean.jpg"),
-            review: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quisquam dignissimos saepe. Tenetur, dolore animi? Ullam id, beatae sapiente eius, hic provident laboriosam ut, corporis quisquam necessitatibus deserunt voluptas ea.`
+            img: johnKean,
+            review: "I am thrilled with my shopping experience at Luminous. The website is user-friendly, and the product quality exceeded my expectations. I'll be back for more!"
         },
         {
             name: "Daniel Bone",
-            img: require ("../assets/daniel-bone.jpg"),
-            review: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium voluptate ab facilis, itaque aperiam, iste odit autem exercitationem ut temporibus distinctio est recusandae veritatis? Quos, maxime aliquam! Fugit, libero repellat.`
+            img: danielBone,
+            review: "Luminous truly stands out in the e-commerce world. Their customer service is exceptional, and the variety of products is fantastic. A go-to place for online shopping!"
         },
         {
             name: "Carla Sofia",
-            img: require ("../assets/carla-sofia.jpg"),
-            review: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse neque accusantium totam quibusdam praesentium. Ipsam enim quam praesentium harum facere voluptas voluptatibus sequi ratione blanditiis reprehenderit, natus expedita architecto molestias.`
+            img: carlaSofia,
+            review: "Luminous made my online shopping convenient and enjoyable. The speedy delivery and secure payment options give me peace of mind. Highly recommended for all your shopping needs!"
         }
     ]
 
@@ -160,7 +174,7 @@ function HomeReview(){
 // home payments
 function Payments(){
 
-    const payments = [require("../assets/ovo.png"), require("../assets/mandiri.png"), require("../assets/dana.png"), require("../assets/bri.png"), require("../assets/linkaja.png"), require("../assets/spay.png"), require("../assets/bni.png")]
+    const payments = [mandiri, dana, bri, ovo, bni, spay, linkaja]
 
     return (
         <section className="payments mx-auto my-32 w-[80vw] flex flex-col gap-6 items-center">
@@ -183,29 +197,29 @@ function HomeContactUs(){
             <div className="contact-header text-3xl font-semibold">Contact Us</div>
             <div className="contact-content w-full mb-10 rounded flex justify-center gap-10 p-10 overflow-hidden bg-white-prim mobile:flex-col mobile:px-[5vw] mobile:pt-6 mobile:w-full mobile:gap-4 mobile:rounded-none tablet:flex-col tablet:w-[90vw]">
                 <div className="location w-3/5 shadow-med mobile:w-full tablet:w-full">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63245.983719494!2d110.33364490508032!3d-7.803163418805134!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a5787bd5b6bc5%3A0x21723fd4d3684f71!2sYogyakarta%2C%20Kota%20Yogyakarta%2C%20Daerah%20Istimewa%20Yogyakarta!5e0!3m2!1sid!2sid!4v1684329849117!5m2!1sid!2sid" title="Location" loading="lazy" referrerpolicy="no-referrer-when-downgrade" className="w-full h-[450px] mobile:w-[90vw] tablet:w-full"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63245.983719494!2d110.33364490508032!3d-7.803163418805134!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a5787bd5b6bc5%3A0x21723fd4d3684f71!2sYogyakarta%2C%20Kota%20Yogyakarta%2C%20Daerah%20Istimewa%20Yogyakarta!5e0!3m2!1sid!2sid!4v1684329849117!5m2!1sid!2sid" title="Location" loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="w-full h-[450px] mobile:w-[90vw] tablet:w-full"></iframe>
                 </div>
                 <form action="" className="contact-form w-2/5 flex flex-col gap-4 mobile:w-full tablet:w-full tablet:p-0">
                     <div className="name flex items-center gap-3 p-3 bg-white shadow-med rounded-md mobile:w-[90vw] tablet:w-full">
                         <label htmlFor="name" className="flex justify-center items-center">
-                            <span class="material-symbols-rounded">person</span>
+                            <IconUser stroke={1.5} />
                         </label>
                         <input id="name" type="text" placeholder="Name" className="w-full outline-none text-xl" />
                     </div>
                     <div className="email flex items-center gap-3 p-3 bg-white shadow-med rounded-md mobile:w-[90vw] tablet:w-full">
                         <label htmlFor="email" className="flex justify-center items-center">
-                            <span class="material-symbols-rounded">mail</span>
+                            <IconMail stroke={1.5} />
                         </label>
                         <input id="email" type="email" placeholder="Email" className="w-full outline-none text-xl" />
                     </div>
                     <div className="message flex items-center gap-3 p-3 bg-white shadow-med rounded-md mobile:w-[90vw] tablet:w-full">
                         <label htmlFor="message" className="flex justify-center items-center self-start">
-                            <span class="material-symbols-rounded">chat</span>
+                            <IconMessage2 stroke={1.5} />
                         </label>
                         <textarea id="message" cols="30" rows="7" placeholder="Message" className="outline-none text-xl resize-none"></textarea>
                     </div>
                     <button type="button" className="w-fit py-1 px-2 rounded bg-primary text-white text-xl self-end flex items-center">
-                        Send <span class="material-symbols-rounded">chevron_right</span>
+                        Send <IconChevronRight stroke={1.5} />
                     </button>
                 </form>
             </div>
