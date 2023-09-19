@@ -25,6 +25,10 @@ import grillMicrowave from "../assets/grill-microwave.jpg"
 import handBlender from "../assets/hand-blender.jpg"
 import fullSizeBlender from "../assets/full-size-blender.jpg"
 import { IconSearch } from "@tabler/icons-react"
+import { IconBorderAll } from "@tabler/icons-react"
+import { IconArmchair } from "@tabler/icons-react"
+import { IconBed } from "@tabler/icons-react"
+import { IconToolsKitchen } from "@tabler/icons-react"
 
 function Store(){
     document.title = "Luminous | Store"
@@ -46,10 +50,10 @@ export const goods = [
         price: 110,
         img: midbackChair,
         searchCategories: ["house", "midback", "chair", "furniture", "ofiice", "seat"],
-        explanation: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum nemo repellendus consequuntur illo deserunt debitis eveniet amet. Voluptatibus sed aperiam placeat molestias, aliquam non laboriosam dolore provident tempore alias impedit.",
+        explanation: "Our Midback Chair is designed with ergonomic support and modern aesthetics, making it the perfect addition to your office or home workspace. Its cushioned seat and adjustable features ensure comfort during long hours of use, promoting better posture and productivity.",
         texture: "Plastic",
         weight: 7,
-        size: "60cmx50cm"
+        size: "60cm x 50cm"
     },
     {
         id: 2,
@@ -58,10 +62,10 @@ export const goods = [
         price: 120,
         img: lazySofa,
         searchCategories: [ "house","chair", "lazy", "sofa", "furniture", "seat"],
-        explanation: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto provident modi optio omnis ut ipsa voluptatem soluta fugit? Aliquam labore nam voluptate debitis nesciunt! Cum architecto repellat earum excepturi ut.",
+        explanation: "Experience ultimate relaxation with our La-Z-Sofa. This plush and spacious sofa is crafted for exceptional comfort, making it an inviting centerpiece for your living room. Sink into its luxurious cushions and unwind after a long day, enjoying quality time with family and friends.",
         texture: "Kapok",
         weight: 4,
-        size: "150cmx75cm"
+        size: "150cm x 75cm"
     },
     {
         id: 3,
@@ -70,10 +74,10 @@ export const goods = [
         price: 130,
         img: endTable,
         searchCategories: ["house", "end", "table", "desk", "furniture"],
-        explanation: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem eum explicabo iusto? Nesciunt in placeat ipsum vel explicabo nostrum, illum sunt! Quia soluta deserunt quis natus! Corrupti rem ad saepe.",
+        explanation: "Elevate your living space with our End Table. Crafted from high-quality materials, it adds a touch of sophistication to any room. With its practical design, you can conveniently place your books, remote controls, or decor items, making it both stylish and functional.",
         texture: "Wood",
         weight: 7,
-        size: "100cmx100cm"
+        size: "100cm x 100cm"
     },
     {
         id: 4,
@@ -82,10 +86,10 @@ export const goods = [
         price: 200,
         img: writingDesk,
         searchCategories: ["house", "table", "writing", "desk", "furniture"],
-        explanation: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa at ad consequuntur accusamus doloremque ducimus repellendus, deserunt praesentium cumque! Hic beatae ducimus facere? Doloribus accusantium sint nostrum accusamus impedit qui.`,
+        explanation: "Boost your productivity with our Writing Desk. Its sleek and sturdy construction provides an organized workspace, while the minimalist design complements various decor styles. Whether for work or creative pursuits, this desk is your perfect companion.",
         texture: "Wood",
         weight: 7,
-        size: "170cmx70cm"
+        size: "170cm x 70cm"
     },
     {
         id: 5,
@@ -94,10 +98,10 @@ export const goods = [
         price: 150,
         img: sideTable,
         searchCategories: ["house", "side", "table", "desk", "furniture"],
-        explanation: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem facere et fugit, nulla nesciunt voluptas tempora temporibus necessitatibus magni, praesentium quas voluptatibus delectus laudantium rem quae! Nobis hic veritatis temporibus.`,
+        explanation: "Our Side Table combines elegance and utility. Its compact size makes it suitable for tight spaces, and the open shelving offers convenient storage for your essentials. Enjoy easy access to your snacks and beverages while enhancing the aesthetics of your room.",
         texture: "Wood",
         weight: 6,
-        size: "60cmx60cm"
+        size: "60cm x 60cm"
     },
     {
         id: 6,
@@ -106,10 +110,10 @@ export const goods = [
         price: 400,
         img: springBed,
         searchCategories: ["house", "spring", "bed", "bedroom", "sleep"],
-        explanation: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Error animi facilis accusantium aliquid perferendis tempora autem doloribus quidem facere, molestias sapiente modi iste aliquam dolor, excepturi iusto tempore deleniti. Cupiditate.`,
+        explanation: "Enjoy a restful sleep on our Spring Bed. Designed with advanced spring technology, it provides optimal support for a comfortable night's rest. Wake up feeling rejuvenated and ready to take on the day with this quality mattress.",
         texture: "Kapok",
         weight: 70,
-        size: "200cmx170cm"
+        size: "200cm x 170cm"
     },
     {
         id: 7,
@@ -118,10 +122,10 @@ export const goods = [
         price: 395,
         img: memoryFoam,
         searchCategories: ["house", "bed", "bedroom", "sleep", "memory", "foam"],
-        explanation: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab eligendi maiores perferendis earum enim consectetur officiis, quod eveniet laudantium ipsum at quisquam et modi. Culpa magnam cum cupiditate quidem esse.`,
+        explanation: "Experience the ultimate in sleep comfort with our Memory Foam mattress. It conforms to your body, relieving pressure points and promoting deep, uninterrupted sleep. Upgrade your sleep quality and overall well-being with this luxurious mattress.",
         texture: "Foam",
         weight: 65,
-        size: "190cmx150cm"
+        size: "190cm x 150cm"
     },
     {
         id: 8,
@@ -130,10 +134,10 @@ export const goods = [
         price: 375,
         img: latexBed,
         searchCategories: ["house", "bed", "bedroom", "sleep", "latex"],
-        explanation: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis, quae fuga? Numquam sapiente, incidunt excepturi error nemo aspernatur impedit culpa molestiae nesciunt! Consequatur, reprehenderit cumque nam praesentium labore ut nemo.`,
+        explanation: "Our Latex Bed offers a natural and eco-friendly sleep solution. With its latex core, it provides exceptional support and breathability, ensuring a comfortable and healthy sleep environment. Invest in your well-being with this durable and sustainable mattress.",
         texture: "Latex",
         weight: 65,
-        size: "190cmx150cm"
+        size: "190cm x 150cm"
     },
     {
         id: 9,
@@ -142,10 +146,10 @@ export const goods = [
         price: 300,
         img: polypropyleneCarpet,
         searchCategories: ["house", "furniture", "bed", "bedroom", "carpet", "floor", "polypropylene"],
-        explanation: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam officiis rerum architecto delectus, iure veritatis tempora ex consequuntur facere facilis repudiandae necessitatibus, mollitia eveniet laborum eos! Beatae repellendus quod quidem.`,
+        explanation: "Elevate your interior with our Polypropylene Carpet. Known for its durability and stain resistance, it's perfect for high-traffic areas. The stylish design adds warmth and charm to your home while ensuring easy maintenance for years to come.",
         texture: "Polypropylene",
         weight: 15,
-        size: "400cmx400cm"
+        size: "400cm x 400cm"
     },
     {
         id: 10,
@@ -154,10 +158,10 @@ export const goods = [
         price: 290,
         img: vinylCarpet,
         searchCategories: ["house", "bed", "furniture", "bedroom", "carpet", "floor", "vinyl"],
-        explanation: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis, quae fuga? Numquam sapiente, incidunt excepturi error nemo aspernatur impedit culpa molestiae nesciunt! Consequatur, reprehenderit cumque nam praesentium labore ut nemo.`,
+        explanation: "Transform your space with our Vinyl Carpet. Its modern patterns and textures create a striking visual impact, while the vinyl material is easy to clean and maintain. Add a touch of luxury to your decor with this versatile and long-lasting carpet.",
         texture: "Vinyl",
         weight: 15,
-        size: "400cmx400cm"
+        size: "400cm x 400cm"
     },
     {
         id: 11,
@@ -166,10 +170,10 @@ export const goods = [
         price: 50,
         img: neckPillow,
         searchCategories: ["house", "bed", "bedroom", "sleep", "pillow", "neck", "relax"],
-        explanation: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, tenetur. Dicta saepe quae odit rem facilis, repellat non, aspernatur vitae fugit amet praesentium minus accusamus, dignissimos commodi magni exercitationem corrupti.`,
+        explanation: "Say goodbye to neck discomfort with our Neck Pillow. Whether you're traveling or relaxing at home, its ergonomic design provides essential support. Enjoy pain relief and relaxation whenever you need it.",
         texture: "Kapok",
         weight: 1,
-        size: "50cmx50cm"
+        size: "50cm x 50cm"
     },
     {
         id: 12,
@@ -178,10 +182,10 @@ export const goods = [
         price: 120,
         img: beanBag,
         searchCategories: ["house", "furniture", "bean", "bag", "pillow", "relax"],
-        explanation: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa libero modi perferendis rem illo atque dolorem doloremque reiciendis, voluptas, aut, praesentium possimus ad dolore doloribus eaque tenetur maxime! Quis, et.`,
+        explanation: "Dive into relaxation with our Bean Bag. This oversized, ultra-comfortable chair adapts to your body, making it the ideal spot for lounging and unwinding. It's a versatile addition to any living space, creating a cozy corner for leisure and relaxation.",
         texture: "Kapok",
         weight: 2,
-        size: "150cmx75cm"
+        size: "150cm x 75cm"
     },
     {
         id: 13,
@@ -190,10 +194,10 @@ export const goods = [
         price: 30,
         img: soupPlate,
         searchCategories: ["house", "kitchen", "plate", "soap", "eat"],
-        explanation: `Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad velit dolores doloremque cum consequatur iste obcaecati? Accusamus temporibus dolore, nam pariatur, voluptatem ipsa velit repudiandae consectetur voluptate porro minus sapiente.`,
+        explanation: "Our Soup Plate is designed with both style and functionality in mind. Its deep design is perfect for serving hearty soups and stews, while its elegant aesthetic enhances your dining experience.",
         texture: "Metal",
         weight: 0.3,
-        size: "15cmx15cm"
+        size: "15cm x 15cm"
     },
     {
         id: 14,
@@ -202,10 +206,10 @@ export const goods = [
         price: 30,
         img: dessertPlate,
         searchCategories: ["house", "kitchen", "plate", "dessert", "eat",],
-        explanation: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque enim obcaecati rerum molestias eius saepe iure incidunt! Possimus dolorum quas est earum harum aspernatur soluta. Repellendus similique temporibus dolore tempora.`,
+        explanation: "Elevate your dessert presentation with our Dessert Plate. Its elegant design complements sweet treats and adds a touch of sophistication to your table setting, making it ideal for special occasions and everyday use.",
         texture: "Metal",
         weight: 0.3,
-        size: "15cmx15cm"
+        size: "15cm x 15cm"
     },
     {
         id: 15,
@@ -214,10 +218,10 @@ export const goods = [
         price: 20,
         img: teaSpoon,
         searchCategories: ["house", "kitchen", "spoon", "tea", "eat"],
-        explanation: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio sunt facere quaerat omnis repellendus! Velit optio, iste eligendi repudiandae minima illum ab eos corrupti ex consequuntur delectus, vel commodi consectetur.`,
+        explanation: "Enhance your tea time with our Tea Spoon. Crafted for both beauty and practicality, it adds a touch of elegance to your tea service. Its ergonomic design ensures comfortable stirring and sipping.",
         texture: "Metal",
         weight: 0.1,
-        size: "10cmx2cm"
+        size: "10cm x 2cm"
     },
     {
         id: 16,
@@ -226,10 +230,10 @@ export const goods = [
         price: 20,
         img: saladSpoon,
         searchCategories: ["house", "kitchen", "spoon", "salad", "eat"],
-        explanation: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio sunt facere quaerat omnis repellendus! Velit optio, iste eligendi repudiandae minima illum ab eos corrupti ex consequuntur delectus, vel commodi consectetur.`,
+        explanation: "Serve salads with style using our Salad Spoon. Its unique design makes tossing and serving salads effortless, while the quality craftsmanship adds a refined touch to your dining table.",
         texture: "Metal",
         weight: 0.1,
-        size: "10cmx2cm"
+        size: "10cm x 2cm"
     },
     {
         id: 17,
@@ -238,10 +242,10 @@ export const goods = [
         price: 90,
         img: slicingKnife,
         searchCategories: ["house", "kitchen", "knife", "slicing", "slice", "eat"],
-        explanation: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores beatae, necessitatibus animi quia amet adipisci, natus inventore modi rem iure repellendus provident sed. Autem quibusdam molestias dolorem temporibus voluptate in.`,
+        explanation: "Our Slicing Knife is a kitchen essential for precise cutting. Its sharp blade effortlessly slices through meats, bread, and more, ensuring uniform slices for a professional culinary experience.",
         texture: "Metal",
         weight: 0.2,
-        size: "30cmx5cm"
+        size: "30cm x 5cm"
     },
     {
         id: 18,
@@ -250,10 +254,10 @@ export const goods = [
         price: 100,
         img: boningKnife,
         searchCategories: ["house", "kitchen", "knife", "boning", "bone", "eat"],
-        explanation: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores beatae, necessitatibus animi quia amet adipisci, natus inventore modi rem iure repellendus provident sed. Autem quibusdam molestias dolorem temporibus voluptate in.`,
+        explanation: "Achieve expert precision with our Boning Knife. Designed for delicate tasks like deboning and filleting, it's a must-have for any chef or home cook. The sharp blade and ergonomic handle make food preparation a breeze.",
         texture: "Metal",
         weight: 0.2,
-        size: "30cmx5cm"
+        size: "30cm x 5cm"
     },
     {
         id: 19,
@@ -262,10 +266,10 @@ export const goods = [
         price: 425,
         img: basicMicrowave,
         searchCategories: ["house", "kitchen", "basic", "microwave", "heat", "eat"],
-        explanation: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam eius, libero repellendus natus facere fuga autem! Sunt facilis assumenda dolore quos quis aperiam hic, doloribus voluptas? Aliquid sit minima consequatur.`,
+        explanation: "Simplify your cooking routine with our Basic Microwave. This versatile appliance offers quick and efficient heating for your favorite dishes, snacks, and beverages. Its user-friendly features make it an essential kitchen companion.",
         texture: "Metal",
         weight: 5,
-        size: "90cmx60cm"
+        size: "90cm x 60cm"
     },
     {
         id: 20,
@@ -274,10 +278,10 @@ export const goods = [
         price: 445,
         img: grillMicrowave,
         searchCategories: ["house", "kitchen", "microwave", "grill", "heat", "eat"],
-        explanation: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam eius, libero repellendus natus facere fuga autem! Sunt facilis assumenda dolore quos quis aperiam hic, doloribus voluptas? Aliquid sit minima consequatur.`,
+        explanation: "Elevate your cooking options with our Grill Microwave. In addition to standard heating, it features a grilling function, allowing you to create delicious, crispy dishes. It's perfect for preparing a wide range of meals with ease.",
         texture: "Metal",
         weight: 5,
-        size: "90cmx60cm"
+        size: "90cm x 60cm"
     },
     {
         id: 21,
@@ -286,10 +290,10 @@ export const goods = [
         price: 215,
         img: handBlender,
         searchCategories: ["house", "kitchen", "hand", "blender", "eat"],
-        explanation: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, natus? Velit architecto distinctio harum nesciunt laboriosam magni cum est? Libero itaque recusandae odit similique dignissimos accusantium laudantium reiciendis totam placeat.`,
+        explanation: "Our Hand Blender is a versatile kitchen tool for blending, chopping, and pureeing. Its ergonomic design and powerful motor make food preparation quick and convenient, simplifying your cooking tasks.",
         texture: "Metal",
         weight: 2,
-        size: "80cmx20cm"
+        size: "80cm x 20cm"
     },
     {
         id: 22,
@@ -298,16 +302,36 @@ export const goods = [
         price: 200,
         img: fullSizeBlender,
         searchCategories: ["house", "kitchen", "full", "size", "blender", "eat"],
-        explanation: `Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores et at, id dicta accusantium quas quod autem rerum rem. A sint ut rerum eaque omnis porro quidem aspernatur laborum iure.`,
+        explanation: "Experience the ultimate blending performance with our Full Size Blender. Whether you're making smoothies, soups, or sauces, this appliance's robust motor and multiple speed settings ensure flawless results every time. Make healthy and delicious creations effortlessly with this kitchen essential.",
         texture: "Metal",
         weight: 3,
-        size: "80cmx30cm"
+        size: "80cm x 30cm"
     }
 ]
 
 function StoreSearch(){
 
-    const categoryMenu = ["All", "Furniture", "Bedroom", "Kitchen"]
+    let items = [...goods].map(item => item.name)
+    console.log(items)
+
+    const categoryMenu = [
+        {
+            title: "All",
+            svg: <IconBorderAll stroke={1.5} />
+        },
+        {
+            title: "Furniture",
+            svg: <IconArmchair stroke={1.5} />
+        },
+        {
+            title: "Bedroom",
+            svg: <IconBed stroke={1.5} />
+        },
+        {
+            title: "Kitchen",
+            svg: <IconToolsKitchen stroke={1.5} />
+        }
+    ]
 
     const [categoryValue, setCategoryValue] = useState("All")
 
@@ -379,15 +403,18 @@ function StoreSearch(){
                     <IconSearch stroke={1.5} />
                 </span>
             </div>
-            <div className="category-value flex items-center gap-6 text-base mobile:justify-between mobile:gap-0 mobile:w-[90vw] tablet:gap-4">
+            <div className="category-value flex items-center flex-wrap gap-4 text-base justify-center mobile:w-[90vw]">
                 {
                     categoryMenu.map((menu, index) => {
                         return (
-                            <div className={`category-value py-1 px-2 rounded border-2 cursor-pointer ${categoryValue === menu ? "border-primary bg-primary text-white-prim" : "border-[#7e8187] hover:bg-hov"}`} key={index} 
+                            <div className={`category-value flex gap-1 items-center p-1 rounded border-2 cursor-pointer ${categoryValue === menu.title ? "border-primary bg-primary text-white-prim" : "border-[#7e8187] hover:bg-hov"}`} key={index} 
                             onClick={() => {
-                                setCategoryValue(menu)
-                                changeGoods(menu, true)
-                            }}>{menu}</div>
+                                setCategoryValue(menu.title)
+                                changeGoods(menu.title, true)
+                            }}>
+                                {menu.svg}
+                                <span>{menu.title}</span>
+                            </div>
                         )
                     })
                 }
@@ -403,14 +430,16 @@ function StoreGrid(props){
     const goods = props.goods
 
     return (
-        <section className="store-grid w-[90vw] mt-12 mx-auto grid grid-cols-5 gap-5 mobile:grid-cols-2 tablet:grid-cols-4">
+        <section className="store-grid w-[80vw] my-12 mx-auto grid grid-cols-5 gap-4 mobile:w-full mobile:px-4 mobile:grid-cols-2 tablet:grid-cols-4 tablet:w-[90vw]">
             {
                 goods.map((item, index) => {
                     return (
-                        <a href={`/store/product${index + 1}`} className="product-item flex flex-col gap-4 rounded-lg bg-white p-3 shadow-med border-2 border-white hover:border-primary hover:shadow-none" key={index}>
+                        <a href={`/store/product${index + 1}`} className="product-item flex flex-col rounded-lg bg-white overflow-hidden border-2 hover:border-primary hover:shadow-none" key={index}>
                             <img src={item.img} alt={item.name} />
-                            <div className="product-name text-2xl mobile:text-xl tablet:text-xl">{item.name}</div>
-                            <div className="product-price text-xl mobile:text-base tablet:text-base">{`$${item.price}`}</div>
+                            <div className="info p-4 flex flex-col gap-4">
+                                <div className="product-name text-xl font-bold mobile:text-xl tablet:text-xl">{item.name}</div>
+                                <div className="product-price text-xl mobile:text-base tablet:text-base">{`$${item.price}`}</div>
+                            </div>
                         </a>
                     )
                 })

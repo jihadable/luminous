@@ -11,9 +11,6 @@ export default {
         "white-prim": "#eee",
         "hov": "rgb(0,0,0,.1)"
       },
-      boxShadow: {
-          'med': '0 5px 30px -2px rgba(0,0,0,.2)',
-      },
       screens: {
           'mobile': {'max': '480px'},
           

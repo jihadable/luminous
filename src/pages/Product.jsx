@@ -70,10 +70,19 @@ function Product(props){
                 <div className="product-info bg-white-prim flex flex-col items-center gap-8 p-5 rounded text-xl w-[50vw] h-fit mobile:w-full tablet:w-[70%]">
                     <div className="product-name text-3xl font-semibold">{name}</div>
                     <div className="product-explanation text-justify">{explanation}</div>
-                    <div className="product-shape text-base w-full flex items-center justify-evenly mobile:justify-between mobile:gap-2">
-                        <span className="product-texture rounded-sm p-2 bg-white shadow-med mobile:flex mobile:flex-col"><span>Texture:</span> {texture}</span>
-                        <span className="product-weight rounded-sm p-2 bg-white shadow-med mobile:flex mobile:flex-col"><span>Weight:</span> {`${weight}kg`}</span>
-                        <span className="product-size rounded-sm p-2 bg-white shadow-med mobile:flex mobile:flex-col"><span>Size:</span> {size}</span>
+                    <div className="product-shape text-base w-full flex items-center justify-between mobile:justify-between mobile:gap-2">
+                        <span className="product-texture rounded-sm p-2 bg-white shadow-med flex flex-col">
+                            <div className="font-bold">Texture</div>
+                            <div>{texture}</div> 
+                        </span>
+                        <span className="product-weight rounded-sm p-2 bg-white shadow-med flex flex-col">
+                            <div className="font-bold">Weight:</div>
+                            <div>{`${weight}kg`}</div>
+                        </span>
+                        <span className="product-size rounded-sm p-2 bg-white shadow-med flex flex-col">
+                            <div className="font-bold">Size:</div>
+                            <div>{size}</div>
+                        </span>
                     </div>
                     <div className="bg-black h-[2px] w-full" />
                     <div className="product-footer w-full flex items-center justify-between">
