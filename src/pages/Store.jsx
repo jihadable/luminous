@@ -309,27 +309,7 @@ export const goods = [
 
 function StoreSearch(){
 
-    let items = [...goods].map(item => item.name)
-    console.log(items)
-
-    const categoryMenu = [
-        {
-            title: "All",
-            svg: <IconBorderAll stroke={1.5} />
-        },
-        {
-            title: "Furniture",
-            svg: <IconArmchair stroke={1.5} />
-        },
-        {
-            title: "Bedroom",
-            svg: <IconBed stroke={1.5} />
-        },
-        {
-            title: "Kitchen",
-            svg: <IconToolsKitchen stroke={1.5} />
-        }
-    ]
+    const categoryMenu = ["All", "Furniture", "Bedroom", "Kitchen"]
 
     const [categoryValue, setCategoryValue] = useState("All")
 
@@ -396,7 +376,7 @@ function StoreSearch(){
         <div className="store-header w-[90vw] mx-auto flex flex-col items-center gap-4">
             <header className="text-3xl mt-36 font-semibold">Find your best will</header>
             <div className="category-search relative">
-                <input type="text" value={searchValue} placeholder="Search..." className="category-search-input text-xl w-[50vw] p-2 rounded outline-none bg-white-prim border-2 border-white-prim focus:border-primary mobile:w-[90vw] tablet:w-[80vw]" onChange={e => setSearchValue(e.target.value)} onKeyUp={e => clickEnterOnSearchInput(e)} autoComplete={false} />
+                <input type="text" value={searchValue} placeholder="Search..." className="category-search-input text-xl w-[50vw] p-2 rounded outline-none bg-white-prim border-2 border-white-prim focus:border-primary mobile:w-[90vw] tablet:w-[80vw]" onChange={e => setSearchValue(e.target.value)} onKeyUp={e => clickEnterOnSearchInput(e)} />
                 <span className="category-search-btn absolute right-0 top-0 bottom-0 flex justify-center items-center p-2 px-3 rounded-r cursor-pointer bg-primary text-white-prim" onClick={() => changeGoods(searchValue, false)}>
                     <IconSearch stroke={1.5} />
                 </span>
@@ -405,13 +385,12 @@ function StoreSearch(){
                 {
                     categoryMenu.map((menu, index) => {
                         return (
-                            <div className={`category-value flex gap-1 items-center py-1 px-4 rounded border-2 cursor-pointer ${categoryValue === menu.title ? "border-primary bg-primary text-white-prim" : "border-[#999] hover:bg-hov"}`} key={index} 
+                            <div className={`category-value flex gap-1 items-center py-1 px-4 rounded border-2 cursor-pointer ${categoryValue === menu ? "border-primary bg-primary text-white-prim" : "border-[#999] hover:bg-hov"}`} key={index} 
                             onClick={() => {
-                                setCategoryValue(menu.title)
-                                changeGoods(menu.title, true)
+                                setCategoryValue(menu)
+                                changeGoods(menu, true)
                             }}>
-                                {/* {menu.svg} */}
-                                <span>{menu.title}</span>
+                                <span>{menu}</span>
                             </div>
                         )
                     })
