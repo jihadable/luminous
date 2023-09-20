@@ -3,13 +3,15 @@ import luminousLogo from "../assets/luminous-logo.png"
 import { IconMail } from "@tabler/icons-react"
 import { IconLock } from "@tabler/icons-react"
 import { IconUserCircle } from "@tabler/icons-react"
+import { Link } from "react-router-dom"
+import goTop from "./goTop"
 
 function LoginSignupForm(props){
 
     const page = props.page
 
     return (
-        <div className="w-[100vw] min-h-[100vh] flex flex-col gap-4 items-center justify-center">
+        <div className="w-[100vw] min-h-[100vh] flex flex-col gap-4 items-center justify-center bg-white-prim">
             <header className="flex items-center gap-2">
                 <img src={luminousLogo} alt="Luminous" className="w-14"/>
                 <span className="text-4xl">Luminous</span>
@@ -41,7 +43,7 @@ function LoginSignupForm(props){
                 <button type="submit" className="py-2 rounded bg-primary text-white">{page === "login" ? "Log in" : "Sign up"}</button>
                 <div className="not-have-account">
                     {page === "login" ? "Don't have an acoount? " : "Already have an account? "}
-                    <a href={page === "login" ? "/signup" : "/login"} className="text-primary">{page === "login" ? "Sign up" : "Log in"}</a>
+                    <Link to={page === "login" ? "/signup" : "/login"} onClick={goTop} className="text-primary">{page === "login" ? "Sign up" : "Log in"}</Link>
                 </div>
             </form>
         </div>

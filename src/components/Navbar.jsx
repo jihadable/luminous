@@ -6,6 +6,8 @@ import { IconMenu2 } from "@tabler/icons-react"
 import { IconShoppingCartX } from "@tabler/icons-react"
 import { IconTrash } from "@tabler/icons-react"
 import { IconX } from "@tabler/icons-react"
+import { Link } from "react-router-dom"
+import goTop from "./goTop"
 
 function Navbar(props){
 
@@ -29,20 +31,20 @@ function Navbar(props){
 
     return (
         <nav className="navbar fixed left-0 right-0 top-0 px-[10vw] py-3 flex items-center bg-white justify-between z-50 mobile:p-2 mobile:px-[5%] tablet:px-[5%]">
-            <a href="/" className="navbar-logo flex items-center gap-2">
+            <Link to="/" onClick={goTop} className="navbar-logo flex items-center gap-2">
                 <img src={luminousLogo} alt="" className="w-12" />
                 <span className="text-[1.3rem]">Luminous</span>
-            </a>
+            </Link>
             <div className="navbar-nav flex gap-8 text-lg mobile:hidden">
-                <a href="/" className={`border-b-2 text-xl ${props.link === "home" ? "border-primary" : "border-white hover:border-primary"}`} >Home</a>
-                <a href="/store" className={`border-b-2 text-xl ${props.link === "home" ? "border-white hover:border-primary" : "border-primary"}`} >Store</a>
+                <Link to="/" onClick={goTop} className={`border-b-2 text-xl ${props.link === "home" ? "border-primary" : "border-white hover:border-primary"}`} >Home</Link>
+                <Link to="/store" onClick={goTop} className={`border-b-2 text-xl ${props.link === "home" ? "border-white hover:border-primary" : "border-primary"}`} >Store</Link>
             </div>
             {
                 (showShoppingCart || showMobileMenu) &&
                 <div className="overlay fixed z-[51] left-0 right-0 top-0 h-[100vh] bg-[rgb(0,0,0,.5)]"></div>
             }
             <div className="navbar-extra flex items-center gap-4 text-lg">
-                <a href="/login" className="py-1 px-2 bg-primary rounded text-white mobile:hidden">Login</a>
+                <Link to="/login" onClick={goTop} className="py-1 px-2 bg-primary rounded text-white mobile:hidden">Login</Link>
                 <span className="shopping-cart-btn flex justify-center items-center relative p-1 rounded cursor-pointer hover:bg-[rgb(0,0,0,.1)]" onClick={() => {setShowShoppingCart(!showShoppingCart)}} ref={shoppingCartBtn}>
                     <IconShoppingCart stroke={1.5} />
                     {
@@ -56,16 +58,14 @@ function Navbar(props){
                 </span>
             </div>
 
-            {/* <div className={`overlay absolute top-0 left-0 h-[100vh] right-0 bg-black/[.5] ${showMobileMenu ? "block" : "hidden"}`}></div> */}
-
             {/* mobile menu */}
             <div className={`mobile-menu flex flex-col gap-4 p-4 text-2xl items-end absolute w-[70vw] top-0 h-[100vh] z-[55] bg-white ${showMobileMenu ? "active" : ""}`} ref={mobileMenu}>
                 <div className="close-mobile-menu top-4 right-4 p-1 rounded cursor-pointer hover:bg-hov" onClick={() => setShowMobileMenu(false)}>
                     <IconX stroke={1.5} />
                 </div>
-                <a href="/" className={props.link === "home" ? "border-b-2 border-primary" : "border-b-2 border-white hover:border-primary"} >Home</a>
-                <a href="/store" className={props.link === "home" ? "border-b-2 border-white hover:border-primary" : "border-b-2 border-primary"} >Store</a>  
-                <a href="/login" className="border-b-2 border-white hover:border-primary" >Login</a>
+                <Link to="/" onClick={goTop} className={props.link === "home" ? "border-b-2 border-primary" : "border-b-2 border-white hover:border-primary"} >Home</Link>
+                <Link to="/store" onClick={goTop} className={props.link === "home" ? "border-b-2 border-white hover:border-primary" : "border-b-2 border-primary"} >Store</Link>  
+                <Link to="/login" onClick={goTop} className="border-b-2 border-white hover:border-primary" >Login</Link>
             </div>
 
             {/* shopping cart */}

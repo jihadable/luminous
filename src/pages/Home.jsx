@@ -27,6 +27,8 @@ import { IconUser } from "@tabler/icons-react"
 import { IconMail } from "@tabler/icons-react"
 import { IconMessage2 } from "@tabler/icons-react"
 import { IconChevronRight } from "@tabler/icons-react"
+import { Link } from "react-router-dom"
+import goTop from "../components/goTop"
 
 // home
 function Home(){
@@ -71,7 +73,7 @@ function HomeTag(){
             <div className="home-tag-content absolute bg-white/[.3] backdrop-blur-lg p-8 flex flex-col gap-4 mobile:static mobile:p-0">
                 <div className="home-tag-header text-3xl font-bold mobile:text-2xl">Luminous Living</div>
                 <div className="home-tag-tagline text-xl mobile:text-base">Luminous help people to find their best will in household. Our products are all made to standard sizes so that you can mix and match them freely</div>
-                <a href="/store" className="w-fit py-1 px-2 rounded bg-primary text-white text-xl mobile:text-base">Shop now</a>
+                <Link to="/store" onClick={goTop} className="w-fit py-1 px-2 rounded bg-primary text-white text-xl mobile:text-base">Shop now</Link>
             </div>
         </section>
     )
@@ -120,13 +122,13 @@ export function HomeTrendingNow(){
                 {
                     trendingItems.map((item, index) => {
                         return (
-                            <a href={`/store/product${item.id}`} className="trending-now-item flex flex-col rounded-lg bg-white overflow-hidden border-2 hover:border-primary hover:shadow-none" key={index}>
+                            <Link to={`/store/product${item.id}`} onClick={goTop} className="trending-now-item flex flex-col rounded-lg bg-white overflow-hidden border-2 hover:border-primary hover:shadow-none" key={index}>
                                 <img src={item.img} alt={item.name} />
                                 <div className="info flex flex-col gap-4 p-4">
                                     <div className="trending-item-name text-xl font-bold mobile:text-xl">{item.name}</div>
                                     <div className="trending-item-price text-xl mobile:text-base">{`$${item.price}`}</div>
                                 </div>
-                            </a>
+                            </Link>
                         )
                     })
                 }

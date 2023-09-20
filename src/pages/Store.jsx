@@ -25,10 +25,8 @@ import grillMicrowave from "../assets/grill-microwave.jpg"
 import handBlender from "../assets/hand-blender.jpg"
 import fullSizeBlender from "../assets/full-size-blender.jpg"
 import { IconSearch } from "@tabler/icons-react"
-import { IconBorderAll } from "@tabler/icons-react"
-import { IconArmchair } from "@tabler/icons-react"
-import { IconBed } from "@tabler/icons-react"
-import { IconToolsKitchen } from "@tabler/icons-react"
+import { Link } from "react-router-dom"
+import goTop from "../components/goTop"
 
 function Store(){
     document.title = "Luminous | Store"
@@ -407,12 +405,12 @@ function StoreSearch(){
                 {
                     categoryMenu.map((menu, index) => {
                         return (
-                            <div className={`category-value flex gap-1 items-center p-1 rounded border-2 cursor-pointer ${categoryValue === menu.title ? "border-primary bg-primary text-white-prim" : "border-[#7e8187] hover:bg-hov"}`} key={index} 
+                            <div className={`category-value flex gap-1 items-center py-1 px-4 rounded border-2 cursor-pointer ${categoryValue === menu.title ? "border-primary bg-primary text-white-prim" : "border-[#999] hover:bg-hov"}`} key={index} 
                             onClick={() => {
                                 setCategoryValue(menu.title)
                                 changeGoods(menu.title, true)
                             }}>
-                                {menu.svg}
+                                {/* {menu.svg} */}
                                 <span>{menu.title}</span>
                             </div>
                         )
@@ -434,13 +432,13 @@ function StoreGrid(props){
             {
                 goods.map((item, index) => {
                     return (
-                        <a href={`/store/product${index + 1}`} className="product-item flex flex-col rounded-lg bg-white overflow-hidden border-2 hover:border-primary hover:shadow-none" key={index}>
+                        <Link to={`/store/product${index + 1}`} onClick={goTop} className="product-item flex flex-col rounded-lg bg-white overflow-hidden border-2 hover:border-primary hover:shadow-none" key={index}>
                             <img src={item.img} alt={item.name} />
                             <div className="info p-4 flex flex-col gap-4">
                                 <div className="product-name text-xl font-bold mobile:text-xl tablet:text-xl">{item.name}</div>
                                 <div className="product-price text-xl mobile:text-base tablet:text-base">{`$${item.price}`}</div>
                             </div>
-                        </a>
+                        </Link>
                     )
                 })
             }
