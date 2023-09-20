@@ -23,13 +23,9 @@ function Navbar(props){
                 setShowMobileMenu(false)
             }
         })
-        
-        document.addEventListener("scroll", function(){
-            setShowMobileMenu(false)
-        })
     })
 
-    const [mobileMenu, mobileMenuBtn, shoppingCartBtn, shoppingCartBtnMobile] = [useRef(), useRef(), useRef(), useRef()]
+    const [mobileMenu, mobileMenuBtn, shoppingCartBtn] = [useRef(), useRef(), useRef()]
 
     return (
         <nav className="navbar fixed left-0 right-0 top-0 px-[10vw] py-3 flex items-center bg-white justify-between z-50 mobile:p-2 mobile:px-[5%] tablet:px-[5%]">
@@ -37,17 +33,16 @@ function Navbar(props){
                 <img src={luminousLogo} alt="" className="w-12" />
                 <span className="text-[1.3rem]">Luminous</span>
             </a>
-            <div className="navbar-nav flex gap-10 text-lg mobile:hidden">
+            <div className="navbar-nav flex gap-8 text-lg mobile:hidden">
                 <a href="/" className={`border-b-2 text-xl ${props.link === "home" ? "border-primary" : "border-white hover:border-primary"}`} >Home</a>
                 <a href="/store" className={`border-b-2 text-xl ${props.link === "home" ? "border-white hover:border-primary" : "border-primary"}`} >Store</a>
             </div>
             {
-                showShoppingCart &&
-                <div className="overlay fixed z-[51] left-0 right-0 top-0 h-[100vh] bg-[rgb(0,0,0,.5)] mobile:hidden"></div>
+                (showShoppingCart || showMobileMenu) &&
+                <div className="overlay fixed z-[51] left-0 right-0 top-0 h-[100vh] bg-[rgb(0,0,0,.5)]"></div>
             }
-            <div className="navbar-extra flex items-center gap-6 text-lg mobile:hidden">
-                <a href="/login" className="text-xl border-b-2 border-white hover:border-primary" >Login</a>
-                <a href="/signup" className="py-1 px-2 bg-primary rounded text-white">Sign Up</a>
+            <div className="navbar-extra flex items-center gap-4 text-lg">
+                <a href="/login" className="py-1 px-2 bg-primary rounded text-white mobile:hidden">Login</a>
                 <span className="shopping-cart-btn flex justify-center items-center relative p-1 rounded cursor-pointer hover:bg-[rgb(0,0,0,.1)]" onClick={() => {setShowShoppingCart(!showShoppingCart)}} ref={shoppingCartBtn}>
                     <IconShoppingCart stroke={1.5} />
                     {
@@ -55,34 +50,26 @@ function Navbar(props){
                         <div className="cart-notify absolute flex justify-center items-center -top-2 -right-2 px-2 py-0 rounded-full text-white-prim text-sm bg-red-500">{cartItems.length}</div>
                     }
                 </span>
-            </div>
-
-            {/* mobile menu */}
-            <div className={`navbar-link hidden flex-col gap-3 items-end absolute right-[5px] top-[calc(100%+5px)] p-2 text-xl w-[150px] rounded shadow-[0_0_10px_-2px_rgb(0,0,0,.5)] bg-white ${showMobileMenu ? "" : "scale-0"} origin-top-right transition mobile:flex`} ref={mobileMenu}>
-                <a href="/" className={props.link === "home" ? "border-b-2 border-primary" : "border-b-2 border-white hover:border-primary"} >Home</a>
-                <a href="/store" className={props.link === "home" ? "border-b-2 border-white hover:border-primary" : "border-b-2 border-primary"} >Store</a>  
-                <a href="/login" className="border-b-2 border-white hover:border-primary" >Login</a>
-                <span className="shopping-cart-btn-mobile relative flex items-center gap-1 border-b-2 border-white hover:border-primary" onClick={() => {setShowShoppingCart(!showShoppingCart)}} ref={shoppingCartBtnMobile}>
-                    <IconShoppingCart stroke={1.5} />
-                    <span>Cart</span>
-                    {
-                        cartItems.length > 0 &&
-                        <div className="cart-notify absolute flex justify-center items-center -top-2 -left-2 px-2 py-0 rounded-full text-white-prim text-sm bg-red-500">{cartItems.length}</div>
-                    }
+                {/* mobile menu button */}
+                <span className="mobile-menu-btn relative hidden justify-center items-center p-1 rounded cursor-pointer hover:bg-hov mobile:flex" onClick={() => {setShowMobileMenu(!showMobileMenu)}} ref={mobileMenuBtn}>
+                    <IconMenu2 stroke={1.5} />
                 </span>
             </div>
 
-            {/* mobile menu button */}
-            <span className="mobile-menu-btn relative hidden justify-center items-center p-1 rounded cursor-pointer hover:bg-hov mobile:flex" onClick={() => {setShowMobileMenu(!showMobileMenu)}} ref={mobileMenuBtn}>
-                <IconMenu2 stroke={1.5} />
-                {
-                    cartItems.length > 0 &&
-                    <div className={`cart-notify absolute ${showMobileMenu ? "hidden" : "flex"} justify-center items-center -top-2 -right-2 px-2 py-0 rounded-full text-white-prim text-sm bg-red-500`}>{cartItems.length}</div>
-                }
-            </span>
+            {/* <div className={`overlay absolute top-0 left-0 h-[100vh] right-0 bg-black/[.5] ${showMobileMenu ? "block" : "hidden"}`}></div> */}
+
+            {/* mobile menu */}
+            <div className={`mobile-menu flex flex-col gap-4 p-4 text-2xl items-end absolute w-[70vw] top-0 h-[100vh] z-[55] bg-white ${showMobileMenu ? "active" : ""}`} ref={mobileMenu}>
+                <div className="close-mobile-menu top-4 right-4 p-1 rounded cursor-pointer hover:bg-hov" onClick={() => setShowMobileMenu(false)}>
+                    <IconX stroke={1.5} />
+                </div>
+                <a href="/" className={props.link === "home" ? "border-b-2 border-primary" : "border-b-2 border-white hover:border-primary"} >Home</a>
+                <a href="/store" className={props.link === "home" ? "border-b-2 border-white hover:border-primary" : "border-b-2 border-primary"} >Store</a>  
+                <a href="/login" className="border-b-2 border-white hover:border-primary" >Login</a>
+            </div>
 
             {/* shopping cart */}
-            <ShoppingCart cartItems={cartItems} setCartItems={setCartItems} showShoppingCart={showShoppingCart} setShowShoppingCart={setShowShoppingCart} shoppingCartBtn={shoppingCartBtn} shoppingCartBtnMobile={shoppingCartBtnMobile} />
+            <ShoppingCart cartItems={cartItems} setCartItems={setCartItems} showShoppingCart={showShoppingCart} setShowShoppingCart={setShowShoppingCart} shoppingCartBtn={shoppingCartBtn} />
         </nav>
     )
 }
@@ -100,12 +87,11 @@ function ShoppingCart(props){
     const setShowShoppingCart = props.setShowShoppingCart
 
     const shoppingCartBtn = props.shoppingCartBtn
-    const shoppingCartBtnMobile = props.shoppingCartBtnMobile
     const shoppingCart = useRef()
 
     useEffect(() => {
         document.addEventListener("click", function(e){
-            if (!shoppingCart.current.contains(e.target) && !shoppingCartBtn.current.contains(e.target) && !shoppingCartBtnMobile.current.contains(e.target)){
+            if (!shoppingCart.current.contains(e.target) && !shoppingCartBtn.current.contains(e.target)){
                 setShowShoppingCart(false)
             }
         })
