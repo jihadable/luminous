@@ -23,10 +23,6 @@ import bca from "../assets/bca.png"
 import qris from "../assets/qris.png"
 import gopay from "../assets/gopay.png"
 import paypal from "../assets/paypal.png"
-import { IconUser } from "@tabler/icons-react"
-import { IconMail } from "@tabler/icons-react"
-import { IconMessage2 } from "@tabler/icons-react"
-import { IconChevronRight } from "@tabler/icons-react"
 import { Link } from "react-router-dom"
 import goTop from "../components/goTop"
 
@@ -41,7 +37,6 @@ function Home(){
             <HomeTrendingNow />
             <HomeReview />
             <Payments />
-            {/* <HomeContactUs /> */}
             <Footer />
         </>
     )
@@ -50,14 +45,13 @@ function Home(){
 // home header
 function HomeHeader(){
     return (
-        <header className="flex h-[100vh] w-[80vw] mx-auto pt-8 items-center gap-4 mobile:flex-col mobile:w-[90vw] mobile:pt-20 mobile:mb-20 mobile:h-fit tablet:h-fit tablet:flex-col tablet:items-center tablet:pt-32 tablet:mb-20 tablet:w-[90vw]">
-            <div className="header-left w-[calc((80vw-.5rem)/2)] h-[calc((80vw-.5rem)/2)] bg-cover flex items-end mobile:w-full mobile:h-[90vw] tablet:w-full tablet:h-[70vw]">
-            </div>
-            <div className="header-right w-[calc((80vw-.5rem)/2)] h-[calc((80vw-.5rem)/2)] flex mobile:w-full mobile:h-[90vw] tablet:w-full tablet:h-[90vw]">
-                <img src={spoon} alt="Spoon" className="spoon-img h-full mobile:h-[90vw]" />
-                <div className="img2 flex flex-col">
-                    <img src={chair} alt="Chair" className="chair-img h-full w-full" />
-                    <img src={table} alt="Table" className="tabler-img h-full w-full" />
+        <header className="flex h-[100vh] w-[80vw] mx-auto pb-8 pt-24 gap-4 mobile:w-full mobile:px-4 mobile:flex-col mobile:h-fit tablet:w-[90vw] tablet:flex-col tablet:h-fit">
+            <div className="header-left w-full h-full rounded-md mobile:h-[calc(100vw-2rem)] tablet:h-[90vw]"></div>
+            <div className="header-right w-full h-full flex gap-4 mobile:h-[calc(100vw-2rem)] tablet:h-[90vw]">
+                <div className="header-right-left w-full h-full rounded-md"></div>
+                <div className="header-right-right w-full h-full flex flex-col gap-4">
+                    <div className="header-right-right-top w-full h-full rounded-md"></div>
+                    <div className="header-right-right-bottom w-full h-full rounded-md"></div>
                 </div>
             </div>
         </header>

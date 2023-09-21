@@ -189,7 +189,7 @@ function ShoppingCart(props){
                             return (
                                 <div className="item w-full flex gap-2 p-2 bg-white rounded border-2 border-[#ccc]" key={index}>
                                     <div className="item-img w-2/5">
-                                        <img src={item.img} alt="Item" />
+                                        <img src={item.img} alt="Item" className="rounded" />
                                     </div>
                                     <div className="item-info w-3/5 h-full flex flex-col justify-between">
                                         <div className="header flex items-center justify-between">

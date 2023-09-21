@@ -84,7 +84,7 @@ function Product(props){
                             <div>{size}</div>
                         </span>
                     </div>
-                    <div className="bg-black h-[2px] w-full" />
+                    <div className="bg-black/[.3] h-[1px] w-full" />
                     <div className="product-footer w-full flex items-center justify-between">
                         <span className="add-minus-product select-none">
                             <span className="add-product cursor-pointer py-2 px-4 bg-primary text-white-prim" onClick={() => minusProduct()}>-</span>

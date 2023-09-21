@@ -34,4 +34,24 @@
 
 .header-left{
   background-image: url("./assets/home.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+.header-right-left{
+  background-image: url("./assets/spoon.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+.header-right-right-top{
+  background-image: url("./assets/chair.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+.header-right-right-bottom{
+  background-image: url("./assets/table.jpg");
+  background-position: center;
+  background-size: cover;
 }

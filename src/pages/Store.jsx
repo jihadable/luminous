@@ -411,7 +411,7 @@ function StoreGrid(props){
             {
                 goods.map((item, index) => {
                     return (
-                        <Link to={`/store/product${index + 1}`} onClick={goTop} className="product-item flex flex-col rounded-lg bg-white overflow-hidden border-2 hover:border-primary hover:shadow-none" key={index}>
+                        <Link to={`/store/product${item.id}`} onClick={goTop} className="product-item flex flex-col rounded-lg bg-white overflow-hidden border-2 hover:border-primary hover:shadow-none" key={index}>
                             <img src={item.img} alt={item.name} />
                             <div className="info p-4 flex flex-col gap-4">
                                 <div className="product-name text-xl font-bold mobile:text-xl tablet:text-xl">{item.name}</div>
