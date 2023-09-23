@@ -63,7 +63,7 @@ function HomeTag(){
 
     return (
         <section className="home-tag flex items-center justify-center my-32 mx-auto w-[80vw] relative mobile:w-full mobile:px-4 mobile:flex-col mobile:gap-4 tablet:w-[90vw]">
-            <img src={household} alt="HouseHold" className="w-full rounded-md" />
+            <img src={household} alt="HouseHold" className="w-full rounded-md" loading="lazy" />
             <div className="home-tag-content absolute bg-white/[.3] backdrop-blur-lg p-8 flex flex-col gap-4 mobile:static mobile:p-0">
                 <div className="home-tag-header text-3xl font-bold mobile:text-2xl">Luminous Living</div>
                 <div className="home-tag-tagline text-xl mobile:text-base">Luminous help people to find their best will in household. Our products are all made to standard sizes so that you can mix and match them freely</div>
@@ -117,7 +117,7 @@ export function HomeTrendingNow(){
                     trendingItems.map((item, index) => {
                         return (
                             <Link to={`/store/product${item.id}`} onClick={goTop} className="trending-now-item flex flex-col rounded-lg bg-white overflow-hidden border-2 hover:border-primary hover:shadow-none" key={index}>
-                                <img src={item.img} alt={item.name} />
+                                <img src={item.img} alt={item.name} loading="lazy" />
                                 <div className="info flex flex-col gap-4 p-4">
                                     <div className="trending-item-name text-xl font-bold mobile:text-xl">{item.name}</div>
                                     <div className="trending-item-price text-xl mobile:text-base">{`$${item.price}`}</div>
@@ -163,7 +163,7 @@ function HomeReview(){
                             return (
                                 <div className="review bg-white-prim flex flex-col gap-4 p-4 rounded-xl h-fit" key={index}>
                                     <div className="review-header flex gap-3">
-                                        <img src={review.img} alt={review.name} className="w-[50px] rounded-full shadow-med" />
+                                        <img src={review.img} alt={review.name} className="w-[50px] rounded-full shadow-med" loading="lazy" />
                                         <div className="name-job">
                                             <div className="name text-xl">{review.name}</div>
                                             <div className="job text-black/[.7]">{review.job}</div>
@@ -190,7 +190,7 @@ function Payments(){
             <div className="payments-content flex items-center justify-center flex-wrap gap-4">
             {
                 payments.map((payment, index) => {
-                    return <img src={payment} alt="Payment" className="w-24 h-fit mobile:w-16" key={index} />
+                    return <img src={payment} alt="Payment" className="w-24 h-fit mobile:w-16" loading="lazy" key={index} />
                 })
             }
             </div>
