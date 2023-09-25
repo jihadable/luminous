@@ -9,15 +9,12 @@ import { IconX } from "@tabler/icons-react"
 import { Link } from "react-router-dom"
 import goTop from "./goTop"
 
-function Navbar(props){
+function Navbar({ link, cartItems, setCartItems }){
 
-    const [cartItems, setCartItems] = useState(props.cartItems)
+    const [showShoppingCart, setShowShoppingCart] = useState(false)
+    const [showMobileMenu, setShowMobileMenu] = useState(false)
 
-    useEffect(() => {
-        setCartItems(props.cartItems)
-    }, [props.cartItems])
-
-    const [[showShoppingCart, setShowShoppingCart], [showMobileMenu, setShowMobileMenu]] = [useState(false), useState(false)]
+    const [mobileMenu, mobileMenuBtn, shoppingCart, shoppingCartBtn] = [useRef(), useRef(), useRef(), useRef()]
 
     useEffect(() => {
         document.addEventListener("click", function(e){
@@ -27,8 +24,6 @@ function Navbar(props){
         })
     })
 
-    const [mobileMenu, mobileMenuBtn, shoppingCartBtn] = [useRef(), useRef(), useRef()]
-
     return (
         <nav className="navbar fixed left-0 right-0 top-0 px-[10vw] py-3 flex items-center bg-white justify-between z-50 mobile:p-2 mobile:px-[5%] tablet:px-[5%]">
             <Link to="/" onClick={goTop} className="navbar-logo flex items-center gap-2">
@@ -36,8 +31,8 @@ function Navbar(props){
                 <span className="text-[1.3rem]">Luminous</span>
             </Link>
             <div className="navbar-nav flex gap-8 text-lg mobile:hidden">
-                <Link to="/" onClick={goTop} className={`border-b-2 text-xl ${props.link === "home" ? "border-primary" : "border-white hover:border-primary"}`} >Home</Link>
-                <Link to="/store" onClick={goTop} className={`border-b-2 text-xl ${props.link === "home" ? "border-white hover:border-primary" : "border-primary"}`} >Store</Link>
+                <Link to="/" onClick={goTop} className={`border-b-2 text-xl ${link === "home" ? "border-primary" : "border-white hover:border-primary"}`} >Home</Link>
+                <Link to="/store" onClick={goTop} className={`border-b-2 text-xl ${link === "home" ? "border-white hover:border-primary" : "border-primary"}`} >Store</Link>
             </div>
             {
                 (showShoppingCart || showMobileMenu) &&
@@ -63,31 +58,18 @@ function Navbar(props){
                 <div className="close-mobile-menu top-4 right-4 p-1 rounded cursor-pointer hover:bg-hov" onClick={() => setShowMobileMenu(false)}>
                     <IconX stroke={1.5} />
                 </div>
-                <Link to="/" onClick={goTop} className={props.link === "home" ? "border-b-2 border-primary" : "border-b-2 border-white hover:border-primary"} >Home</Link>
-                <Link to="/store" onClick={goTop} className={props.link === "home" ? "border-b-2 border-white hover:border-primary" : "border-b-2 border-primary"} >Store</Link>  
+                <Link to="/" onClick={goTop} className={link === "home" ? "border-b-2 border-primary" : "border-b-2 border-white hover:border-primary"} >Home</Link>
+                <Link to="/store" onClick={goTop} className={link === "home" ? "border-b-2 border-white hover:border-primary" : "border-b-2 border-primary"} >Store</Link>  
                 <Link to="/login" onClick={goTop} className="border-b-2 border-white hover:border-primary" >Login</Link>
             </div>
 
             {/* shopping cart */}
-            <ShoppingCart cartItems={cartItems} setCartItems={setCartItems} showShoppingCart={showShoppingCart} setShowShoppingCart={setShowShoppingCart} shoppingCartBtn={shoppingCartBtn} />
+            <ShoppingCart cartItems={cartItems} setCartItems={setCartItems} showShoppingCart={showShoppingCart} setShowShoppingCart={setShowShoppingCart} shoppingCart={shoppingCart} shoppingCartBtn={shoppingCartBtn} />
         </nav>
     )
 }
 
-Navbar.defaultProps = {
-    cartItems: JSON.parse(localStorage.getItem("cartItems"))
-}
-
-function ShoppingCart(props){
-
-    const cartItems = props.cartItems
-    const setCartItems = props.setCartItems
-
-    const showShoppingCart = props.showShoppingCart
-    const setShowShoppingCart = props.setShowShoppingCart
-
-    const shoppingCartBtn = props.shoppingCartBtn
-    const shoppingCart = useRef()
+function ShoppingCart({ cartItems, setCartItems, showShoppingCart, setShowShoppingCart, shoppingCart, shoppingCartBtn }){
 
     useEffect(() => {
         document.addEventListener("click", function(e){
@@ -97,26 +79,9 @@ function ShoppingCart(props){
         })
     })
 
-    function removeItem(itemName){
-        let locatItem = JSON.parse(localStorage.getItem("cartItems"))
-
-        let index
-        locatItem.forEach(function(item, i){
-            if (item.name === itemName){
-                index = i
-
-                return
-            }
-        })
-
-        locatItem.splice(index, 1)
-
-        setCartItems(locatItem)
+    function removeItem(id){
+        setCartItems(cartItems => cartItems.filter(cartItem => cartItem.id !== id))
     }
-
-    useEffect(() => {
-        localStorage.setItem("cartItems", JSON.stringify(cartItems))
-    }, [cartItems])
 
     function sumPrice(array){
         let price = 0
@@ -128,32 +93,36 @@ function ShoppingCart(props){
         return `${price}`
     }
 
-    function addProduct(itemName, itemPrice){
-        let locatItem = JSON.parse(localStorage.getItem("cartItems"))
+    function addProduct(id){
+        const updatedCartItems = [...cartItems].map(cartItem => {
+            if (cartItem.id === id){
+                let quantity = cartItem.quantity + 1
+                let price = cartItem.price + (cartItem.price / (quantity - 1))
 
-        locatItem.forEach(function(item){
-            if (item["name"] === itemName){
-                itemPrice = itemPrice / item["sum"]
-                item["sum"] += 1
-                item["price"] += itemPrice
+                return {...cartItem, quantity: quantity, price: price}
             }
+
+            return cartItem
         })
 
-        setCartItems(locatItem)
+        setCartItems(updatedCartItems)
     }
 
-    function minusProduct(itemName, itemPrice){
-        let locatItem = JSON.parse(localStorage.getItem("cartItems"))
+    function minusProduct(id){
+        const updatedCartItems = [...cartItems].map(cartItem => {
+            if (cartItem.id === id){
+                if (cartItem.quantity > 1){
+                    let quantity = cartItem.quantity - 1
+                    let price = cartItem.price - (cartItem.price / (quantity + 1))
 
-        locatItem.forEach(function(item){
-            if ((item["name"] === itemName) && item["sum"] > 1){
-                itemPrice = itemPrice / item["sum"]
-                item["sum"] -= 1
-                item["price"] -= itemPrice
+                    return {...cartItem, quantity: quantity, price: price}
+                }
             }
+
+            return cartItem
         })
 
-        setCartItems(locatItem)
+        setCartItems(updatedCartItems)
     }
 
     return (
@@ -185,7 +154,7 @@ function ShoppingCart(props){
                     cartItems.length > 0 &&
                     <div className="items flex flex-col gap-2">
                     {
-                        cartItems.map((item, index) => {
+                        [...cartItems].reverse().map((item, index) => {
                             return (
                                 <div className="item w-full flex gap-2 p-2 bg-white rounded border-2 border-[#ccc]" key={index}>
                                     <div className="item-img w-2/5">
@@ -194,15 +163,15 @@ function ShoppingCart(props){
                                     <div className="item-info w-3/5 h-full flex flex-col justify-between">
                                         <div className="header flex items-center justify-between">
                                             <span className="item-name font-bold">{item.name}</span>
-                                            <span className="remove-item-btn flex justify-center items-center cursor-pointer p-1 rounded hover:bg-hov" onClick={() => {removeItem(item.name)}} title="Remove item">
+                                            <span className="remove-item-btn flex justify-center items-center cursor-pointer p-1 rounded hover:bg-hov" onClick={() => {removeItem(item.id)}} title="Remove item">
                                                 <IconTrash stroke={1.5} />
                                             </span>
                                         </div>
                                         <div className="footer flex items-center justify-between">
                                             <span className="add-minus-item select-none">
-                                                <span className="add-item cursor-pointer px-2 bg-primary text-white" onClick={() => {minusProduct(item.name, item.price)}}>-</span>
-                                                <span className="px-2 bg-white-prim">{item.sum}</span>
-                                                <span className="minus-item cursor-pointer px-2 bg-primary text-white" onClick={() => {addProduct(item.name, item.price)}}>+</span>
+                                                <span className="add-item cursor-pointer px-2 bg-primary text-white" onClick={() => minusProduct(item.id)}>-</span>
+                                                <span className="px-2 bg-white-prim">{item.quantity}</span>
+                                                <span className="minus-item cursor-pointer px-2 bg-primary text-white" onClick={() => addProduct(item.id)}>+</span>
                                             </span>
                                             <span className="item-total-price">{`$${item.price}`}</span>
                                         </div>

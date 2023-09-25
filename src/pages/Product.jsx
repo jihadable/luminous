@@ -3,92 +3,72 @@ import Navbar from "../components/Navbar"
 import { HomeTrendingNow } from "./Home"
 import Footer from "../components/Footer"
 
-function Product(props){
+function Product({ item, cartItems, setCartItems }){
 
-    const [id, sum, name, img, explanation, texture, weight, size] = [props.id, props.sum, props.name, props.img, props.explanation, props.texture, props.weight, props.size]
+    document.title = `Luminous | ${item.name}`
 
-    document.title = `Luminous | ${name}`
-
-    const [sumItem, setSumItem] = useState(1)
-    const [price, setPrice] = useState(props.price)
-
-    const surePrice = props.price
+    const [quantity, setQuantity] = useState(item.quantity)
+    const [price, setPrice] = useState(item.price)
 
     function addProduct(){
-        setSumItem(sumItem => sumItem + 1)
-        setPrice(price => price + surePrice)
+        setQuantity(quantity + 1)
     }
     
     function minusProduct(){
-        if (sumItem > 1){
-            setSumItem(sumItem => sumItem - 1)
-            setPrice(price => price - surePrice)
+        if (quantity > 1){
+            setQuantity(quantity - 1)
         }
     }
 
-    const [cartItems, setCartItems] = useState([...JSON.parse(localStorage.getItem("cartItems"))])
+    useEffect(() => {
+        setPrice(item.price * quantity)
+    }, [quantity])
 
     function addProductToCart(){
-        const newItem = {
-            id: id,
-            sum: sum,
-            name: name,
-            price: surePrice,
-            img: img
-        }
+        let localItems = [...JSON.parse(localStorage.getItem("cartItems"))]
 
-        let localItem = [...JSON.parse(localStorage.getItem("cartItems"))]
-
-        let valid = true
-        localItem.forEach(function(item){
-            if (item.name === newItem.name){
-                valid = false
-
+        for (let i = 0 ; i < localItems.length ; i++){
+            if (localItems[i].id === item.id){
                 return
             }
-        })
-
-        if (valid){
-            localItem.push(newItem)
-            setCartItems(localItem)
         }
+
+        setCartItems(cartItems => ([...cartItems, {...item, quantity: quantity, price: price}]))
     }
 
     useEffect(() => {
         localStorage.setItem("cartItems", JSON.stringify(cartItems))
     }, [cartItems])
 
-    document.body.classList.add("flex", "flex-col", "items-center")
-
     return (
         <>
-            <Navbar link="store" cartItems={cartItems} />
+            <Navbar link="store" cartItems={cartItems} setCartItems={setCartItems} />
             <section className="product mt-32 flex w-[80vw] mx-auto gap-2 mobile:w-[90vw] mobile:flex-col mobile:items-center tablet:w-[90vw]">
                 <div className="product-img w-[30vw] h-fit rounded overflow-hidden mobile:w-full tablet:w-[30%]">
-                    <img src={img} alt={name} />
+                    <img src={item.img} alt={item.name} />
                 </div>
                 <div className="product-info bg-white-prim flex flex-col items-center gap-8 p-5 rounded text-xl w-[50vw] h-fit mobile:w-full tablet:w-[70%]">
-                    <div className="product-name text-3xl font-semibold">{name}</div>
-                    <div className="product-explanation text-justify">{explanation}</div>
+                    <div className="product-name text-3xl font-semibold">{item.name}</div>
+                    <div className="product-explanation text-justify">{item.explanation}</div>
                     <div className="product-shape text-base w-full flex items-center justify-between mobile:justify-between mobile:gap-2">
                         <span className="product-texture rounded-sm p-2 bg-white shadow-med flex flex-col">
                             <div className="font-bold">Texture</div>
-                            <div>{texture}</div> 
+                            <div>{item.texture}</div> 
                         </span>
                         <span className="product-weight rounded-sm p-2 bg-white shadow-med flex flex-col">
                             <div className="font-bold">Weight:</div>
-                            <div>{`${weight}kg`}</div>
+                            <div>{`${item.weight}kg`}</div>
                         </span>
                         <span className="product-size rounded-sm p-2 bg-white shadow-med flex flex-col">
                             <div className="font-bold">Size:</div>
-                            <div>{size}</div>
+                            <div>{item.size}</div>
                         </span>
                     </div>
                     <div className="bg-black/[.3] h-[1px] w-full" />
                     <div className="product-footer w-full flex items-center justify-between">
                         <span className="add-minus-product select-none">
                             <span className="add-product cursor-pointer py-2 px-4 bg-primary text-white-prim" onClick={() => minusProduct()}>-</span>
-                            <span className="py-2 px-4 bg-white">{sumItem}</span>
+                            <span className="py-2 px-4 bg-white">{quantity}</span>
                             <span className="minus-product cursor-pointer py-2 px-4 bg-primary text-white-prim" onClick={() => addProduct()}>+</span>
                         </span>
                         <span className="product-price  p-2 bg-primary text-white-prim rounded">{`$${price}`}</span>

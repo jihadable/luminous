@@ -1,8 +1,5 @@
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
-import chair from "../assets/chair.jpg"
-import table from "../assets/table.jpg"
-import spoon from "../assets/spoon.jpg"
 import household from "../assets/household.jpg"
 import lazySofa from "../assets/lazy-sofa.jpg"
 import sideTable from "../assets/side-table.jpg"
@@ -27,11 +24,11 @@ import { Link } from "react-router-dom"
 import goTop from "../components/goTop"
 
 // home
-function Home(){
+function Home({ cartItems, setCartItems }){
 
     return (
         <>
-            <Navbar link="home" />
+            <Navbar link="home" cartItems={cartItems} setCartItems={setCartItems} />
             <HomeHeader />
             <HomeTag />
             <HomeTrendingNow />

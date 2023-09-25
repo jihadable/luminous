@@ -4,7 +4,9 @@ import Store from "./pages/Store"
 import Login from "./pages/Login"
 import Signup from "./pages/Signup"
 import Product from './pages/Product';
-import { goods } from './pages/Store';
+import { items } from './components/items';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 function Router(){
 
@@ -12,27 +14,24 @@ function Router(){
         localStorage.setItem("cartItems", JSON.stringify([]))
     }
 
+    const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem("cartItems")))
+
+    useEffect(() => {
+        localStorage.setItem("cartItems", JSON.stringify(cartItems))
+    }, [cartItems])
+
     return (
         <BrowserRouter>
             <Routes>
-                <Route path='/' exact element={<Home />}></Route>
-                <Route path='/store' element={<Store />}></Route>
+                <Route path='/' exact element={<Home cartItems={cartItems} setCartItems={setCartItems} />}></Route>
+                <Route path='/store' element={<Store items={items} cartItems={cartItems} setCartItems={setCartItems} />}></Route>
                 <Route path='/login' element={<Login />}></Route>
                 <Route path='/signup' element={<Signup />}></Route>
                 {
-                    goods.map((good, index) => {
+                    items.map((item, index) => {
                         return (
-                            <Route path={`/store/product${good.id}`} key={index} element={
-                                <Product 
-                                id={good.id}
-                                sum={good.sum}
-                                name={good.name} 
-                                price={good.price} 
-                                img={good.img} 
-                                explanation={good.explanation} 
-                                texture={good.texture} 
-                                weight={good.weight}
-                                size={good.size} />
+                            <Route path={`/store/product${item.id}`} key={index} element={
+                                <Product item={item} cartItems={cartItems} setCartItems={setCartItems} />
                             }></Route>
                         )
                     })
