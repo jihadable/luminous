@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import Navbar from "../components/Navbar"
 import { HomeTrendingNow } from "./Home"
 import Footer from "../components/Footer"
+import { IconShoppingCartPlus } from "@tabler/icons-react"
+import { IconCash } from "@tabler/icons-react"
 
 function Product({ item, cartItems, setCartItems }){
 
@@ -74,8 +76,14 @@ function Product({ item, cartItems, setCartItems }){
                         <span className="product-price  p-2 bg-primary text-white-prim rounded">{`$${price}`}</span>
                     </div>
                     <div className="procudt-checkout w-full flex items-center justify-end gap-4">
-                        <div className="add-to-cart p-2 px-3 bg-white cursor-pointer shadow-med rounded-sm" onClick={() => {addProductToCart()}}>Add to cart</div>
-                        <div className="checkout p-2 px-3 text-white-prim cursor-pointer shadow-med bg-primary rounded-sm">Checkout</div>
+                        <div className="add-to-cart flex items-center gap-2 p-2 px-3 bg-white cursor-pointer shadow-med rounded-sm" onClick={() => {addProductToCart()}}>
+                            <IconShoppingCartPlus stroke={1.5} />
+                            <span>Add to cart</span>
+                        </div>
+                        <div className="checkout flex items-center gap-2 p-2 px-3 text-white-prim cursor-pointer shadow-med bg-primary rounded-sm">
+                            <IconCash stroke={1.5} />
+                            <span>Checkout</span>
+                        </div>
                     </div>
                 </div>
             </section>

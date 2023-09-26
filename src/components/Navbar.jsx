@@ -8,6 +8,7 @@ import { IconTrash } from "@tabler/icons-react"
 import { IconX } from "@tabler/icons-react"
 import { Link } from "react-router-dom"
 import goTop from "./goTop"
+import { IconCash } from "@tabler/icons-react"
 
 function Navbar({ link, cartItems, setCartItems }){
 
@@ -189,7 +190,10 @@ function ShoppingCart({ cartItems, setCartItems, showShoppingCart, setShowShoppi
                     <span className="total-price">
                         <p>{`Total: $${sumPrice(cartItems)}`}</p>
                     </span>
-                    <button type="button" className="p-1 px-2 rounded bg-primary text-white text-base">Checkout</button>
+                    <button type="button" className="p-1 px-2 flex gap-2 items-center rounded bg-primary text-white text-base">
+                        <IconCash stroke={1.5} />
+                        <span>Checkout</span>
+                    </button>
                 </div>
             }
         </div>
