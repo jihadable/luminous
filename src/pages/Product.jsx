@@ -4,6 +4,8 @@ import { HomeTrendingNow } from "./Home"
 import Footer from "../components/Footer"
 import { IconShoppingCartPlus } from "@tabler/icons-react"
 import { IconCash } from "@tabler/icons-react"
+import { Link } from "react-router-dom"
+import goTop from "../components/goTop"
 
 function Product({ item, cartItems, setCartItems }){
 
@@ -38,9 +40,15 @@ function Product({ item, cartItems, setCartItems }){
         setCartItems(cartItems => ([...cartItems, {...item, quantity: quantity, price: price}]))
     }
 
-    useEffect(() => {
-        localStorage.setItem("cartItems", JSON.stringify(cartItems))
-    }, [cartItems])
+    function checkCartItems(id){
+        cartItems.forEach(function(cartItem){
+            if (cartItem.id === id){
+                return true
+            }
+        })
+
+        return false
+    }
 
     return (
         <>
@@ -80,10 +88,10 @@ function Product({ item, cartItems, setCartItems }){
                             <IconShoppingCartPlus stroke={1.5} />
                             <span>Add to cart</span>
                         </div>
-                        <div className="checkout flex items-center gap-2 p-2 px-3 text-white-prim cursor-pointer shadow-med bg-primary rounded-sm">
+                        <Link to={`/checkout/product${item.id}`} onClick={goTop} className="checkout flex items-center gap-2 p-2 px-3 text-white-prim cursor-pointer shadow-med bg-primary rounded-sm">
                             <IconCash stroke={1.5} />
                             <span>Checkout</span>
-                        </div>
+                        </Link>
                     </div>
                 </div>
             </section>

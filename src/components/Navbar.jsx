@@ -9,6 +9,7 @@ import { IconX } from "@tabler/icons-react"
 import { Link } from "react-router-dom"
 import goTop from "./goTop"
 import { IconCash } from "@tabler/icons-react"
+import { IconShoppingCartOff } from "@tabler/icons-react"
 
 function Navbar({ link, cartItems, setCartItems }){
 
@@ -94,7 +95,7 @@ function ShoppingCart({ cartItems, setCartItems, showShoppingCart, setShowShoppi
         return `${price}`
     }
 
-    function addProduct(id){
+    function addQuantity(id){
         const updatedCartItems = [...cartItems].map(cartItem => {
             if (cartItem.id === id){
                 let quantity = cartItem.quantity + 1
@@ -109,7 +110,7 @@ function ShoppingCart({ cartItems, setCartItems, showShoppingCart, setShowShoppi
         setCartItems(updatedCartItems)
     }
 
-    function minusProduct(id){
+    function minQuantity(id){
         const updatedCartItems = [...cartItems].map(cartItem => {
             if (cartItem.id === id){
                 if (cartItem.quantity > 1){
@@ -146,9 +147,9 @@ function ShoppingCart({ cartItems, setCartItems, showShoppingCart, setShowShoppi
                 {
                     cartItems.length === 0 &&
                     <div className="empty-cart flex flex-col items-center gap-2 h-3/4 justify-center">
-                        <img src={emptyCart} alt="Empty cart" className="w-[100px]" />
+                        <IconShoppingCartOff stroke={1.5} width={128} height={128} />
                         <div>Your cart is empty</div>
-                        <div>Keep browsing</div>
+                        <Link to={"/store"} onClick={goTop} className="px-2 py-1 bg-primary text-white rounded">Shop now</Link>
                     </div>
                 }
                 {
@@ -158,7 +159,7 @@ function ShoppingCart({ cartItems, setCartItems, showShoppingCart, setShowShoppi
                         [...cartItems].reverse().map((item, index) => {
                             return (
                                 <div className="item w-full flex gap-2 p-2 bg-white rounded border-2 border-[#ccc]" key={index}>
-                                    <div className="item-img w-2/5">
+                                    <div className="item-img flex w-2/5">
                                         <img src={item.img} alt="Item" className="rounded" />
                                     </div>
                                     <div className="item-info w-3/5 h-full flex flex-col justify-between">
@@ -170,9 +171,9 @@ function ShoppingCart({ cartItems, setCartItems, showShoppingCart, setShowShoppi
                                         </div>
                                         <div className="footer flex items-center justify-between">
                                             <span className="add-minus-item select-none">
-                                                <span className="add-item cursor-pointer px-2 bg-primary text-white" onClick={() => minusProduct(item.id)}>-</span>
+                                                <span className="add-item cursor-pointer px-2 bg-primary text-white" onClick={() => minQuantity(item.id)}>-</span>
                                                 <span className="px-2 bg-white-prim">{item.quantity}</span>
-                                                <span className="minus-item cursor-pointer px-2 bg-primary text-white" onClick={() => addProduct(item.id)}>+</span>
+                                                <span className="minus-item cursor-pointer px-2 bg-primary text-white" onClick={() => addQuantity(item.id)}>+</span>
                                             </span>
                                             <span className="item-total-price">{`$${item.price}`}</span>
                                         </div>
@@ -190,10 +191,10 @@ function ShoppingCart({ cartItems, setCartItems, showShoppingCart, setShowShoppi
                     <span className="total-price">
                         <p>{`Total: $${sumPrice(cartItems)}`}</p>
                     </span>
-                    <button type="button" className="p-1 px-2 flex gap-2 items-center rounded bg-primary text-white text-base">
+                    <Link to={"/checkout"} onClick={goTop} className="p-1 px-2 flex gap-2 items-center rounded bg-primary text-white text-base">
                         <IconCash stroke={1.5} />
                         <span>Checkout</span>
-                    </button>
+                    </Link>
                 </div>
             }
         </div>
