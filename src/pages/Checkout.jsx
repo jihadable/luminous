@@ -9,6 +9,17 @@ import Footer from "../components/Footer"
 import { IconShoppingCartOff } from "@tabler/icons-react"
 import { Link } from "react-router-dom"
 import goTop from "../components/goTop"
+import dana from "../assets/dana.png"
+import mandiri from "../assets/mandiri.png"
+import ovo from "../assets/ovo.png"
+import bri from "../assets/bri.png"
+import bni from "../assets/bni.png"
+import linkaja from "../assets/linkaja.png"
+import spay from "../assets/spay.png"
+import bca from "../assets/bca.png"
+import qris from "../assets/qris.png"
+import gopay from "../assets/gopay.png"
+import paypal from "../assets/paypal.png"
 
 export default function Checkout({ item, cartItems, setCartItems }){
 
@@ -16,8 +27,10 @@ export default function Checkout({ item, cartItems, setCartItems }){
 
     const [initialItem, setInitialItem] = useState(item)
 
+    const [checkoutItems, setCheckoutItems] = useState(initialItem ? [{...initialItem}] : [])
+    
     if (initialItem && cartItems.length > 0){
-
+          
         for (let i = 0 ; i < cartItems.length ; i++){
             if (cartItems[i].id === initialItem.id){
                 setInitialItem(null)
@@ -25,8 +38,6 @@ export default function Checkout({ item, cartItems, setCartItems }){
             }
         }
     }
-
-    const [checkoutItems, setCheckoutItems] = useState([])
 
     function addRemoveCheckoutItems(item){
         if (checkingCheckoutItems(item.id)){
@@ -171,6 +182,9 @@ export default function Checkout({ item, cartItems, setCartItems }){
         setCheckoutItems(updatedCheckoutItems)
     }
 
+    const paymentsData = [mandiri, dana, bri, ovo, bni, spay, linkaja, qris, gopay, bca, paypal]
+    const [paymentIndex, setPaymentIndex] = useState(null)
+
     return (
         <>
         <Navbar link={"store"} cartItems={cartItems} setCartItems={setCartItems} />
@@ -196,7 +210,36 @@ export default function Checkout({ item, cartItems, setCartItems }){
                 </div>
                 <div className="cart-items flex flex-col gap-2">
                 {
-                    cartItems.map((item, index) => {
+                    initialItem &&
+                    <div className="item-checkout w-full flex items-stretch gap-2 p-2 rounded-md border-2">
+                        <div className={`checkbox border p-1 rounded cursor-pointer h-fit ${checkingCheckoutItems(initialItem.id) ? "bg-primary text-white" : "text-transparent"}`} onClick={() => addRemoveCheckoutItems(initialItem)}>
+                            <IconCheck stroke={1.5} width={16} height={16} />
+                        </div>
+                        <div className="item w-full h-full flex gap-2">
+                            <div className="item-img w-1/5 flex h-full mobile:w-2/5">
+                                <img src={initialItem.img} alt="Item" className="rounded" />
+                            </div>
+                            <div className="item-info w-4/5 flex flex-col justify-between mobile:w-3/5">
+                                <div className="header flex items-center justify-between">
+                                    <span className="item-name font-bold overflow-hidden text-ellipsis whitespace-nowrap">{initialItem.name}</span>
+                                    <span className="remove-item-btn flex justify-center items-center cursor-pointer p-1 rounded hover:bg-hov" title="Remove item" onClick={() => removeCartItems(initialItem.id)}>
+                                        <IconTrash stroke={1.5} />
+                                    </span>
+                                </div>
+                                <div className="footer flex items-center justify-between">
+                                    <span className="add-minus-item select-none">
+                                        <span className="cursor-pointer px-2 bg-primary text-white" onClick={() => minItemQuantity()}>-</span>
+                                        <span className="px-2 bg-white-prim">{initialItem.quantity}</span>
+                                        <span className="cursor-pointer px-2 bg-primary text-white" onClick={() => addItemQuantity()}>+</span>
+                                    </span>
+                                    <span className="item-total-price">{`$${initialItem.price}`}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                {
+                    [...cartItems].reverse().map((item, index) => {
                         return (
                             <div className="cart-item w-full flex items-stretch gap-2 p-2 rounded-md border-2" key={index}>
                                 <div className={`checkbox border p-1 rounded cursor-pointer h-fit ${checkingCheckoutItems(item.id) ? "bg-primary text-white" : "text-transparent"}`} onClick={() => addRemoveCheckoutItems(item)}>
@@ -227,35 +270,6 @@ export default function Checkout({ item, cartItems, setCartItems }){
                         )
                     })
                 }
-                {
-                    initialItem &&
-                    <div className="item-checkout w-full flex items-stretch gap-2 p-2 rounded-md border-2">
-                        <div className={`checkbox border p-1 rounded cursor-pointer h-fit ${checkingCheckoutItems(initialItem.id) ? "bg-primary text-white" : "text-transparent"}`} onClick={() => addRemoveCheckoutItems(initialItem)}>
-                            <IconCheck stroke={1.5} width={16} height={16} />
-                        </div>
-                        <div className="item w-full h-full flex gap-2">
-                            <div className="item-img w-1/5 flex h-full mobile:w-2/5">
-                                <img src={initialItem.img} alt="Item" className="rounded" />
-                            </div>
-                            <div className="item-info w-4/5 flex flex-col justify-between mobile:w-3/5">
-                                <div className="header flex items-center justify-between">
-                                    <span className="item-name font-bold overflow-hidden text-ellipsis whitespace-nowrap">{initialItem.name}</span>
-                                    <span className="remove-item-btn flex justify-center items-center cursor-pointer p-1 rounded hover:bg-hov" title="Remove item" onClick={() => removeCartItems(initialItem.id)}>
-                                        <IconTrash stroke={1.5} />
-                                    </span>
-                                </div>
-                                <div className="footer flex items-center justify-between">
-                                    <span className="add-minus-item select-none">
-                                        <span className="cursor-pointer px-2 bg-primary text-white" onClick={() => minItemQuantity()}>-</span>
-                                        <span className="px-2 bg-white-prim">{item.quantity}</span>
-                                        <span className="cursor-pointer px-2 bg-primary text-white" onClick={() => addItemQuantity()}>+</span>
-                                    </span>
-                                    <span className="item-total-price">{`$${initialItem.price}`}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                }
                 </div>
             </div>
             <div className="checkout w-2/5 flex flex-col gap-2 rounded bg-white-prim h-fit p-2 mobile:w-full">
@@ -273,7 +287,7 @@ export default function Checkout({ item, cartItems, setCartItems }){
                 checkoutItems.map((checkoutItem, index) => {
                     return (
                         <div className="flex w-full items-center justify-between" key={index}>
-                            <div className="name max-w-[80%] whitespace-nowrap text-ellipsis overflow-hidden">{checkoutItem.name}</div>
+                            <div className="name max-w-[80%] whitespace-nowrap text-ellipsis overflow-hidden">({checkoutItem.quantity}) {checkoutItem.name}</div>
                             <div className="price">${checkoutItem.price}</div>
                         </div>
                     )
@@ -284,6 +298,16 @@ export default function Checkout({ item, cartItems, setCartItems }){
                 {
                     checkoutItems.length === 0 ? "$0" : `$${checkoutTotalPrice()}`
                 }
+                </div>
+                <div className="payments-container w-full flex flex-col gap-2 pb-2 overflow-x-auto mt-8">
+                    <div>Payment methods</div>
+                    <div className="payments flex items-center gap-2">
+                    {
+                        paymentsData.map((item, index) => {
+                            return <img src={item} alt="Payment" className={`payment p-2 h-10 cursor-pointer rounded border-2 ${paymentIndex === index ? "border-primary" : "border-[#ccc]"}`} key={index} onClick={() => setPaymentIndex(index)} />
+                        })
+                    }
+                    </div>
                 </div>
                 <div className="checkout-btn flex items-center gap-2 self-end cursor-pointer p-2 rounded bg-primary text-white">
                     <IconCash stroke={1.5} />

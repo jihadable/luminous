@@ -55,3 +55,15 @@
   background-position: center;
   background-size: cover;
 }
+
+.payments-container{
+  &::-webkit-scrollbar{
+    height: 0.5rem;
+    background-color: white;
+    border-radius: 5rem;
+  }
+  &::-webkit-scrollbar-thumb{
+    background-color: #aaa;
+    border-radius: 5rem;
+  }
+}
