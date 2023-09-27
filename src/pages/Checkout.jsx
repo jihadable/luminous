@@ -272,28 +272,28 @@ export default function Checkout({ item, cartItems, setCartItems }){
                 }
                 </div>
             </div>
-            <div className="checkout w-2/5 flex flex-col gap-2 rounded bg-white-prim h-fit p-2 mobile:w-full">
-            <div className="discount flex items-center gap-2 cursor-pointer p-2 bg-white w-fit rounded">
-                <IconDiscount stroke={1.5} />
-                <span>Discount code</span>
-            </div>
-            <div className="cart-items-list flex flex-col items-center">
-            {
-                checkoutItems.length === 0 &&
-                <span className="text-base text-black/[.5] py-8">Selected items will appear here</span>
-            }
-            {
-                checkoutItems.length > 0 &&
-                checkoutItems.map((checkoutItem, index) => {
-                    return (
-                        <div className="flex w-full items-center justify-between" key={index}>
-                            <div className="name max-w-[80%] whitespace-nowrap text-ellipsis overflow-hidden">({checkoutItem.quantity}) {checkoutItem.name}</div>
-                            <div className="price">${checkoutItem.price}</div>
-                        </div>
-                    )
-                })
-            }
-            </div>
+            <div className="checkout w-2/5 flex flex-col gap-2 rounded bg-white-prim h-fit p-2 mobile:w-full sticky top-24 mobile:static mobile:top-auto">
+                <div className="discount flex items-center gap-2 cursor-pointer p-2 bg-white w-fit rounded">
+                    <IconDiscount stroke={1.5} />
+                    <span>Discount code</span>
+                </div>
+                <div className="cart-items-list flex flex-col items-center">
+                {
+                    checkoutItems.length === 0 &&
+                    <span className="text-base text-black/[.5] py-8">Selected items will appear here</span>
+                }
+                {
+                    checkoutItems.length > 0 &&
+                    checkoutItems.map((checkoutItem, index) => {
+                        return (
+                            <div className="flex w-full items-center justify-between" key={index}>
+                                <div className="name max-w-[80%] whitespace-nowrap text-ellipsis overflow-hidden">({checkoutItem.quantity}) {checkoutItem.name}</div>
+                                <div className="price">${checkoutItem.price}</div>
+                            </div>
+                        )
+                    })
+                }
+                </div>
                 <div className="total-price w-full flex justify-end pt-2 border-t-2 border-dashed border-black">
                 {
                     checkoutItems.length === 0 ? "$0" : `$${checkoutTotalPrice()}`
