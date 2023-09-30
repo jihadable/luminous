@@ -1,11 +1,6 @@
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 import household from "../assets/household.jpg"
-import lazySofa from "../assets/lazy-sofa.jpg"
-import sideTable from "../assets/side-table.jpg"
-import neckPillow from "../assets/neck-pillow.jpg"
-import handBlender from "../assets/hand-blender.jpg"
-import beanBag from "../assets/bean-bag.jpg"
 import johnKean from "../assets/john-kean.jpg"
 import danielBone from "../assets/daniel-bone.jpg"
 import carlaSofia from "../assets/carla-sofia.jpg"
@@ -77,31 +72,31 @@ export function HomeTrendingNow(){
         {
             id: 2,
             name: "La-Z-Sofa",
-            img: lazySofa,
+            img: "https://umar-api.000webhostapp.com/luminous/assets/lazy-sofa.jpg",
             price: 120
         },
         {
             id: 5,
             name: "Side Table",
-            img: sideTable,
+            img: "https://umar-api.000webhostapp.com/luminous/assets/side-table.jpg",
             price: 150
         },
         {
             id: 11,
             name: "Neck Pillow",
-            img: neckPillow,
+            img: "https://umar-api.000webhostapp.com/luminous/assets/neck-pillow.jpg",
             price: 50
         },
         {
             id: 21,
             name: "Hand Blender",
-            img: handBlender,
+            img: "https://umar-api.000webhostapp.com/luminous/assets/hand-blender.jpg",
             price: 215
         },
         {
             id: 12,
             name: "Bean Bag",
-            img: beanBag,
+            img: "https://umar-api.000webhostapp.com/luminous/assets/bean-bag.jpg",
             price: 120
         },
     ]

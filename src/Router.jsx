@@ -5,11 +5,25 @@ import Login from "./pages/Login"
 import Signup from "./pages/Signup"
 import Product from './pages/Product';
 import Checkout from "./pages/Checkout"
-import { items } from './components/items';
+// import { items } from './components/items';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
 function Router(){
+
+    const [items, setItems] = useState([])
+
+    useEffect(() => {
+        const getItems = async() => {
+            let response = await fetch("https://umar-api.000webhostapp.com/luminous/items/")
+            response = await response.json()
+            response = response.map(item => ({...item, quantity: parseInt(item.quantity), price: parseInt(item.price), categories: JSON.parse(item.categories)}))
+            
+            setItems(response)
+        }
+    
+        getItems()
+    }, [])
 
     if (!localStorage.getItem("cartItems")){
         localStorage.setItem("cartItems", JSON.stringify([]))
@@ -25,7 +39,7 @@ function Router(){
         <BrowserRouter>
             <Routes>
                 <Route path='/' exact element={<Home cartItems={cartItems} setCartItems={setCartItems} />} />
-                <Route path='/store' element={<Store items={items} cartItems={cartItems} setCartItems={setCartItems} />} />
+                <Route path='/store' element={<Store cartItems={cartItems} setCartItems={setCartItems} />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/signup' element={<Signup />} />
                 {

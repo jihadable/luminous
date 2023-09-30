@@ -20,6 +20,7 @@ import bca from "../assets/bca.png"
 import qris from "../assets/qris.png"
 import gopay from "../assets/gopay.png"
 import paypal from "../assets/paypal.png"
+import { useEffect } from "react"
 
 export default function Checkout({ item, cartItems, setCartItems }){
 
@@ -83,19 +84,6 @@ export default function Checkout({ item, cartItems, setCartItems }){
         })
 
         setCartItems(updatedCartItems)
-
-        const updatedCheckoutItems = [...checkoutItems].map(checkoutItem => {
-            if (checkoutItem.id === id){
-                let quantity = checkoutItem.quantity + 1
-                let price = checkoutItem.price + (checkoutItem.price / (quantity - 1))
-
-                return {...checkoutItem, quantity: quantity, price: price}
-            }
-
-            return checkoutItem
-        })
-
-        setCheckoutItems(updatedCheckoutItems)
     }
 
     function minQuantity(id){
@@ -113,27 +101,27 @@ export default function Checkout({ item, cartItems, setCartItems }){
         })
 
         setCartItems(updatedCartItems)
+    }
 
-        const updatedCheckoutItems = [...checkoutItems].map(checkoutItem => {
-            if (checkoutItem.id === id){
-                if (checkoutItem.quantity > 1){
-                    let quantity = checkoutItem.quantity - 1
-                    let price = checkoutItem.price - (checkoutItem.price / (quantity + 1))
+    useEffect(() => {
+        const updatedCheckoutItems = [...checkoutItems]
+        
+        cartItems.forEach(cartItem => {
+            const indexCheckoutItems = updatedCheckoutItems.findIndex(updatedCheckoutItem => updatedCheckoutItem.id === cartItem.id)
 
-                    return {...checkoutItem, quantity: quantity, price: price}
-                }
+            if (indexCheckoutItems !== -1){
+                updatedCheckoutItems[indexCheckoutItems] = {...updatedCheckoutItems[indexCheckoutItems], quantity: cartItem.quantity, price: cartItem.price}
             }
-
-            return checkoutItem
         })
 
         setCheckoutItems(updatedCheckoutItems)
-    }
+    }, [cartItems])
 
     function removeCartItems(id){
         if (initialItem && initialItem.id === id){
             setInitialItem(null)
         }
+
         setCartItems(cartItems => cartItems.filter(cartItem => cartItem.id !== id))
         setCheckoutItems(checkoutItems => checkoutItems.filter(checkoutItem => checkoutItem.id !== id))
     }

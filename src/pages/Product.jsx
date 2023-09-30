@@ -40,16 +40,6 @@ function Product({ item, cartItems, setCartItems }){
         setCartItems(cartItems => ([...cartItems, {...item, quantity: quantity, price: price}]))
     }
 
-    function checkCartItems(id){
-        cartItems.forEach(function(cartItem){
-            if (cartItem.id === id){
-                return true
-            }
-        })
-
-        return false
-    }
-
     return (
         <>
             <Navbar link="store" cartItems={cartItems} setCartItems={setCartItems} />
