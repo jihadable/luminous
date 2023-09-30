@@ -29,7 +29,7 @@ function StoreSearch(){
             response = response.map(item => ({...item, quantity: parseInt(item.quantity), price: parseInt(item.price), categories: JSON.parse(item.categories)}))
             
             setItems(response)
-        }, 1500)
+        }, 3000)
     }, [])
     
     useEffect(() => {
@@ -42,13 +42,15 @@ function StoreSearch(){
     const [categorySearchValue, setCategorySearchValue] = useState("")
 
     const handleEnter = (key) => {
-        if (key === "Enter"){
+        if (key === "Enter" && items){
             handleSearchValidItems(categorySearchValue)
         }
     }
     
     const handleSearchClick = () => {
-        handleSearchValidItems(categorySearchValue)
+        if (items){
+            handleSearchValidItems(categorySearchValue)
+        }
     }
 
     useEffect(() => {
@@ -92,8 +94,10 @@ function StoreSearch(){
                         return (
                             <div className={`category-value flex gap-1 items-center py-1 px-4 rounded border-2 cursor-pointer ${categoryMenuValue === menu ? "border-primary bg-primary text-white-prim" : "border-[#999] hover:bg-hov"}`} key={index} 
                             onClick={() => {
-                                setCategoryMenuValue(menu)
-                                handleSearchValidItems(menu.toLowerCase())
+                                if(items){
+                                    setCategoryMenuValue(menu)
+                                    handleSearchValidItems(menu.toLowerCase())
+                                }
                             }}>
                                 <span>{menu}</span>
                             </div>
@@ -139,11 +143,11 @@ function StoreGrid({ items }){
 
 function ItemSkeleton(){
     return (
-        <div className="border-2 flex flex-col rounded-lg overflow-hidden cursor-pointer">
-            <div className="img w-full pt-[100%] bg-[#ddd]"></div>
+        <div className="border-2 flex flex-col rounded-lg overflow-hidden cursor-pointer border-white-prim">
+            <div className="img w-full pt-[100%] bg-white-prim"></div>
             <div className="info p-4 flex flex-col gap-4">
-                <div className="product-name h-6 w-full rounded-sm bg-[#ddd]"></div>
-                <div className="product-price h-6 w-1/4 rounded-sm bg-[#ddd]"></div>
+                <div className="product-name h-6 w-full rounded-sm bg-white-prim"></div>
+                <div className="product-price h-6 w-1/4 rounded-sm bg-white-prim"></div>
             </div>
         </div>
     )
