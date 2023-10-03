@@ -56,11 +56,22 @@
   background-size: cover;
 }
 
+.item-skeleton-animation{
+  animation: skeleton_animation 1s linear infinite;
+}
+
+@keyframes skeleton_animation {
+  0% {transform: translateX(-150%) skewX(-20deg);}
+  50% {transform: translateX(-60%) skewX(-20deg);}
+  100% {transform: translateX(150%) skewX(-20deg);}
+}
+
 .payments-container::-webkit-scrollbar{
   height: 0.5rem;
   background-color: white;
   border-radius: 5rem;
 }
+
 .payments-container::-webkit-scrollbar-thumb{
   background-color: #aaa;
   border-radius: 5rem;

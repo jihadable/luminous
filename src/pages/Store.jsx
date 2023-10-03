@@ -143,12 +143,13 @@ function StoreGrid({ items }){
 
 function ItemSkeleton(){
     return (
-        <div className="border-2 flex flex-col rounded-lg overflow-hidden cursor-pointer border-[#ddd]">
+        <div className="border-2 flex flex-col rounded-lg overflow-hidden cursor-pointer border-[#ddd] relative">
             <div className="img w-full pt-[100%] bg-[#ddd]"></div>
             <div className="info p-4 flex flex-col gap-4">
                 <div className="product-name h-6 w-full rounded-sm bg-[#ddd]"></div>
                 <div className="product-price h-6 w-1/4 rounded-sm bg-[#ddd]"></div>
             </div>
+            <div className="item-skeleton-animation absolute top-0 left-0 w-[80%] h-full skew-x-[20deg] bg-white/[.1]"></div>
         </div>
     )
 }
