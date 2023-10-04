@@ -37,15 +37,11 @@ function Home({ cartItems, setCartItems }){
 // home header
 function HomeHeader(){
     return (
-        <header className="flex h-[100vh] w-[80vw] mx-auto pb-8 pt-24 gap-4 mobile:w-full mobile:px-4 mobile:flex-col mobile:h-fit tablet:w-[90vw] tablet:flex-col tablet:h-fit">
-            <div className="header-left w-full h-full rounded-md mobile:h-[calc(100vw-2rem)] tablet:h-[90vw]"></div>
-            <div className="header-right w-full h-full flex gap-4 mobile:h-[calc(100vw-2rem)] tablet:h-[90vw]">
-                <div className="header-right-left w-full h-full rounded-md"></div>
-                <div className="header-right-right w-full h-full flex flex-col gap-4">
-                    <div className="header-right-right-top w-full h-full rounded-md"></div>
-                    <div className="header-right-right-bottom w-full h-full rounded-md"></div>
-                </div>
-            </div>
+        <header className="grid grid-cols-4 grid-rows-2 h-[100vh] w-[80vw] mx-auto pb-8 pt-24 gap-4 mobile:w-full mobile:px-4 mobile:grid-cols-2 mobile:grid-rows-4 mobile:h-fit tablet:w-[90vw] tablet:grid-cols-2 tablet:grid-rows-4 tablet:h-fit">
+            <div className="header-left col-span-2 row-span-2 w-full h-full rounded-md mobile:h-[calc(100vw-2rem)] tablet:h-[90vw]"></div>
+            <div className="header-right-left row-span-2 w-full h-full rounded-md"></div>
+            <div className="header-right-right-top w-full h-full rounded-md"></div>
+            <div className="header-right-right-bottom w-full h-full rounded-md"></div>
         </header>
     )
 }
