@@ -21,10 +21,11 @@ function StoreSearch(){
 
     const [items, setItems] = useState(null)
     const [showItems, setShowItems] = useState(null)
+    const item_api_endpoint = import.meta.env.VITE_ITEM_API_ENDPOINT
 
     useEffect(() => {
         setTimeout(async() => {
-            let response = await fetch("https://umar-api.000webhostapp.com/luminous/items/")
+            let response = await fetch(item_api_endpoint)
             response = await response.json()
             response = response.map(item => ({...item, quantity: parseInt(item.quantity), price: parseInt(item.price), categories: JSON.parse(item.categories)}))
             
