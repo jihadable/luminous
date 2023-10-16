@@ -150,7 +150,7 @@ function ItemSkeleton(){
                 <div className="product-name h-6 w-full rounded-sm bg-[#ddd]"></div>
                 <div className="product-price h-6 w-1/4 rounded-sm bg-[#ddd]"></div>
             </div>
-            <div className="item-skeleton-animation absolute top-0 left-0 w-[80%] h-full skew-x-[20deg] bg-white/[.1]"></div>
+            <div className="item-skeleton-animation absolute top-0 left-0 w-[80%] h-full skew-x-[20deg] bg-white/[.07]"></div>
         </div>
     )
 }

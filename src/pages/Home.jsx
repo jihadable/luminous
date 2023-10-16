@@ -1,6 +1,7 @@
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 import household from "../assets/household.jpg"
+import household2 from "../assets/household2.jpg"
 import johnKean from "../assets/john-kean.jpg"
 import danielBone from "../assets/daniel-bone.jpg"
 import carlaSofia from "../assets/carla-sofia.jpg"
@@ -27,6 +28,7 @@ function Home({ cartItems, setCartItems }){
             <HomeHeader />
             <HomeTag />
             <HomeTrendingNow />
+            <HomeTag2 />
             <HomeReview />
             <Payments />
             <Footer />
@@ -52,9 +54,9 @@ function HomeTag(){
     return (
         <section className="home-tag flex items-center justify-center my-32 mx-auto w-[80vw] relative mobile:w-full mobile:px-4 mobile:flex-col mobile:gap-4 tablet:w-[90vw]">
             <img src={household} alt="HouseHold" className="w-full rounded-md" loading="lazy" />
-            <div className="home-tag-content absolute bg-white/[.3] backdrop-blur-lg p-8 flex flex-col gap-4 mobile:static mobile:p-0">
+            <div className="home-tag-content absolute left-0 right-0 bg-white/[.3] backdrop-blur-lg p-8 flex flex-col gap-4 mobile:static mobile:p-0">
                 <div className="home-tag-header text-3xl font-bold mobile:text-2xl">Luminous Living</div>
-                <div className="home-tag-tagline text-xl mobile:text-base">Luminous help people to find their best will in household. Our products are all made to standard sizes so that you can mix and match them freely</div>
+                <div className="home-tag-tagline text-xl mobile:text-base">Luminous help people to find their best will in household. Our products are all made to standard sizes so that you can mix and match them freely.</div>
                 <Link to="/store" onClick={goTop} className="w-fit py-1 px-2 rounded bg-primary text-white text-xl mobile:text-base">Shop now</Link>
             </div>
         </section>
@@ -114,6 +116,21 @@ export function HomeTrendingNow(){
                         )
                     })
                 }
+            </div>
+        </section>
+    )
+}
+
+// home tag 2
+function HomeTag2(){
+
+    return (
+        <section className="home-tag flex items-center justify-center my-32 mx-auto w-[80vw] relative mobile:w-full mobile:px-4 mobile:flex-col mobile:gap-4 tablet:w-[90vw]">
+            <img src={household2} alt="HouseHold" className="w-full rounded-md" loading="lazy" />
+            <div className="home-tag-content absolute left-0 right-0 bg-white/[.3] backdrop-blur-lg p-8 flex flex-col gap-4 mobile:static mobile:p-0">
+                <div className="home-tag-header text-3xl font-bold mobile:text-2xl">Luminous Living</div>
+                <div className="home-tag-tagline text-xl mobile:text-base">Our products boast standardized sizes, allowing seamless mixing and matching for a personalized touch to your living spaces. Discover your ideal home with Luminous.</div>
+                <Link to="/store" onClick={goTop} className="w-fit py-1 px-2 rounded bg-primary text-white text-xl mobile:text-base">Shop now</Link>
             </div>
         </section>
     )
