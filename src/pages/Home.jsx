@@ -19,7 +19,7 @@ import paypal from "../assets/paypal.png"
 import { Link } from "react-router-dom"
 import goTop from "../components/goTop"
 
-// home
+// /home
 function Home({ cartItems, setCartItems }){
 
     return (
