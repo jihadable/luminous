@@ -1,15 +1,8 @@
 import luminousLogo from "../assets/luminous-logo.png"
-import emptyCart from "../assets/empty-cart.png"
 import { useState, useRef, useEffect } from "react"
-import { IconShoppingCart } from "@tabler/icons-react"
-import { IconMenu2 } from "@tabler/icons-react"
-import { IconShoppingCartX } from "@tabler/icons-react"
-import { IconTrash } from "@tabler/icons-react"
-import { IconX } from "@tabler/icons-react"
+import { IconShoppingCartOff, IconCash, IconX, IconTrash, IconShoppingCartX, IconMenu2, IconShoppingCart } from "@tabler/icons-react"
 import { Link } from "react-router-dom"
 import goTop from "./goTop"
-import { IconCash } from "@tabler/icons-react"
-import { IconShoppingCartOff } from "@tabler/icons-react"
 
 function Navbar({ link, cartItems, setCartItems }){
 

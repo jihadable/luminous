@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 import { IconSearch } from "@tabler/icons-react"
 import { Link } from "react-router-dom"
 import goTop from "../components/goTop"
+import { items as itemsData } from "../components/items"
 
 function Store({ cartItems, setCartItems }){
     document.title = "Luminous | Store"
@@ -21,15 +22,10 @@ function StoreSearch(){
 
     const [items, setItems] = useState(null)
     const [showItems, setShowItems] = useState(null)
-    const item_api_endpoint = import.meta.env.VITE_ITEM_API_ENDPOINT
-
+    
     useEffect(() => {
-        setTimeout(async() => {
-            let response = await fetch(item_api_endpoint)
-            response = await response.json()
-            response = response.map(item => ({...item, quantity: parseInt(item.quantity), price: parseInt(item.price), categories: JSON.parse(item.categories)}))
-            
-            setItems(response)
+        setTimeout(() => {
+            setItems(itemsData)
         }, 3000)
     }, [])
     
@@ -120,7 +116,7 @@ function StoreGrid({ items }){
                 items &&
                 items.map((item, index) => {
                     return (
-                        <Link to={`/store/product${item.id}`} onClick={goTop} className="product-item flex flex-col rounded-lg bg-white overflow-hidden border-2 hover:border-primary hover:shadow-none" key={index}>
+                        <Link to={`/store/product/${item.id}`} onClick={goTop} className="product-item flex flex-col rounded-lg bg-white overflow-hidden border-2 hover:border-primary hover:shadow-none" key={index}>
                             <img src={item.img} alt={item.name} loading="lazy" />
                             <div className="info p-4 flex flex-col gap-4">
                                 <div className="product-name text-xl font-bold mobile:text-xl tablet:text-xl">{item.name}</div>

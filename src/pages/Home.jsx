@@ -16,6 +16,7 @@ import bca from "../assets/bca.png"
 import qris from "../assets/qris.png"
 import gopay from "../assets/gopay.png"
 import paypal from "../assets/paypal.png"
+import { items } from "../components/items"
 import { Link } from "react-router-dom"
 import goTop from "../components/goTop"
 
@@ -66,38 +67,7 @@ function HomeTag(){
 // home trending now
 export function HomeTrendingNow(){
 
-    const trendingItems = [
-        {
-            id: 2,
-            name: "La-Z-Sofa",
-            img: "https://umar-api.000webhostapp.com/luminous/assets/lazy-sofa.jpg",
-            price: 120
-        },
-        {
-            id: 5,
-            name: "Side Table",
-            img: "https://umar-api.000webhostapp.com/luminous/assets/side-table.jpg",
-            price: 150
-        },
-        {
-            id: 11,
-            name: "Neck Pillow",
-            img: "https://umar-api.000webhostapp.com/luminous/assets/neck-pillow.jpg",
-            price: 50
-        },
-        {
-            id: 21,
-            name: "Hand Blender",
-            img: "https://umar-api.000webhostapp.com/luminous/assets/hand-blender.jpg",
-            price: 215
-        },
-        {
-            id: 12,
-            name: "Bean Bag",
-            img: "https://umar-api.000webhostapp.com/luminous/assets/bean-bag.jpg",
-            price: 120
-        },
-    ]
+    const trendingItems = items.filter(item => [2, 5, 11, 12, 21].includes(item.id))
 
     return (
         <section className="trending-now w-[80vw] flex flex-col items-center gap-6 my-32 mx-auto mobile:w-full mobile:px-4 tablet:w-[90vw]">
@@ -106,7 +76,7 @@ export function HomeTrendingNow(){
                 {
                     trendingItems.map((item, index) => {
                         return (
-                            <Link to={`/store/product${item.id}`} onClick={goTop} className="trending-now-item flex flex-col rounded-lg bg-white overflow-hidden border-2 hover:border-primary hover:shadow-none" key={index}>
+                            <Link to={`/store/product/${item.id}`} onClick={goTop} className="trending-now-item flex flex-col rounded-lg bg-white overflow-hidden border-2 hover:border-primary hover:shadow-none" key={index}>
                                 <img src={item.img} alt={item.name} loading="lazy" />
                                 <div className="info flex flex-col gap-4 p-4">
                                     <div className="trending-item-name text-xl font-bold mobile:text-xl">{item.name}</div>

@@ -1,13 +1,6 @@
-import { IconCash } from "@tabler/icons-react"
 import Navbar from "../components/Navbar"
-import { IconTrash } from "@tabler/icons-react"
-import { IconCheck } from "@tabler/icons-react"
-import { IconDiscount } from "@tabler/icons-react"
-import { useState } from "react"
-import { IconChecks } from "@tabler/icons-react"
 import Footer from "../components/Footer"
-import { IconShoppingCartOff } from "@tabler/icons-react"
-import { Link } from "react-router-dom"
+import { IconShoppingCartOff, IconCash, IconChecks, IconTrash, IconCheck, IconDiscount } from "@tabler/icons-react"
 import goTop from "../components/goTop"
 import dana from "../assets/dana.png"
 import mandiri from "../assets/mandiri.png"
@@ -20,9 +13,15 @@ import bca from "../assets/bca.png"
 import qris from "../assets/qris.png"
 import gopay from "../assets/gopay.png"
 import paypal from "../assets/paypal.png"
-import { useEffect } from "react"
+import { useState, useEffect } from "react"
+import { Link, useParams } from "react-router-dom"
+import { items } from "../components/items"
 
-export default function Checkout({ item, cartItems, setCartItems }){
+export default function Checkout({ cartItems, setCartItems }){
+
+    const { id } = useParams()
+
+    const item = items.filter(item => item.id == id)[0]
 
     document.title = "Luminous | Checkout"
 
@@ -287,9 +286,9 @@ export default function Checkout({ item, cartItems, setCartItems }){
                     checkoutItems.length === 0 ? "$0" : `$${checkoutTotalPrice()}`
                 }
                 </div>
-                <div className="payments-container w-full flex flex-col gap-2 pb-2 overflow-x-auto mt-8">
+                <div className="payments-container w-full flex flex-col gap-2 pb-2 mt-8">
                     <div>Payment methods</div>
-                    <div className="payments flex items-center gap-2">
+                    <div className="payments flex items-center gap-2 pb-2 overflow-x-auto">
                     {
                         paymentsData.map((item, index) => {
                             return <img src={item} alt="Payment" className={`payment p-2 h-10 cursor-pointer rounded border-2 ${paymentIndex === index ? "border-primary" : "border-[#ccc]"}`} key={index} onClick={() => setPaymentIndex(index)} />

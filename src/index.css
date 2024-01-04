@@ -66,13 +66,13 @@
   100% {transform: translateX(150%) skewX(-20deg);}
 }
 
-.payments-container::-webkit-scrollbar{
+.payments-container .payments::-webkit-scrollbar{
   height: 0.5rem;
   background-color: white;
   border-radius: 5rem;
 }
 
-.payments-container::-webkit-scrollbar-thumb{
+.payments-container .payments::-webkit-scrollbar-thumb{
   background-color: #aaa;
   border-radius: 5rem;
 }
