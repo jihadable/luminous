@@ -1,10 +1,10 @@
-import LoginSignupForm from "../components/LoginSignupForm";
+import RegisterLoginForm from "../components/RegisterAndLoginForm";
 
 function Login(){
     document.title = "Luminous | Login"
     
     return (
-        <LoginSignupForm page="login" />
+        <RegisterLoginForm page="login" />
     )
 }
 

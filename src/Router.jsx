@@ -1,13 +1,13 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from "./pages/Home"
-import Store from "./pages/Store"
-import Login from "./pages/Login"
-import Signup from "./pages/Signup"
-import Product from './pages/Product';
-import Checkout from "./pages/Checkout"
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Checkout from "./pages/Checkout";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
 import NotFound from './pages/NotFound';
+import Product from './pages/Product';
 import ProductOutlet from './pages/ProductOutlet';
+import Register from './pages/Register';
+import Store from "./pages/Store";
 
 function Router(){
 
@@ -24,11 +24,10 @@ function Router(){
     return (
         <BrowserRouter>
             <Routes>
-                <Route path='*' element={<NotFound />} />
                 <Route path='/' exact element={<Home cartItems={cartItems} setCartItems={setCartItems} />} />
                 <Route path='/store' element={<Store cartItems={cartItems} setCartItems={setCartItems} />} />
                 <Route path='/login' element={<Login />} />
-                <Route path='/signup' element={<Signup />} />
+                <Route path='/register' element={<Register />} />
                 <Route path='/store/product/:id' element={<ProductOutlet />}>
                     <Route path="/store/product/:id" element={
                         <Product cartItems={cartItems} setCartItems={setCartItems} />}
@@ -42,6 +41,7 @@ function Router(){
                 <Route path="/checkout" element={
                     <Checkout item={null} cartItems={cartItems} setCartItems={setCartItems} />}
                 />
+                <Route path='*' element={<NotFound />} />
             </Routes>
         </BrowserRouter>
     )
