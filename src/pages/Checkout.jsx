@@ -1,23 +1,24 @@
-import Navbar from "../components/Navbar"
-import Footer from "../components/Footer"
-import { IconShoppingCartOff, IconCash, IconChecks, IconTrash, IconCheck, IconDiscount } from "@tabler/icons-react"
-import goTop from "../components/goTop"
+import { IconCash, IconCheck, IconChecks, IconDiscount, IconShoppingCartOff, IconTrash } from "@tabler/icons-react"
+import { useContext, useEffect, useState } from "react"
+import { Link, useParams } from "react-router-dom"
+import bca from "../assets/bca.png"
+import bni from "../assets/bni.png"
+import bri from "../assets/bri.png"
 import dana from "../assets/dana.png"
+import gopay from "../assets/gopay.png"
+import linkaja from "../assets/linkaja.png"
 import mandiri from "../assets/mandiri.png"
 import ovo from "../assets/ovo.png"
-import bri from "../assets/bri.png"
-import bni from "../assets/bni.png"
-import linkaja from "../assets/linkaja.png"
-import spay from "../assets/spay.png"
-import bca from "../assets/bca.png"
-import qris from "../assets/qris.png"
-import gopay from "../assets/gopay.png"
 import paypal from "../assets/paypal.png"
-import { useState, useEffect } from "react"
-import { Link, useParams } from "react-router-dom"
+import qris from "../assets/qris.png"
+import spay from "../assets/spay.png"
+import Footer from "../components/Footer"
+import Navbar from "../components/Navbar"
+import goTop from "../components/goTop"
 import { items } from "../components/items"
+import { AuthContext } from "../contexts/AuthContext"
 
-export default function Checkout({ cartItems, setCartItems }){
+export default function Checkout(){
 
     const { id } = useParams()
 
@@ -25,14 +26,16 @@ export default function Checkout({ cartItems, setCartItems }){
 
     document.title = "Luminous | Checkout"
 
+    const { cart, setCart } = useContext(AuthContext)
+
     const [initialItem, setInitialItem] = useState(item)
 
     const [checkoutItems, setCheckoutItems] = useState(initialItem ? [{...initialItem}] : [])
     
-    if (initialItem && cartItems.length > 0){
+    if (initialItem && cart.length > 0){
           
-        for (let i = 0 ; i < cartItems.length ; i++){
-            if (cartItems[i].id === initialItem.id){
+        for (let i = 0 ; i < cart.length ; i++){
+            if (cart[i].id === initialItem.id){
                 setInitialItem(null)
                 break
             }
@@ -71,7 +74,7 @@ export default function Checkout({ cartItems, setCartItems }){
     }
 
     function addQuantity(id){
-        const updatedCartItems = [...cartItems].map(cartItem => {
+        const updatedCartItems = [...cart].map(cartItem => {
             if (cartItem.id === id){
                 let quantity = cartItem.quantity + 1
                 let price = cartItem.price + (cartItem.price / (quantity - 1))
@@ -82,11 +85,11 @@ export default function Checkout({ cartItems, setCartItems }){
             return cartItem
         })
 
-        setCartItems(updatedCartItems)
+        setCart(updatedCartItems)
     }
 
     function minQuantity(id){
-        const updatedCartItems = [...cartItems].map(cartItem => {
+        const updatedCartItems = [...cart].map(cartItem => {
             if (cartItem.id === id){
                 if (cartItem.quantity > 1){
                     let quantity = cartItem.quantity - 1
@@ -99,13 +102,13 @@ export default function Checkout({ cartItems, setCartItems }){
             return cartItem
         })
 
-        setCartItems(updatedCartItems)
+        setCart(updatedCartItems)
     }
 
     useEffect(() => {
         const updatedCheckoutItems = [...checkoutItems]
         
-        cartItems.forEach(cartItem => {
+        cart.forEach(cartItem => {
             const indexCheckoutItems = updatedCheckoutItems.findIndex(updatedCheckoutItem => updatedCheckoutItem.id === cartItem.id)
 
             if (indexCheckoutItems !== -1){
@@ -114,14 +117,14 @@ export default function Checkout({ cartItems, setCartItems }){
         })
 
         setCheckoutItems(updatedCheckoutItems)
-    }, [cartItems])
+    }, [cart])
 
     function removeCartItems(id){
         if (initialItem && initialItem.id === id){
             setInitialItem(null)
         }
 
-        setCartItems(cartItems => cartItems.filter(cartItem => cartItem.id !== id))
+        setCart(cartItems => cartItems.filter(cartItem => cartItem.id !== id))
         setCheckoutItems(checkoutItems => checkoutItems.filter(checkoutItem => checkoutItem.id !== id))
     }
 
@@ -174,22 +177,22 @@ export default function Checkout({ cartItems, setCartItems }){
 
     return (
         <>
-        <Navbar link={"store"} cartItems={cartItems} setCartItems={setCartItems} />
+        <Navbar link={"store"} />
         <section className="checkout-container w-[80vw] flex gap-2 mx-auto mt-24 mb-36 text-xl mobile:w-full mobile:px-4 mobile:flex-col-reverse tablet:w-[90vw]">
         {
-            (cartItems.length === 0 && !initialItem) &&
+            (cart.length === 0 && !initialItem) &&
             <div className="flex flex-col gap-4 items-center justify-center w-full py-[40vh]">
                 <IconShoppingCartOff stroke={1.5} width={128} height={128} />
                 <Link to={"/store"} onClick={goTop} className="px-2 py-1 rounded bg-primary text-white">Shop now</Link>
             </div>
         }
         {
-            (cartItems.length > 0 || initialItem) &&
+            (cart.length > 0 || initialItem) &&
             <>
             <div className="cart-items-container flex flex-col gap-2 w-3/5 mobile:w-full">
                 <div className="select-all-btn flex items-center gap-2 cursor-pointer bg-white-prim w-fit p-2 rounded" onClick={() => {
                     {
-                        initialItem ? setCheckoutItems([...cartItems, {...initialItem}]) : setCheckoutItems([...cartItems]) 
+                        initialItem ? setCheckoutItems([...cart, {...initialItem}]) : setCheckoutItems([...cart]) 
                     }
                 }}>
                     <IconChecks stroke={1.5} />
@@ -226,7 +229,7 @@ export default function Checkout({ cartItems, setCartItems }){
                     </div>
                 }
                 {
-                    [...cartItems].reverse().map((item, index) => {
+                    [...cart].reverse().map((item, index) => {
                         return (
                             <div className="cart-item w-full flex items-stretch gap-2 p-2 rounded-md border-2" key={index}>
                                 <div className={`checkbox border p-1 rounded cursor-pointer h-fit ${checkingCheckoutItems(item.id) ? "bg-primary text-white" : "text-transparent"}`} onClick={() => addRemoveCheckoutItems(item)}>

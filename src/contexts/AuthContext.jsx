@@ -1,4 +1,4 @@
-import { createContext, useState } from "react"
+import { createContext, useEffect, useState } from "react"
 
 export const AuthContext = createContext()
 
@@ -7,9 +7,14 @@ export default function AuthProvider({ children }){
     const [isLogin, setIsLogin] = useState(null)
     const [isAdmin, setIsAdmin] = useState(null)
     const [user, setUser] = useState(null)
+    const [cart, setCart] = useState(localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [])
+
+    useEffect(() => {
+        localStorage.setItem("cart", JSON.stringify(cart))
+    }, [cart])
 
     return (
-        <AuthContext.Provider value={{ token, setToken, isLogin, setIsLogin, isAdmin, setIsAdmin, user, setUser }}>
+        <AuthContext.Provider value={{ token, setToken, isLogin, setIsLogin, isAdmin, setIsAdmin, user, setUser, cart, setCart }}>
             { children }
         </AuthContext.Provider>
     )

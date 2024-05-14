@@ -1,10 +1,13 @@
 import { IconCash, IconMenu2, IconShoppingCart, IconShoppingCartOff, IconShoppingCartX, IconTrash, IconX } from "@tabler/icons-react"
-import { useEffect, useRef, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import luminousLogo from "../assets/luminous-logo.png"
+import { AuthContext } from "../contexts/AuthContext"
 import goTop from "./goTop"
 
-function Navbar({ link, cartItems, setCartItems }){
+function Navbar({ link }){
+
+    const { cart } = useContext(AuthContext)
 
     const [showShoppingCart, setShowShoppingCart] = useState(false)
     const [showMobileMenu, setShowMobileMenu] = useState(false)
@@ -38,8 +41,8 @@ function Navbar({ link, cartItems, setCartItems }){
                 <span className="shopping-cart-btn flex justify-center items-center relative p-1 rounded cursor-pointer hover:bg-[rgb(0,0,0,.1)]" onClick={() => {setShowShoppingCart(!showShoppingCart)}} ref={shoppingCartBtn}>
                     <IconShoppingCart stroke={1.5} />
                     {
-                        cartItems.length > 0 &&
-                        <div className="cart-notify absolute flex justify-center items-center -top-2 -right-2 px-2 py-0 rounded-full text-white-prim text-sm bg-red-500">{cartItems.length}</div>
+                        cart.length > 0 &&
+                        <div className="cart-notify absolute flex justify-center items-center -top-2 -right-2 px-2 py-0 rounded-full text-white-prim text-sm bg-red-500">{cart.length}</div>
                     }
                 </span>
                 <span className="mobile-menu-btn relative hidden justify-center items-center p-1 rounded cursor-pointer hover:bg-hov mobile:flex" onClick={() => {setShowMobileMenu(!showMobileMenu)}} ref={mobileMenuBtn}>
@@ -54,12 +57,14 @@ function Navbar({ link, cartItems, setCartItems }){
                 <Link to="/store" onClick={goTop} className={link === "home" ? "border-b-2 border-white hover:border-primary" : "border-b-2 border-primary"} >Store</Link>  
                 <Link to="/login" onClick={goTop} className="border-b-2 border-white hover:border-primary" >Login</Link>
             </div>
-            <ShoppingCart cartItems={cartItems} setCartItems={setCartItems} showShoppingCart={showShoppingCart} setShowShoppingCart={setShowShoppingCart} shoppingCart={shoppingCart} shoppingCartBtn={shoppingCartBtn} />
+            <ShoppingCart showShoppingCart={showShoppingCart} setShowShoppingCart={setShowShoppingCart} shoppingCart={shoppingCart} shoppingCartBtn={shoppingCartBtn} />
         </nav>
     )
 }
 
-function ShoppingCart({ cartItems, setCartItems, showShoppingCart, setShowShoppingCart, shoppingCart, shoppingCartBtn }){
+function ShoppingCart({ showShoppingCart, setShowShoppingCart, shoppingCart, shoppingCartBtn }){
+
+    const { cart, setCart } = useContext(AuthContext)
 
     useEffect(() => {
         document.addEventListener("click", function(e){
@@ -70,7 +75,7 @@ function ShoppingCart({ cartItems, setCartItems, showShoppingCart, setShowShoppi
     })
 
     function removeItem(id){
-        setCartItems(cartItems => cartItems.filter(cartItem => cartItem.id !== id))
+        setCart(cartItems => cartItems.filter(cartItem => cartItem.id !== id))
     }
 
     function sumPrice(array){
@@ -84,7 +89,7 @@ function ShoppingCart({ cartItems, setCartItems, showShoppingCart, setShowShoppi
     }
 
     function addQuantity(id){
-        const updatedCartItems = [...cartItems].map(cartItem => {
+        const updatedCartItems = [...cart].map(cartItem => {
             if (cartItem.id === id){
                 let quantity = cartItem.quantity + 1
                 let price = cartItem.price + (cartItem.price / (quantity - 1))
@@ -95,11 +100,11 @@ function ShoppingCart({ cartItems, setCartItems, showShoppingCart, setShowShoppi
             return cartItem
         })
 
-        setCartItems(updatedCartItems)
+        setCart(updatedCartItems)
     }
 
     function minQuantity(id){
-        const updatedCartItems = [...cartItems].map(cartItem => {
+        const updatedCartItems = [...cart].map(cartItem => {
             if (cartItem.id === id){
                 if (cartItem.quantity > 1){
                     let quantity = cartItem.quantity - 1
@@ -112,17 +117,17 @@ function ShoppingCart({ cartItems, setCartItems, showShoppingCart, setShowShoppi
             return cartItem
         })
 
-        setCartItems(updatedCartItems)
+        setCart(updatedCartItems)
     }
 
     return (
         <div className={`shopping-cart z-[60] w-[30vw] h-[100vh] flex flex-col absolute top-0 ${showShoppingCart ? "active" : ""} bg-white text-xl mobile:w-full tablet:w-[70vw] tablet:h-[70vh]`} ref={shoppingCart}>
             <div className="header flex items-center justify-between p-2">
-                <div className="info">{`Shopping cart (${cartItems.length})`}</div>
+                <div className="info">{`Shopping cart (${cart.length})`}</div>
                 <div className="btns flex gap-2 items-center">
                     {
-                        cartItems.length > 0 &&
-                        <div className="remove-all-btn flex items-center justify-center gap-2 p-1 rounded cursor-pointer bg-red-200" onClick={() => {setCartItems([])}} title="Empty cart">
+                        cart.length > 0 &&
+                        <div className="remove-all-btn flex items-center justify-center gap-2 p-1 rounded cursor-pointer bg-red-200" onClick={() => {setCart([])}} title="Empty cart">
                             <IconShoppingCartX stroke={1.5} />
                         </div>
                     }
@@ -131,9 +136,9 @@ function ShoppingCart({ cartItems, setCartItems, showShoppingCart, setShowShoppi
                     </span>
                 </div>
             </div>
-            <div className={`content flex flex-1 ${cartItems.length > 0 ? "overflow-y-auto scrollbar-hide p-2" : "justify-center items-center"}`}>
+            <div className={`content flex flex-1 ${cart.length > 0 ? "overflow-y-auto scrollbar-hide p-2" : "justify-center items-center"}`}>
                 {
-                    cartItems.length === 0 &&
+                    cart.length === 0 &&
                     <div className="empty-cart flex flex-col items-center gap-2 h-3/4 justify-center">
                         <IconShoppingCartOff stroke={1.5} width={128} height={128} />
                         <div>Your cart is empty</div>
@@ -141,10 +146,10 @@ function ShoppingCart({ cartItems, setCartItems, showShoppingCart, setShowShoppi
                     </div>
                 }
                 {
-                    cartItems.length > 0 &&
+                    cart.length > 0 &&
                     <div className="items flex flex-col gap-2">
                     {
-                        [...cartItems].reverse().map((item, index) => {
+                        [...cart].reverse().map((item, index) => {
                             return (
                                 <div className="item w-full flex gap-2 p-2 bg-white rounded border-2 border-[#ccc]" key={index}>
                                     <div className="item-img flex w-2/5">
@@ -174,10 +179,10 @@ function ShoppingCart({ cartItems, setCartItems, showShoppingCart, setShowShoppi
                 }
             </div>
             {
-                cartItems.length > 0 &&
+                cart.length > 0 &&
                 <div className="footer flex items-center justify-between p-2 mt-2 border-t-2 border-black border-dashed">
                     <span className="total-price">
-                        <p>{`Total: $${sumPrice(cartItems)}`}</p>
+                        <p>{`Total: $${sumPrice(cart)}`}</p>
                     </span>
                     <Link to={"/checkout"} onClick={goTop} className="p-1 px-2 flex gap-2 items-center rounded bg-primary text-white text-base">
                         <IconCash stroke={1.5} />

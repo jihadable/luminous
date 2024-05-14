@@ -1,31 +1,30 @@
-import Navbar from "../components/Navbar"
-import Footer from "../components/Footer"
+import { Link } from "react-router-dom"
+import bca from "../assets/bca.png"
+import bni from "../assets/bni.png"
+import bri from "../assets/bri.png"
+import carlaSofia from "../assets/carla-sofia.jpg"
+import dana from "../assets/dana.png"
+import danielBone from "../assets/daniel-bone.jpg"
+import gopay from "../assets/gopay.png"
 import household from "../assets/household.jpg"
 import household2 from "../assets/household2.jpg"
 import johnKean from "../assets/john-kean.jpg"
-import danielBone from "../assets/daniel-bone.jpg"
-import carlaSofia from "../assets/carla-sofia.jpg"
-import dana from "../assets/dana.png"
+import linkaja from "../assets/linkaja.png"
 import mandiri from "../assets/mandiri.png"
 import ovo from "../assets/ovo.png"
-import bri from "../assets/bri.png"
-import bni from "../assets/bni.png"
-import linkaja from "../assets/linkaja.png"
-import spay from "../assets/spay.png"
-import bca from "../assets/bca.png"
-import qris from "../assets/qris.png"
-import gopay from "../assets/gopay.png"
 import paypal from "../assets/paypal.png"
-import { items } from "../components/items"
-import { Link } from "react-router-dom"
+import qris from "../assets/qris.png"
+import spay from "../assets/spay.png"
+import Footer from "../components/Footer"
+import Navbar from "../components/Navbar"
 import goTop from "../components/goTop"
+import { items } from "../components/items"
 
-// /home
-function Home({ cartItems, setCartItems }){
-
+// home
+export default function Home(){
     return (
         <>
-            <Navbar link="home" cartItems={cartItems} setCartItems={setCartItems} />
+            <Navbar link="home" />
             <HomeHeader />
             <HomeTag />
             <HomeTrendingNow />
@@ -51,7 +50,6 @@ function HomeHeader(){
 
 // home tag
 function HomeTag(){
-
     return (
         <section className="home-tag flex items-center justify-center my-32 mx-auto w-[80vw] relative mobile:w-full mobile:px-4 mobile:flex-col mobile:gap-4 tablet:w-[90vw]">
             <img src={household} alt="HouseHold" className="w-full rounded-md" loading="lazy" />
@@ -69,22 +67,22 @@ export function HomeTrendingNow(){
 
     const trendingItems = items.filter(item => [2, 5, 11, 12, 21].includes(item.id))
 
+    console.log(items)
+
     return (
         <section className="trending-now w-[80vw] flex flex-col items-center gap-6 my-32 mx-auto mobile:w-full mobile:px-4 tablet:w-[90vw]">
             <div className="trending-now-header text-3xl font-semibold">Trending Now</div>
             <div className="trending-now-items grid grid-cols-5 gap-4 mobile:grid-cols-2 tablet:grid-cols-4">
                 {
-                    trendingItems.map((item, index) => {
-                        return (
-                            <Link to={`/store/product/${item.id}`} onClick={goTop} className="trending-now-item flex flex-col rounded-lg bg-white overflow-hidden border-2 hover:border-primary hover:shadow-none" key={index}>
-                                <img src={item.img} alt={item.name} loading="lazy" />
-                                <div className="info flex flex-col gap-4 p-4">
-                                    <div className="trending-item-name text-xl font-bold mobile:text-xl">{item.name}</div>
-                                    <div className="trending-item-price text-xl mobile:text-base">{`$${item.price}`}</div>
-                                </div>
-                            </Link>
-                        )
-                    })
+                    trendingItems.map((item, index) => (
+                        <Link to={`/store/${item.id}`} onClick={goTop} className="trending-now-item flex flex-col rounded-lg bg-white overflow-hidden border-2 hover:border-primary hover:shadow-none" key={index}>
+                            <img src={item.img} alt={item.name} loading="lazy" />
+                            <div className="info flex flex-col gap-4 p-4">
+                                <div className="trending-item-name text-xl font-bold mobile:text-xl">{item.name}</div>
+                                <div className="trending-item-price text-xl mobile:text-base">{`$${item.price}`}</div>
+                            </div>
+                        </Link>
+                    ))
                 }
             </div>
         </section>
@@ -134,20 +132,18 @@ function HomeReview(){
             <div className="reviews-header text-3xl font-semibold">Reviews</div>
             <div className="review-slide flex gap-4 mobile:flex-col tablet:gap-4">
                     {
-                        reviews.map((review, index) => {
-                            return (
-                                <div className="review bg-white-prim flex flex-col gap-4 p-4 rounded-xl h-fit" key={index}>
-                                    <div className="review-header flex gap-3">
-                                        <img src={review.img} alt={review.name} className="w-[50px] rounded-full shadow-med" loading="lazy" />
-                                        <div className="name-job">
-                                            <div className="name text-xl">{review.name}</div>
-                                            <div className="job text-black/[.7]">{review.job}</div>
-                                        </div>
+                        reviews.map((review, index) => (
+                            <div className="review bg-white-prim flex flex-col gap-4 p-4 rounded-xl h-fit" key={index}>
+                                <div className="review-header flex gap-3">
+                                    <img src={review.img} alt={review.name} className="w-[50px] rounded-full shadow-med" loading="lazy" />
+                                    <div className="name-job">
+                                        <div className="name text-xl">{review.name}</div>
+                                        <div className="job text-black/[.7]">{review.job}</div>
                                     </div>
-                                    <div className="review-text">{review.review}</div>
                                 </div>
-                            )
-                        })
+                                <div className="review-text">{review.review}</div>
+                            </div>
+                        ))
                     }
                 </div>
         </section>
@@ -164,13 +160,11 @@ function Payments(){
             <div className="payments-header text-3xl font-semibold">Payment methods</div>
             <div className="payments-content flex items-center justify-center flex-wrap gap-4">
             {
-                payments.map((payment, index) => {
-                    return <img src={payment} alt="Payment" className="w-24 h-fit mobile:w-16" loading="lazy" key={index} />
-                })
+                payments.map((payment, index) => (
+                    <img src={payment} alt="Payment" className="w-24 h-fit mobile:w-16" loading="lazy" key={index} />
+                ))
             }
             </div>
         </section>
     )
 }
-
-export default Home

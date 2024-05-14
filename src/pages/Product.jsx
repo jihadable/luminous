@@ -1,20 +1,22 @@
-import { useEffect, useState } from "react"
-import Navbar from "../components/Navbar"
-import { HomeTrendingNow } from "./Home"
-import Footer from "../components/Footer"
-import { IconShoppingCartPlus } from "@tabler/icons-react"
-import { IconCash } from "@tabler/icons-react"
+import { IconCash, IconShoppingCartPlus } from "@tabler/icons-react"
+import { useContext, useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
-import { items } from "../components/items"
+import Footer from "../components/Footer"
+import Navbar from "../components/Navbar"
 import goTop from "../components/goTop"
+import { items } from "../components/items"
+import { AuthContext } from "../contexts/AuthContext"
+import { HomeTrendingNow } from "./Home"
 
-function Product({ cartItems, setCartItems }){
+function Product(){
 
     const { id } = useParams()
 
     const item = items.filter(item => item.id == id)[0]
 
     document.title = `Luminous | ${item.name}`
+
+    const { setCart } = useContext(AuthContext)
 
     const [quantity, setQuantity] = useState(item.quantity)
     const [price, setPrice] = useState(item.price)
@@ -42,12 +44,12 @@ function Product({ cartItems, setCartItems }){
             }
         }
 
-        setCartItems(cartItems => ([...cartItems, {...item, quantity: quantity, price: price}]))
+        setCart(cartItems => ([...cartItems, {...item, quantity: quantity, price: price}]))
     }
 
     return (
         <>
-            <Navbar link="store" cartItems={cartItems} setCartItems={setCartItems} />
+            <Navbar link="store" />
             <section className="product mt-32 flex w-[80vw] mx-auto gap-2 mobile:w-[90vw] mobile:flex-col mobile:items-center tablet:w-[90vw]">
                 <div className="product-img w-[30vw] h-fit rounded overflow-hidden mobile:w-full tablet:w-[30%]">
                     <img src={item.img} alt={item.name} />
@@ -78,7 +80,7 @@ function Product({ cartItems, setCartItems }){
                         </span>
                         <span className="product-price  p-2 bg-primary text-white-prim rounded">{`$${price}`}</span>
                     </div>
-                    <div className="procudt-checkout w-full flex items-center justify-end gap-4">
+                    <div className="product-checkout w-full flex items-center justify-end gap-4">
                         <div className="add-to-cart flex items-center gap-2 p-2 px-3 bg-white cursor-pointer shadow-med rounded-sm" onClick={() => {addProductToCart()}}>
                             <IconShoppingCartPlus stroke={1.5} />
                             <span>Add to cart</span>
