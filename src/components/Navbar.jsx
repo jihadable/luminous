@@ -1,7 +1,7 @@
-import luminousLogo from "../assets/luminous-logo.png"
-import { useState, useRef, useEffect } from "react"
-import { IconShoppingCartOff, IconCash, IconX, IconTrash, IconShoppingCartX, IconMenu2, IconShoppingCart } from "@tabler/icons-react"
+import { IconCash, IconMenu2, IconShoppingCart, IconShoppingCartOff, IconShoppingCartX, IconTrash, IconX } from "@tabler/icons-react"
+import { useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
+import luminousLogo from "../assets/luminous-logo.png"
 import goTop from "./goTop"
 
 function Navbar({ link, cartItems, setCartItems }){
@@ -42,13 +42,10 @@ function Navbar({ link, cartItems, setCartItems }){
                         <div className="cart-notify absolute flex justify-center items-center -top-2 -right-2 px-2 py-0 rounded-full text-white-prim text-sm bg-red-500">{cartItems.length}</div>
                     }
                 </span>
-                {/* mobile menu button */}
                 <span className="mobile-menu-btn relative hidden justify-center items-center p-1 rounded cursor-pointer hover:bg-hov mobile:flex" onClick={() => {setShowMobileMenu(!showMobileMenu)}} ref={mobileMenuBtn}>
                     <IconMenu2 stroke={1.5} />
                 </span>
             </div>
-
-            {/* mobile menu */}
             <div className={`mobile-menu flex flex-col gap-4 p-4 text-2xl items-end absolute w-[70vw] top-0 h-[100vh] z-[55] bg-white ${showMobileMenu ? "active" : ""}`} ref={mobileMenu}>
                 <div className="close-mobile-menu top-4 right-4 p-1 rounded cursor-pointer hover:bg-hov" onClick={() => setShowMobileMenu(false)}>
                     <IconX stroke={1.5} />
@@ -57,8 +54,6 @@ function Navbar({ link, cartItems, setCartItems }){
                 <Link to="/store" onClick={goTop} className={link === "home" ? "border-b-2 border-white hover:border-primary" : "border-b-2 border-primary"} >Store</Link>  
                 <Link to="/login" onClick={goTop} className="border-b-2 border-white hover:border-primary" >Login</Link>
             </div>
-
-            {/* shopping cart */}
             <ShoppingCart cartItems={cartItems} setCartItems={setCartItems} showShoppingCart={showShoppingCart} setShowShoppingCart={setShowShoppingCart} shoppingCart={shoppingCart} shoppingCartBtn={shoppingCartBtn} />
         </nav>
     )

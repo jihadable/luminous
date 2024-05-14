@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import AuthProvider from './contexts/AuthContext';
 import Checkout from "./pages/Checkout";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -23,26 +24,28 @@ function Router(){
 
     return (
         <BrowserRouter>
-            <Routes>
-                <Route path='/' exact element={<Home cartItems={cartItems} setCartItems={setCartItems} />} />
-                <Route path='/store' element={<Store cartItems={cartItems} setCartItems={setCartItems} />} />
-                <Route path='/login' element={<Login />} />
-                <Route path='/register' element={<Register />} />
-                <Route path='/store/product/:id' element={<ProductOutlet />}>
-                    <Route path="/store/product/:id" element={
-                        <Product cartItems={cartItems} setCartItems={setCartItems} />}
+            <AuthProvider>
+                <Routes>
+                    <Route path="/" exact element={<Home cartItems={cartItems} setCartItems={setCartItems} />} />
+                    <Route path="/store" element={<Store cartItems={cartItems} setCartItems={setCartItems} />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/store/product/:id" element={<ProductOutlet />}>
+                        <Route path="/store/product/:id" element={
+                            <Product cartItems={cartItems} setCartItems={setCartItems} />}
+                        />
+                    </Route>
+                    <Route path="/checkout/product/:id" element={<ProductOutlet />}>
+                        <Route path="/checkout/product/:id" element={
+                            <Checkout cartItems={cartItems} setCartItems={setCartItems} />}
+                        />
+                    </Route>
+                    <Route path="/checkout" element={
+                        <Checkout item={null} cartItems={cartItems} setCartItems={setCartItems} />}
                     />
-                </Route>
-                <Route path='/checkout/product/:id' element={<ProductOutlet />}>
-                    <Route path="/checkout/product/:id" element={
-                        <Checkout cartItems={cartItems} setCartItems={setCartItems} />}
-                    />
-                </Route>
-                <Route path="/checkout" element={
-                    <Checkout item={null} cartItems={cartItems} setCartItems={setCartItems} />}
-                />
-                <Route path='*' element={<NotFound />} />
-            </Routes>
+                    <Route path="*" element={<NotFound />} />
+                </Routes>
+            </AuthProvider>
         </BrowserRouter>
     )
 }
