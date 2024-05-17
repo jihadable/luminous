@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AuthProvider from './contexts/AuthContext';
+import ProductsProvider from './contexts/ProductsContext';
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import NotFound from './pages/NotFound';
@@ -12,6 +13,7 @@ function Router(){
     return (
         <BrowserRouter>
             <AuthProvider>
+            <ProductsProvider>
                 <Routes>
                     <Route path="/" exact element={<Home />} />
                     <Route path="/store" element={<Store />} />
@@ -28,6 +30,7 @@ function Router(){
                     /> */}
                     <Route path="*" element={<NotFound />} />
                 </Routes>
+            </ProductsProvider>
             </AuthProvider>
         </BrowserRouter>
     )

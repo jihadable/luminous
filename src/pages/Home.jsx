@@ -67,8 +67,6 @@ export function HomeTrendingNow(){
 
     const trendingItems = items.filter(item => [2, 5, 11, 12, 21].includes(item.id))
 
-    console.log(items)
-
     return (
         <section className="trending-now w-[80vw] flex flex-col items-center gap-6 my-32 mx-auto mobile:w-full mobile:px-4 tablet:w-[90vw]">
             <div className="trending-now-header text-3xl font-semibold">Trending Now</div>
