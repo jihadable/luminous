@@ -48,7 +48,7 @@ function StoreSearch(){
             <div className="category-value flex items-center flex-wrap gap-4 text-base justify-center mobile:w-[90vw]">
             {
                 categories.map(category => (
-                    <div className={`category-value flex gap-1 items-center py-1 px-4 rounded border-2 cursor-pointer ${selectedCategory === category ? "border-primary bg-primary text-white-prim" : "border-[#999] hover:bg-hov"}`} key={category} onClick={() => handleSelectCategory(category)}>
+                    <div className={`category-value flex gap-1 items-center py-1 px-4 rounded border-2 cursor-pointer ${selectedCategory === category ? "border-primary bg-primary text-white-prim" : "border-primary/[.1] hover:bg-hov"}`} key={category} onClick={() => handleSelectCategory(category)}>
                         <span>{category}</span>
                     </div>
                 ))
@@ -69,7 +69,7 @@ function StoreGrid({ products }){
             {
                 products &&
                 products.map((item, index) => (
-                    <Link to={`/store/${item.id}`} onClick={goTop} className="product-item flex flex-col rounded-lg bg-white overflow-hidden border-2 hover:border-primary hover:shadow-none" key={index}>
+                    <Link to={`/store/${item.id}`} onClick={goTop} className="product-item flex flex-col rounded-lg bg-white overflow-hidden border-2 border-primary/[.1] hover:border-primary hover:shadow-none" key={index}>
                         <img src={`${productImagesAPIEndpoint}/${item.img}`} alt={item.name} loading="lazy" />
                         <div className="info p-4 flex flex-col gap-4">
                             <div className="product-name text-xl font-bold mobile:text-xl tablet:text-xl">{item.name}</div>

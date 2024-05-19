@@ -6,7 +6,7 @@ import goTop from "./goTop"
 function RegisterLoginForm({ page }){
 
     return (
-        <div className="w-[100vw] min-h-[100vh] flex flex-col gap-4 items-center justify-center bg-white-prim">
+        <div className="w-[100vw] min-h-[100vh] flex flex-col gap-4 items-center justify-center bg-primary/[.1]">
             <header className="flex items-center gap-2">
                 <img src={luminousLogo} alt="Luminous" className="w-14"/>
                 <span className="text-4xl">Luminous</span>
@@ -15,22 +15,22 @@ function RegisterLoginForm({ page }){
                 <div className="form-login-header text-3xl text-center">{page === "register" ? "Register" : "Login"}</div>
                 {
                     page === "register" &&
-                    <div className="form-login-email relative bg-white-prim p-3 flex items-center gap-3 rounded-lg">
+                    <div className="form-login-email relative bg-primary/[.1] p-3 flex items-center gap-3 rounded-lg">
                         <IconUserCircle stroke={1.5} />
                         <input type="text" placeholder="Full name" className="bg-transparent outline-none w-[250px] mobile:w-full" />
                     </div>
                 }
-                <div className="form-login-email relative bg-white-prim p-3 flex items-center gap-3 rounded-lg">
+                <div className="form-login-email relative bg-primary/[.1] p-3 flex items-center gap-3 rounded-lg">
                     <IconMail stroke={1.5} />
                     <input type={page === "login" ? "text" : "email"} placeholder="Email" className="bg-transparent outline-none w-[250px] mobile:w-full" />
                 </div>
-                <div className="form-login-password relative bg-white-prim p-3 flex items-center gap-3 rounded-lg">
+                <div className="form-login-password relative bg-primary/[.1] p-3 flex items-center gap-3 rounded-lg">
                     <IconLock stroke={1.5} />
                     <input type="password" placeholder="Password" className="bg-transparent outline-none w-[250px] mobile:w-full" />
                 </div>
                 {
                     page === "register" && 
-                    <div className="form-login-password relative bg-white-prim p-3 flex items-center gap-3 rounded-lg">
+                    <div className="form-login-password relative bg-primary/[.1] p-3 flex items-center gap-3 rounded-lg">
                         <IconLock stroke={1.5} />
                         <input type="password" placeholder="Confirm password" className="bg-transparent outline-none w-[250px] mobile:w-full" />
                     </div>

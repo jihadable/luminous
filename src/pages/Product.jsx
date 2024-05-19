@@ -41,7 +41,7 @@ function Product(){
                 <div className="product-img w-[30vw] h-fit rounded overflow-hidden mobile:w-full tablet:w-[30%]">
                     <img src={`${productImagesAPIEndpoint}/${product.img}`} alt={product.name} />
                 </div>
-                <div className="product-info bg-white-prim flex flex-col items-center gap-8 p-5 rounded text-xl w-[50vw] h-fit mobile:w-full tablet:w-[70%]">
+                <div className="product-info bg-primary/[.1] flex flex-col items-center gap-8 p-5 rounded text-xl w-[50vw] h-fit mobile:w-full tablet:w-[70%]">
                     <div className="product-name text-3xl font-semibold">{product.name}</div>
                     <div className="product-explanation text-justify">{product.description}</div>
                     <div className="product-shape text-base w-full flex items-center justify-between mobile:justify-between mobile:gap-2">
@@ -83,6 +83,14 @@ function Product(){
             <HomeTrendingNow />
             <Footer />
         </>
+    )
+}
+
+function ProductSkeleton(){
+    return (
+        <div className="skeleton">
+            <div className="w-[30vw] h-[30vw] rounded overflow-hidden mobile:w-full tablet:w-[30%]"></div>
+        </div>
     )
 }
 

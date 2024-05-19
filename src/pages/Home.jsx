@@ -53,7 +53,7 @@ function HomeTag(){
     return (
         <section className="home-tag flex items-center justify-center my-32 mx-auto w-[80vw] relative mobile:w-full mobile:px-4 mobile:flex-col mobile:gap-4 tablet:w-[90vw]">
             <img src={household} alt="HouseHold" className="w-full rounded-md" loading="lazy" />
-            <div className="home-tag-content absolute left-0 right-0 bg-white/[.3] backdrop-blur-lg p-8 flex flex-col gap-4 mobile:static mobile:p-0">
+            <div className="home-tag-content absolute left-0 right-0 bg-primary/[.1] backdrop-blur-lg p-8 flex flex-col gap-4 mobile:static mobile:p-0">
                 <div className="home-tag-header text-3xl font-bold mobile:text-2xl">Luminous Living</div>
                 <div className="home-tag-tagline text-xl mobile:text-base">Luminous help people to find their best will in household. Our products are all made to standard sizes so that you can mix and match them freely.</div>
                 <Link to="/store" onClick={goTop} className="w-fit py-1 px-2 rounded bg-primary text-white text-xl mobile:text-base">Shop now</Link>
@@ -93,7 +93,7 @@ function HomeTag2(){
     return (
         <section className="home-tag flex items-center justify-center my-32 mx-auto w-[80vw] relative mobile:w-full mobile:px-4 mobile:flex-col mobile:gap-4 tablet:w-[90vw]">
             <img src={household2} alt="HouseHold" className="w-full rounded-md" loading="lazy" />
-            <div className="home-tag-content absolute left-0 right-0 bg-white/[.3] backdrop-blur-lg p-8 flex flex-col gap-4 mobile:static mobile:p-0">
+            <div className="home-tag-content absolute left-0 right-0 bg-primary/[.1] backdrop-blur-lg p-8 flex flex-col gap-4 mobile:static mobile:p-0">
                 <div className="home-tag-header text-3xl font-bold mobile:text-2xl">Luminous Living</div>
                 <div className="home-tag-tagline text-xl mobile:text-base">Our products boast standardized sizes, allowing seamless mixing and matching for a personalized touch to your living spaces. Discover your ideal home with Luminous.</div>
                 <Link to="/store" onClick={goTop} className="w-fit py-1 px-2 rounded bg-primary text-white text-xl mobile:text-base">Shop now</Link>
@@ -129,21 +129,21 @@ function HomeReview(){
         <section className="reviews w-[80vw] mx-auto my-32 flex flex-col items-center gap-6 mobile:w-[90vw] tablet:w-[90vw]">
             <div className="reviews-header text-3xl font-semibold">Reviews</div>
             <div className="review-slide flex gap-4 mobile:flex-col tablet:gap-4">
-                    {
-                        reviews.map((review, index) => (
-                            <div className="review bg-white-prim flex flex-col gap-4 p-4 rounded-xl h-fit" key={index}>
-                                <div className="review-header flex gap-3">
-                                    <img src={review.img} alt={review.name} className="w-[50px] rounded-full shadow-med" loading="lazy" />
-                                    <div className="name-job">
-                                        <div className="name text-xl">{review.name}</div>
-                                        <div className="job text-black/[.7]">{review.job}</div>
-                                    </div>
+                {
+                    reviews.map((review, index) => (
+                        <div className="review bg-primary/[.1] flex flex-col gap-4 p-4 rounded-xl h-fit" key={index}>
+                            <div className="review-header flex gap-3">
+                                <img src={review.img} alt={review.name} className="w-[50px] rounded-full shadow-med" loading="lazy" />
+                                <div className="name-job">
+                                    <div className="name text-xl">{review.name}</div>
+                                    <div className="job text-black/[.7]">{review.job}</div>
                                 </div>
-                                <div className="review-text">{review.review}</div>
                             </div>
-                        ))
-                    }
-                </div>
+                            <div className="review-text">{review.review}</div>
+                        </div>
+                    ))
+                }
+            </div>
         </section>
     )
 }
