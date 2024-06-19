@@ -5,7 +5,6 @@ export const AuthContext = createContext()
 export default function AuthProvider({ children }){
     const [token, setToken] = useState(localStorage.getItem("token"))
     const [isLogin, setIsLogin] = useState(null)
-    const [isAdmin, setIsAdmin] = useState(null)
     const [user, setUser] = useState(null)
     const [cart, setCart] = useState(localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [])
 
@@ -14,7 +13,7 @@ export default function AuthProvider({ children }){
     }, [cart])
 
     return (
-        <AuthContext.Provider value={{ token, setToken, isLogin, setIsLogin, isAdmin, setIsAdmin, user, setUser, cart, setCart }}>
+        <AuthContext.Provider value={{ token, setToken, isLogin, setIsLogin, user, setUser, cart, setCart }}>
             { children }
         </AuthContext.Provider>
     )

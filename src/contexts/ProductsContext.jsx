@@ -12,9 +12,9 @@ export default function ProductsProvider({ children }){
             try {
                 const producstAPIEndpoint = import.meta.env.VITE_PRODUCTS_API_ENDPOINT
 
-                const { data: response } = await axios.get(producstAPIEndpoint)
+                const { data } = await axios.get(producstAPIEndpoint)
 
-                setProducts(response.products)
+                setProducts(data.products)
             } catch (error){
                 console.log(error)
             }

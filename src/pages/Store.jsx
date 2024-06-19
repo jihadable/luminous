@@ -68,19 +68,19 @@ function StoreGrid({ products }){
         <section className="store-grid w-[80vw] my-12 mx-auto grid grid-cols-5 gap-4 mobile:w-full mobile:px-4 mobile:grid-cols-2 tablet:grid-cols-4 tablet:w-[90vw]">
             {
                 products &&
-                products.map((item, index) => (
-                    <Link to={`/store/${item.id}`} onClick={goTop} className="product-item flex flex-col rounded-lg bg-white overflow-hidden border-2 border-primary/[.1] hover:border-primary hover:shadow-none" key={index}>
-                        <img src={`${productImagesAPIEndpoint}/${item.img}`} alt={item.name} loading="lazy" />
+                products.map((product, index) => (
+                    <Link to={`/store/${product.id}`} onClick={goTop} className="product flex flex-col rounded-lg bg-white overflow-hidden border-2 border-primary/[.1] hover:border-primary hover:shadow-none" key={index}>
+                        <img src={`${productImagesAPIEndpoint}/${product.img}`} alt={product.name} loading="lazy" />
                         <div className="info p-4 flex flex-col gap-4">
-                            <div className="product-name text-xl font-bold mobile:text-xl tablet:text-xl">{item.name}</div>
-                            <div className="product-price text-xl mobile:text-base tablet:text-base">{`$${item.price}`}</div>
+                            <div className="product-name text-xl font-bold mobile:text-xl tablet:text-xl">{product.name}</div>
+                            <div className="product-price text-xl mobile:text-base tablet:text-base">{`$${product.price}`}</div>
                         </div>
                     </Link>
                 ))
             }
             {
                 !products && 
-                [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => (
+                [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(item => (
                     <ItemSkeleton key={item} />
                 ))
             }
