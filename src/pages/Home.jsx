@@ -1,24 +1,28 @@
 import { Link } from "react-router-dom"
 import bca from "../assets/bca.png"
+import beanBag from "../assets/bean-bag.jpg"
 import bni from "../assets/bni.png"
 import bri from "../assets/bri.png"
 import carlaSofia from "../assets/carla-sofia.jpg"
 import dana from "../assets/dana.png"
 import danielBone from "../assets/daniel-bone.jpg"
 import gopay from "../assets/gopay.png"
+import handBlender from "../assets/hand-blender.jpg"
 import household from "../assets/household.jpg"
 import household2 from "../assets/household2.jpg"
 import johnKean from "../assets/john-kean.jpg"
+import lazySofa from "../assets/lazy-sofa.jpg"
 import linkaja from "../assets/linkaja.png"
 import mandiri from "../assets/mandiri.png"
+import neckPillow from "../assets/neck-pillow.jpg"
 import ovo from "../assets/ovo.png"
 import paypal from "../assets/paypal.png"
 import qris from "../assets/qris.png"
+import sideTable from "../assets/side-table.jpg"
 import spay from "../assets/spay.png"
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
 import goTop from "../components/goTop"
-import { items } from "../components/items"
 
 // home
 export default function Home(){
@@ -55,8 +59,8 @@ function HomeTag(){
             <img src={household} alt="HouseHold" className="w-full rounded-md" loading="lazy" />
             <div className="home-tag-content absolute left-0 right-0 bg-primary/[.1] backdrop-blur-lg p-8 flex flex-col gap-4 mobile:static mobile:p-0">
                 <div className="home-tag-header text-3xl font-bold mobile:text-2xl">Luminous Living</div>
-                <div className="home-tag-tagline text-xl mobile:text-base">Luminous help people to find their best will in household. Our products are all made to standard sizes so that you can mix and match them freely.</div>
-                <Link to="/store" onClick={goTop} className="w-fit py-1 px-2 rounded bg-primary text-white text-xl mobile:text-base">Shop now</Link>
+                <div className="home-tag-tagline text-xl mobile:text-base">Luminous membantu pelanggan menemukan kehendak terbaiknya dalam rumah tangga. Semua produk kami dibuat dengan ukuran standar sehingga Anda dapat memadupadankannya dengan bebas.</div>
+                <Link to="/store" onClick={goTop} className="w-fit py-1 px-2 rounded bg-primary text-white text-xl mobile:text-base">Belanja sekarang</Link>
             </div>
         </section>
     )
@@ -65,23 +69,54 @@ function HomeTag(){
 // home trending now
 export function HomeTrendingNow(){
 
-    const trendingItems = items.filter(item => [2, 5, 11, 12, 21].includes(item.id))
+    const trendingProducts = [
+        {
+            id: "6643655c8d27b91980146f1b",
+            name: "La-Z-Sofa",
+            price: 120,
+            img: lazySofa
+        },
+        {
+            id: "6643655c8d27b91980146f1e",
+            name: "Side Table",
+            price: 150,
+            img: sideTable
+        },
+        {
+            id: "6643655c8d27b91980146f24",
+            name: "Neck Pillow",
+            price: 50,
+            img: neckPillow
+        },
+        {
+            id: "6643655c8d27b91980146f25",
+            name: "Bean Bag",
+            price: 120,
+            img: beanBag
+        },
+        {
+            id: "6643655c8d27b91980146f2e",
+            name: "Hand Blender",
+            price: 215,
+            img: handBlender
+        }
+    ]
 
     return (
         <section className="trending-now w-[80vw] flex flex-col items-center gap-6 my-32 mx-auto mobile:w-full mobile:px-4 tablet:w-[90vw]">
-            <div className="trending-now-header text-3xl font-semibold">Trending Now</div>
+            <div className="trending-now-header text-3xl font-semibold">Produk trending</div>
             <div className="trending-now-items grid grid-cols-5 gap-4 mobile:grid-cols-2 tablet:grid-cols-4">
-                {
-                    trendingItems.map((item, index) => (
-                        <Link to={`/store/${item.id}`} onClick={goTop} className="trending-now-item flex flex-col rounded-lg bg-white overflow-hidden border-2 hover:border-primary hover:shadow-none" key={index}>
-                            <img src={item.img} alt={item.name} loading="lazy" />
-                            <div className="info flex flex-col gap-4 p-4">
-                                <div className="trending-item-name text-xl font-bold mobile:text-xl">{item.name}</div>
-                                <div className="trending-item-price text-xl mobile:text-base">{`$${item.price}`}</div>
-                            </div>
-                        </Link>
-                    ))
-                }
+            {
+                trendingProducts.map((product, index) => (
+                    <Link to={`/store/${product.id}`} onClick={goTop} className="trending-now-item flex flex-col rounded-lg bg-white overflow-hidden border-2 hover:border-primary hover:shadow-none" key={index}>
+                        <img src={product.img} alt={product.name} loading="lazy" />
+                        <div className="info flex flex-col gap-4 p-4">
+                            <div className="trending-item-name text-xl font-bold mobile:text-xl">{product.name}</div>
+                            <div className="trending-item-price text-xl mobile:text-base">{`$${product.price}`}</div>
+                        </div>
+                    </Link>
+                ))
+            }
             </div>
         </section>
     )
@@ -89,14 +124,13 @@ export function HomeTrendingNow(){
 
 // home tag 2
 function HomeTag2(){
-
     return (
         <section className="home-tag flex items-center justify-center my-32 mx-auto w-[80vw] relative mobile:w-full mobile:px-4 mobile:flex-col mobile:gap-4 tablet:w-[90vw]">
             <img src={household2} alt="HouseHold" className="w-full rounded-md" loading="lazy" />
             <div className="home-tag-content absolute left-0 right-0 bg-primary/[.1] backdrop-blur-lg p-8 flex flex-col gap-4 mobile:static mobile:p-0">
                 <div className="home-tag-header text-3xl font-bold mobile:text-2xl">Luminous Living</div>
-                <div className="home-tag-tagline text-xl mobile:text-base">Our products boast standardized sizes, allowing seamless mixing and matching for a personalized touch to your living spaces. Discover your ideal home with Luminous.</div>
-                <Link to="/store" onClick={goTop} className="w-fit py-1 px-2 rounded bg-primary text-white text-xl mobile:text-base">Shop now</Link>
+                <div className="home-tag-tagline text-xl mobile:text-base">Produk kami memiliki ukuran standar, memungkinkan pencampuran dan pencocokan yang mulus untuk sentuhan pribadi pada ruang keluarga Anda. Temukan rumah ideal Anda dengan Luminous.</div>
+                <Link to="/store" onClick={goTop} className="w-fit py-1 px-2 rounded bg-primary text-white text-xl mobile:text-base">Belanja sekarang</Link>
             </div>
         </section>
     )
@@ -107,42 +141,42 @@ function HomeReview(){
     const reviews = [
         {
             name: "John Kean",
-            job: "College Student",
+            job: "Mahasiswa",
             img: johnKean,
-            review: "I am thrilled with my shopping experience at Luminous. The website is user-friendly, and the product quality exceeded my expectations. I'll be back for more!"
+            review: "Saya senang dengan pengalaman berbelanja saya di Luminous. Situs webnya ramah pengguna, dan kualitas produk melebihi ekspektasi saya. Saya akan kembali belanja lagi!"
         },
         {
             name: "Daniel Bone",
-            job: "College Student",
+            job: "Mahasiswa",
             img: danielBone,
-            review: "Luminous truly stands out in the e-commerce world. Their customer service is exceptional, and the variety of products is fantastic. A go-to place for online shopping!"
+            review: "Layanan pelanggan mereka luar biasa, dan variasi produknya luar biasa. Tempat yang tepat untuk belanja online!"
         },
         {
             name: "Carla Sofia",
-            job: "Teacher",
+            job: "Guru",
             img: carlaSofia,
-            review: "Luminous made my online shopping convenient and enjoyable. The speedy delivery and secure payment options give me peace of mind. Highly recommended for all your shopping needs!"
+            review: "Luminous membuat belanja online saya nyaman dan menyenangkan. Pengiriman yang cepat dan opsi pembayaran yang aman memberi saya ketenangan pikiran. Sangat direkomendasikan untuk semua kebutuhan belanja Anda!"
         }
     ]
 
     return (
         <section className="reviews w-[80vw] mx-auto my-32 flex flex-col items-center gap-6 mobile:w-[90vw] tablet:w-[90vw]">
-            <div className="reviews-header text-3xl font-semibold">Reviews</div>
+            <div className="reviews-header text-3xl font-semibold">Review</div>
             <div className="review-slide flex gap-4 mobile:flex-col tablet:gap-4">
-                {
-                    reviews.map((review, index) => (
-                        <div className="review bg-primary/[.1] flex flex-col gap-4 p-4 rounded-xl h-fit" key={index}>
-                            <div className="review-header flex gap-3">
-                                <img src={review.img} alt={review.name} className="w-[50px] rounded-full shadow-med" loading="lazy" />
-                                <div className="name-job">
-                                    <div className="name text-xl">{review.name}</div>
-                                    <div className="job text-black/[.7]">{review.job}</div>
-                                </div>
+            {
+                reviews.map((review, index) => (
+                    <div className="review bg-primary/[.1] flex flex-col gap-4 p-4 rounded-xl h-fit" key={index}>
+                        <div className="review-header flex gap-3">
+                            <img src={review.img} alt={review.name} className="w-[50px] rounded-full shadow-med" loading="lazy" />
+                            <div className="name-job">
+                                <div className="name text-xl">{review.name}</div>
+                                <div className="job text-black/[.7]">{review.job}</div>
                             </div>
-                            <div className="review-text">{review.review}</div>
                         </div>
-                    ))
-                }
+                        <div className="review-text">{review.review}</div>
+                    </div>
+                ))
+            }
             </div>
         </section>
     )
@@ -155,7 +189,7 @@ function Payments(){
 
     return (
         <section className="payments mx-auto my-32 w-[80vw] flex flex-col gap-6 items-center">
-            <div className="payments-header text-3xl font-semibold">Payment methods</div>
+            <div className="payments-header text-3xl font-semibold">Metode pembayaran</div>
             <div className="payments-content flex items-center justify-center flex-wrap gap-4">
             {
                 payments.map((payment, index) => (

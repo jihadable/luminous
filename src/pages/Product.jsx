@@ -41,16 +41,13 @@ function Product(){
         }
 
         setCart(cart => {
-            return [...cart, {
-                ...product, quantity
-            }]
+            return [...cart, {...product, quantity}]
         })
     }
 
     if (product === undefined && products !== null){
         return <NotFound />
     }
-
 
     if (products !== null && product !== undefined && product !== null){
         document.title = `Luminous | ${product ? product.name : "Product"}` 

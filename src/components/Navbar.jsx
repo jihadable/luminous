@@ -35,6 +35,7 @@ function Navbar({ link }){
 
     const handleLogout = () => {
         localStorage.removeItem("token")
+        localStorage.removeItem("cart")
         setIsLogin(false)
         setUser(null)
 
@@ -80,7 +81,7 @@ function Navbar({ link }){
                         <IconChevronDown stroke={1.5} width={16} height={16} />
                     </button>
                     <div className={`menu ${showAccountMenu ? "flex" : "hidden"} flex-col items-end absolute top-[105%] right-0 bg-white rounded-md py-1 border-2 border-primary/[.1]`}>
-                        <Link to={"/account"} className="w-full p-2 px-4 hover:bg-primary/[.1]">Account</Link>
+                        <Link to={"/account"} className="w-full p-2 px-4 hover:bg-primary/[.1]">Akun</Link>
                         <button type="button" className="w-full p-2 px-4 hover:bg-primary/[.1]" onClick={handleLogout}>Logout</button>
                     </div>
                 </div>
@@ -205,7 +206,7 @@ function ShoppingCart({ showShoppingCart, setShowShoppingCart, shoppingCart, sho
                     cart.length > 0 &&
                     <div className="items flex flex-col gap-2">
                     {
-                        [...cart].reverse().map((product, index) => {
+                        [...cart].reverse().map((product, index) => (
                             <div className="item w-full flex gap-2 p-2 bg-white rounded border-2 border-[#ccc]" key={index}>
                                 <div className="item-img flex w-2/5">
                                     <img src={`${imagesAPIEndpoint}/${product.img}`} alt="Item" className="rounded" />
@@ -227,7 +228,7 @@ function ShoppingCart({ showShoppingCart, setShowShoppingCart, shoppingCart, sho
                                     </div>
                                 </div>
                             </div>
-                        })
+                        ))
                     }
                     </div>
                 }
