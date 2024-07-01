@@ -2,12 +2,14 @@ import { IconCash, IconMenu2, IconShoppingCart, IconShoppingCartOff, IconShoppin
 import { useContext, useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import luminousLogo from "../assets/luminous-logo.png"
-import { AuthContext } from "../contexts/AuthContext"
+import { ProductsContext } from "../contexts/ProductsContext"
 import goTop from "./goTop"
 
 function Navbar({ link }){
 
-    const { cart } = useContext(AuthContext)
+    // const { user, setUser, isLogin, setIsLogin } = useContext(AuthContext)
+
+    const { cart } = useContext(ProductsContext)
 
     const [showShoppingCart, setShowShoppingCart] = useState(false)
     const [showMobileMenu, setShowMobileMenu] = useState(false)
@@ -25,7 +27,7 @@ function Navbar({ link }){
     return (
         <nav className="navbar fixed left-0 right-0 top-0 px-[10vw] py-3 flex items-center bg-white justify-between z-50 mobile:p-2 mobile:px-[5%] tablet:px-[5%]">
             <Link to="/" onClick={goTop} className="navbar-logo flex items-center gap-2">
-                <img src={luminousLogo} alt="" className="w-12" />
+                <img src={luminousLogo} alt="Luminous" className="w-12" />
                 <span className="text-[1.3rem]">Luminous</span>
             </Link>
             <div className="navbar-nav flex gap-8 text-lg mobile:hidden">
@@ -64,7 +66,7 @@ function Navbar({ link }){
 
 function ShoppingCart({ showShoppingCart, setShowShoppingCart, shoppingCart, shoppingCartBtn }){
 
-    const { cart, setCart } = useContext(AuthContext)
+    const { cart, setCart } = useContext(ProductsContext)
 
     useEffect(() => {
         document.addEventListener("click", function(e){
@@ -120,6 +122,8 @@ function ShoppingCart({ showShoppingCart, setShowShoppingCart, shoppingCart, sho
         setCart(updatedCartItems)
     }
 
+    const imagesAPIEndpoint = import.meta.env.VITE_PRODUCT_IMAGES_API_ENDPOINT
+
     return (
         <div className={`shopping-cart z-[60] w-[30vw] h-[100vh] flex flex-col absolute top-0 ${showShoppingCart ? "active" : ""} bg-white text-xl mobile:w-full tablet:w-[70vw] tablet:h-[70vh]`} ref={shoppingCart}>
             <div className="header flex items-center justify-between p-2">
@@ -153,7 +157,7 @@ function ShoppingCart({ showShoppingCart, setShowShoppingCart, shoppingCart, sho
                             return (
                                 <div className="item w-full flex gap-2 p-2 bg-white rounded border-2 border-[#ccc]" key={index}>
                                     <div className="item-img flex w-2/5">
-                                        <img src={item.img} alt="Item" className="rounded" />
+                                        <img src={`${imagesAPIEndpoint}/${item.img}`} alt="Item" className="rounded" />
                                     </div>
                                     <div className="item-info w-3/5 h-full flex flex-col justify-between">
                                         <div className="header flex items-center justify-between">

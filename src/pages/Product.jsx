@@ -4,7 +4,6 @@ import { Link, useParams } from "react-router-dom"
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
 import goTop from "../components/goTop"
-import { AuthContext } from "../contexts/AuthContext"
 import { ProductsContext } from "../contexts/ProductsContext"
 import { HomeTrendingNow } from "./Home"
 import NotFound from "./NotFound"
@@ -14,7 +13,7 @@ function Product(){
     const { id } = useParams()
 
     const { products } = useContext(ProductsContext)
-    const { cart, setCart } = useContext(AuthContext)
+    const { cart, setCart } = useContext(ProductsContext)
     
     const [product, setProduct] = useState(null)
     
@@ -54,7 +53,6 @@ function Product(){
 
     if (products !== null && product !== undefined && product !== null){
         document.title = `Luminous | ${product ? product.name : "Product"}` 
-
 
         return (
             <>

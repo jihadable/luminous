@@ -1,19 +1,42 @@
+import axios from "axios"
 import { createContext, useEffect, useState } from "react"
 
 export const AuthContext = createContext()
 
 export default function AuthProvider({ children }){
-    const [token, setToken] = useState(localStorage.getItem("token"))
     const [isLogin, setIsLogin] = useState(null)
     const [user, setUser] = useState(null)
-    const [cart, setCart] = useState(localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [])
 
     useEffect(() => {
-        localStorage.setItem("cart", JSON.stringify(cart))
-    }, [cart])
+        const auth = async() => {
+            const token = localStorage.getItem("token")
+
+            if (!token){
+                return
+            }
+    
+            try {
+                const usersAPIEndpoint = import.meta.env.VITE_USERS_API_ENDPOINT
+    
+                const { data } = await axios.get(usersAPIEndpoint, {
+                    headers: {
+                        "Authorization": "Bearer " + token
+                    }
+                })
+
+                console.log(data)
+            } catch(error){
+                setIsLogin(false)
+                setUser(null)
+                console.log(error)
+            }
+        }
+
+        auth()
+    }, [])
 
     return (
-        <AuthContext.Provider value={{ token, setToken, isLogin, setIsLogin, user, setUser, cart, setCart }}>
+        <AuthContext.Provider value={{ isLogin, setIsLogin, user, setUser }}>
             { children }
         </AuthContext.Provider>
     )
