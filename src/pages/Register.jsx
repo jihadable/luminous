@@ -1,7 +1,7 @@
 import { IconLock, IconMail, IconUserCircle } from "@tabler/icons-react"
 import axios from "axios"
 import { useContext, useRef } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import luminousLogo from "../assets/luminous-logo.png"
 import goTop from "../components/goTop"
 import { AuthContext } from "../contexts/AuthContext"
@@ -10,6 +10,7 @@ function Register(){
     document.title = "Luminous | Register"
 
     const { setIsLogin, setUser } = useContext(AuthContext)
+    const navigate = useNavigate()
 
     const fullnameElement = useRef(null)
     const emailElement = useRef(null)
@@ -45,6 +46,8 @@ function Register(){
             localStorage.setItem("token", data.token)
             setIsLogin(true)
             setUser(data.user)
+
+            navigate("/")
         } catch(error){
             setIsLogin(false)
             localStorage.removeItem("token")

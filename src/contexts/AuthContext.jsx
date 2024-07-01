@@ -12,6 +12,9 @@ export default function AuthProvider({ children }){
             const token = localStorage.getItem("token")
 
             if (!token){
+                setIsLogin(false)
+                setUser(null)
+                
                 return
             }
     
@@ -25,6 +28,8 @@ export default function AuthProvider({ children }){
                 })
 
                 console.log(data)
+                setIsLogin(true)
+                setUser(data.user)
             } catch(error){
                 setIsLogin(false)
                 setUser(null)

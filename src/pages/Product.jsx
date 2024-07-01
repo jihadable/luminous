@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom"
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
 import goTop from "../components/goTop"
+import { AuthContext } from "../contexts/AuthContext"
 import { ProductsContext } from "../contexts/ProductsContext"
 import { HomeTrendingNow } from "./Home"
 import NotFound from "./NotFound"
@@ -12,8 +13,8 @@ function Product(){
 
     const { id } = useParams()
 
-    const { products } = useContext(ProductsContext)
-    const { cart, setCart } = useContext(ProductsContext)
+    const { isLogin } = useContext(AuthContext)
+    const { products, cart, setCart } = useContext(ProductsContext)
     
     const [product, setProduct] = useState(null)
     
@@ -80,6 +81,9 @@ function Product(){
                                 <div>{product.size}</div>
                             </span>
                         </div>
+                    {
+                        isLogin === true &&
+                        <>
                         <div className="bg-black/[.3] h-[1px] w-full" />
                         <div className="product-footer w-full flex items-center justify-between">
                             <span className="add-minus-product select-none">
@@ -89,7 +93,7 @@ function Product(){
                             </span>
                             <span className="product-price  p-2 bg-primary text-white-prim rounded">{`$${product.price * quantity}`}</span>
                         </div>
-                        <div className="product-checkout w-full flex items-center justify-end gap-4">
+                        <div className="w-full flex items-center justify-end gap-4">
                             <div className="add-to-cart flex items-center gap-2 p-2 px-3 bg-white cursor-pointer shadow-med rounded-sm" onClick={addToCart}>
                                 <IconShoppingCartPlus stroke={1.5} />
                                 <span>Add to cart</span>
@@ -99,6 +103,8 @@ function Product(){
                                 <span>Checkout</span>
                             </Link>
                         </div>
+                        </>
+                    }
                     </div>
                 </section>
             }
