@@ -2,8 +2,9 @@ import { useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
-import goTop from "../components/goTop"
 import { ProductsContext } from "../contexts/ProductsContext"
+import { getIdCurrency } from "../utils/getIdCurrency"
+import goTop from "../utils/goTop"
 
 function Store(){
     document.title = "Luminous | Store"
@@ -27,8 +28,8 @@ function StoreSearch(){
         setDisplayedProducts(products)
     }, [products])
 
-    const categories = ["All", "Furniture", "Bedroom", "Kitchen"]
-    const [selectedCategory, setSelectedCategory] = useState("All")
+    const categories = ["Semua", "Furniture", "Kamar tidur", "Dapur", "Elektronik"]
+    const [selectedCategory, setSelectedCategory] = useState("Semua")
     
     const handleSelectCategory = category => {
         setSelectedCategory(category)
@@ -44,7 +45,7 @@ function StoreSearch(){
     return (
         <>
         <div className="store-header w-[90vw] mx-auto flex flex-col items-center gap-4">
-            <header className="text-3xl mt-36 font-semibold">Find your best will</header>
+            <header className="text-3xl mt-36 font-semibold">Temukan barang impian Anda</header>
             <div className="category-value flex items-center flex-wrap gap-4 text-base justify-center mobile:w-[90vw]">
             {
                 categories.map(category => (
@@ -73,7 +74,7 @@ function StoreGrid({ products }){
                         <img src={`${productImagesAPIEndpoint}/${product.img}`} alt={product.name} loading="lazy" />
                         <div className="info p-4 flex flex-col gap-4">
                             <div className="product-name text-xl font-bold mobile:text-xl tablet:text-xl">{product.name}</div>
-                            <div className="product-price text-xl mobile:text-base tablet:text-base">{`$${product.price}`}</div>
+                            <div className="product-price text-xl mobile:text-base tablet:text-base">{getIdCurrency(product.price)}</div>
                         </div>
                     </Link>
                 ))

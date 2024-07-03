@@ -3,9 +3,10 @@ import { useContext, useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
-import goTop from "../components/goTop"
 import { AuthContext } from "../contexts/AuthContext"
 import { ProductsContext } from "../contexts/ProductsContext"
+import { getIdCurrency } from "../utils/getIdCurrency"
+import goTop from "../utils/goTop"
 import { HomeTrendingNow } from "./Home"
 import NotFound from "./NotFound"
 
@@ -66,15 +67,15 @@ function Product(){
                         <div className="product-explanation text-justify">{product.description}</div>
                         <div className="product-shape text-base w-full flex items-center justify-between mobile:justify-between mobile:gap-2">
                             <span className="product-texture rounded-sm p-2 bg-white shadow-med flex flex-col">
-                                <div className="font-bold">Texture</div>
+                                <div className="font-bold">Tekstur:</div>
                                 <div>{product.texture}</div> 
                             </span>
                             <span className="product-weight rounded-sm p-2 bg-white shadow-med flex flex-col">
-                                <div className="font-bold">Weight:</div>
+                                <div className="font-bold">Berat:</div>
                                 <div>{`${product.weight}kg`}</div>
                             </span>
                             <span className="product-size rounded-sm p-2 bg-white shadow-med flex flex-col">
-                                <div className="font-bold">Size:</div>
+                                <div className="font-bold">Ukuran:</div>
                                 <div>{product.size}</div>
                             </span>
                         </div>
@@ -88,12 +89,12 @@ function Product(){
                                 <span className="py-2 px-4 bg-white">{quantity}</span>
                                 <span className="minus-product cursor-pointer py-2 px-4 bg-primary text-white-prim" onClick={() => setQuantity(quantity => quantity + 1)}>+</span>
                             </span>
-                            <span className="product-price  p-2 bg-primary text-white-prim rounded">{`$${product.price * quantity}`}</span>
+                            <span className="product-price  p-2 bg-primary text-white-prim rounded">{getIdCurrency(product.price * quantity)}</span>
                         </div>
                         <div className="w-full flex items-center justify-end gap-4">
                             <div className="add-to-cart flex items-center gap-2 p-2 px-3 bg-white cursor-pointer shadow-med rounded-sm" onClick={addToCart}>
                                 <IconShoppingCartPlus stroke={1.5} />
-                                <span>Add to cart</span>
+                                <span>Tambah ke keranjang</span>
                             </div>
                             <Link to={`/checkout/product/${product.id}`} onClick={goTop} className="checkout flex items-center gap-2 p-2 px-3 text-white-prim cursor-pointer shadow-med bg-primary rounded-sm">
                                 <IconCash stroke={1.5} />

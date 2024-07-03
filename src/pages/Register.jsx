@@ -3,8 +3,8 @@ import axios from "axios"
 import { useContext, useRef } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import luminousLogo from "../assets/luminous-logo.png"
-import goTop from "../components/goTop"
 import { AuthContext } from "../contexts/AuthContext"
+import goTop from "../utils/goTop"
 
 function Register(){
     document.title = "Luminous | Register"

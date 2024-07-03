@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom"
 import luminousLogo from "../assets/luminous-logo.png"
 import { AuthContext } from "../contexts/AuthContext"
 import { ProductsContext } from "../contexts/ProductsContext"
-import goTop from "./goTop"
+import goTop from "../utils/goTop"
 
 function Navbar({ link }){
 
@@ -53,8 +53,8 @@ function Navbar({ link }){
                 <span className="text-[1.3rem]">Luminous</span>
             </Link>
             <div className="navbar-nav flex gap-8 text-lg mobile:hidden">
-                <Link to="/" onClick={goTop} className={`border-b-2 text-xl ${link === "home" ? "border-primary" : "border-white hover:border-primary"}`} >Home</Link>
-                <Link to="/store" onClick={goTop} className={`border-b-2 text-xl ${link === "home" ? "border-white hover:border-primary" : "border-primary"}`} >Store</Link>
+                <Link to={"/"} onClick={goTop} className={`border-b-2 text-xl ${link === "home" ? "border-primary" : "border-white hover:border-primary"}`} >Home</Link>
+                <Link to={"/store"} onClick={goTop} className={`border-b-2 text-xl ${link === "home" ? "border-white hover:border-primary" : "border-primary"}`} >Store</Link>
             </div>
             {
                 (showShoppingCart || showMobileMenu) &&
@@ -80,9 +80,9 @@ function Navbar({ link }){
                         <img src={`${avatarGenerator}name=${user.fullname}`} alt="User" className="w-8 rounded-full" />
                         <IconChevronDown stroke={1.5} width={16} height={16} />
                     </button>
-                    <div className={`menu ${showAccountMenu ? "flex" : "hidden"} flex-col items-end absolute top-[105%] right-0 bg-white rounded-md py-1 border-2 border-primary/[.1]`}>
-                        <Link to={"/account"} className="w-full p-2 px-4 hover:bg-primary/[.1]">Akun</Link>
-                        <button type="button" className="w-full p-2 px-4 hover:bg-primary/[.1]" onClick={handleLogout}>Logout</button>
+                    <div className={`menu ${showAccountMenu ? "flex" : "hidden"} flex-col items-end gap-4 absolute top-[105%] right-0 bg-white rounded-md py-2 px-4 border-2 border-primary/[.1]`}>
+                        <Link to={"/account"} className="w-full border-b-2 border-transparent hover:border-primary">Akun</Link>
+                        <button type="button" className="w-full border-b-2 border-transparent hover:border-primary" onClick={handleLogout}>Logout</button>
                     </div>
                 </div>
                 </>

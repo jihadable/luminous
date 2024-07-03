@@ -22,7 +22,7 @@ import sideTable from "../assets/side-table.jpg"
 import spay from "../assets/spay.png"
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
-import goTop from "../components/goTop"
+import goTop from "../utils/goTop"
 
 // home
 export default function Home(){

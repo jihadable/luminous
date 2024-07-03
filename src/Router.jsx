@@ -8,8 +8,7 @@ import Product from './pages/Product';
 import Register from './pages/Register';
 import Store from "./pages/Store";
 
-function Router(){
-
+export default function Router(){
     return (
         <BrowserRouter>
             <AuthProvider>
@@ -35,5 +34,3 @@ function Router(){
         </BrowserRouter>
     )
 }
-
-export default Router
