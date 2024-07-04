@@ -22,6 +22,7 @@ import sideTable from "../assets/side-table.jpg"
 import spay from "../assets/spay.png"
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
+import { getIdCurrency } from "../utils/getIdCurrency"
 import goTop from "../utils/goTop"
 
 // home
@@ -71,33 +72,33 @@ export function HomeTrendingNow(){
 
     const trendingProducts = [
         {
-            id: "6643655c8d27b91980146f1b",
+            id: "66869f9069e9cbc6160c482c",
             name: "La-Z-Sofa",
-            price: 120,
+            price: 250000,
             img: lazySofa
         },
         {
-            id: "6643655c8d27b91980146f1e",
-            name: "Side Table",
-            price: 150,
+            id: "66869f9069e9cbc6160c482f",
+            name: "Meja Samping",
+            price: 175000,
             img: sideTable
         },
         {
-            id: "6643655c8d27b91980146f24",
-            name: "Neck Pillow",
-            price: 50,
+            id: "66869f9069e9cbc6160c4835",
+            name: "Bantal Leher",
+            price: 50000,
             img: neckPillow
         },
         {
-            id: "6643655c8d27b91980146f25",
-            name: "Bean Bag",
-            price: 120,
+            id: "66869f9069e9cbc6160c4836",
+            name: "Kursi Malas",
+            price: 185000,
             img: beanBag
         },
         {
-            id: "6643655c8d27b91980146f2e",
-            name: "Hand Blender",
-            price: 215,
+            id: "66869f9069e9cbc6160c483f",
+            name: "Blender Genggam",
+            price: 215000,
             img: handBlender
         }
     ]
@@ -112,7 +113,7 @@ export function HomeTrendingNow(){
                         <img src={product.img} alt={product.name} loading="lazy" />
                         <div className="info flex flex-col gap-4 p-4">
                             <div className="trending-item-name text-xl font-bold mobile:text-xl">{product.name}</div>
-                            <div className="trending-item-price text-xl mobile:text-base">{`$${product.price}`}</div>
+                            <div className="trending-item-price text-xl mobile:text-base">{getIdCurrency(product.price)}</div>
                         </div>
                     </Link>
                 ))
@@ -167,7 +168,7 @@ function HomeReview(){
                 reviews.map((review, index) => (
                     <div className="review bg-primary/[.1] flex flex-col gap-4 p-4 rounded-xl h-fit" key={index}>
                         <div className="review-header flex gap-3">
-                            <img src={review.img} alt={review.name} className="w-[50px] rounded-full shadow-med" loading="lazy" />
+                            <img src={review.img} alt={review.name} className="w-[50px] h-fit rounded-full shadow-med" loading="lazy" />
                             <div className="name-job">
                                 <div className="name text-xl">{review.name}</div>
                                 <div className="job text-black/[.7]">{review.job}</div>

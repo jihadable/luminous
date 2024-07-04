@@ -42,7 +42,7 @@ function Product(){
         }
 
         setCart(cart => {
-            return [...cart, {...product, quantity}]
+            return [...cart, {...product, quantity, price: product.price * quantity}]
         })
     }
 

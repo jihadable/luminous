@@ -27,13 +27,12 @@ export default function AuthProvider({ children }){
                     }
                 })
 
-                console.log(data)
                 setIsLogin(true)
                 setUser(data.user)
             } catch(error){
+                localStorage.removeItem("token")
                 setIsLogin(false)
                 setUser(null)
-                console.log(error)
             }
         }
 

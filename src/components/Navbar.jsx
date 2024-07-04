@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom"
 import luminousLogo from "../assets/luminous-logo.png"
 import { AuthContext } from "../contexts/AuthContext"
 import { ProductsContext } from "../contexts/ProductsContext"
+import { getIdCurrency } from "../utils/getIdCurrency"
 import goTop from "../utils/goTop"
 
 function Navbar({ link }){
@@ -24,10 +25,10 @@ function Navbar({ link }){
 
     useEffect(() => {
         document.addEventListener("click", function(e){
-            if (!mobileMenu.current.contains(e.target) && !mobileMenuBtn.current.contains(e.target)){
+            if (!mobileMenu.current?.contains(e.target) && !mobileMenuBtn.current?.contains(e.target)){
                 setShowMobileMenu(false)
             }
-            if (!accountMenuBtn.current.contains(e.target)){
+            if (!accountMenuBtn.current?.contains(e.target)){
                 setShowAccountMenu(false)
             }
         })
@@ -121,7 +122,7 @@ function ShoppingCart({ showShoppingCart, setShowShoppingCart, shoppingCart, sho
 
     useEffect(() => {
         document.addEventListener("click", function(e){
-            if (!shoppingCart.current.contains(e.target) && !shoppingCartBtn.current.contains(e.target)){
+            if (!shoppingCart.current?.contains(e.target) && !shoppingCartBtn.current?.contains(e.target)){
                 setShowShoppingCart(false)
             }
         })
@@ -138,7 +139,7 @@ function ShoppingCart({ showShoppingCart, setShowShoppingCart, shoppingCart, sho
             price += item.price
         })
 
-        return `${price}`
+        return getIdCurrency(price)
     }
 
     function addQuantity(id){
@@ -178,15 +179,15 @@ function ShoppingCart({ showShoppingCart, setShowShoppingCart, shoppingCart, sho
     return (
         <div className={`shopping-cart z-[60] w-[30vw] h-[100vh] flex flex-col absolute top-0 ${showShoppingCart ? "active" : ""} bg-white text-xl mobile:w-full tablet:w-[70vw] tablet:h-[70vh]`} ref={shoppingCart}>
             <div className="header flex items-center justify-between p-2">
-                <div className="info">{`Shopping cart (${cart.length})`}</div>
+                <div className="info">Keranjang ({cart.length})</div>
                 <div className="btns flex gap-2 items-center">
                     {
                         cart.length > 0 &&
-                        <div className="remove-all-btn flex items-center justify-center gap-2 p-1 rounded cursor-pointer bg-red-200" onClick={() => {setCart([])}} title="Empty cart">
+                        <div className="remove-all-btn flex items-center justify-center gap-2 p-1 rounded cursor-pointer bg-red-200" onClick={() => {setCart([])}} title="Kosongkan keranjang">
                             <IconShoppingCartX stroke={1.5} />
                         </div>
                     }
-                    <span className="close-shopping-cart-btn cursor-pointer flex justify-center items-center p-1 rounded hover:bg-hov" onClick={() => setShowShoppingCart(false)} title="Close cart">
+                    <span className="close-shopping-cart-btn cursor-pointer flex justify-center items-center p-1 rounded hover:bg-hov" onClick={() => setShowShoppingCart(false)} title="Tutup">
                         <IconX stroke={1.5} />
                     </span>
                 </div>
@@ -196,8 +197,8 @@ function ShoppingCart({ showShoppingCart, setShowShoppingCart, shoppingCart, sho
                     cart.length === 0 &&
                     <div className="empty-cart flex flex-col items-center gap-2 h-3/4 justify-center">
                         <IconShoppingCartOff stroke={1.5} width={128} height={128} />
-                        <div>Your cart is empty</div>
-                        <Link to={"/store"} onClick={goTop} className="px-2 py-1 bg-primary text-white rounded">Shop now</Link>
+                        <div>Keranjang kosong</div>
+                        <Link to={"/store"} onClick={goTop} className="px-2 py-1 bg-primary text-white rounded">Belanja sekarang</Link>
                     </div>
                 }
                 {
@@ -212,7 +213,7 @@ function ShoppingCart({ showShoppingCart, setShowShoppingCart, shoppingCart, sho
                                 <div className="item-info w-3/5 h-full flex flex-col justify-between">
                                     <div className="header flex items-center justify-between">
                                         <span className="item-name font-bold">{product.name}</span>
-                                        <span className="remove-item-btn flex justify-center items-center cursor-pointer p-1 rounded hover:bg-hov" onClick={() => {removeItem(product.id)}} title="Remove item">
+                                        <span className="remove-item-btn flex justify-center items-center cursor-pointer p-1 rounded hover:bg-hov" onClick={() => {removeItem(product.id)}} title="Hapus">
                                             <IconTrash stroke={1.5} />
                                         </span>
                                     </div>
@@ -222,7 +223,7 @@ function ShoppingCart({ showShoppingCart, setShowShoppingCart, shoppingCart, sho
                                             <span className="px-2 bg-white-prim">{product.quantity}</span>
                                             <span className="minus-item cursor-pointer px-2 bg-primary text-white" onClick={() => addQuantity(product.id)}>+</span>
                                         </span>
-                                        <span className="item-total-price">{`$${product.price}`}</span>
+                                        <span className="item-total-price">{getIdCurrency(product.price)}</span>
                                     </div>
                                 </div>
                             </div>
@@ -235,7 +236,7 @@ function ShoppingCart({ showShoppingCart, setShowShoppingCart, shoppingCart, sho
                 cart.length > 0 &&
                 <div className="footer flex items-center justify-between p-2 mt-2 border-t-2 border-black border-dashed">
                     <span className="total-price">
-                        <p>{`Total: $${sumPrice(cart)}`}</p>
+                        <p>{`Total: ${sumPrice(cart)}`}</p>
                     </span>
                     <Link to={"/checkout"} onClick={goTop} className="p-1 px-2 flex gap-2 items-center rounded bg-primary text-white text-base">
                         <IconCash stroke={1.5} />

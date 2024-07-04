@@ -2,6 +2,7 @@ import { IconLock, IconMail } from "@tabler/icons-react"
 import axios from "axios"
 import { useContext, useRef } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
 import luminousLogo from "../assets/luminous-logo.png"
 import { AuthContext } from "../contexts/AuthContext"
 import goTop from "../utils/goTop"
@@ -27,17 +28,16 @@ function Login(){
                 email, password
             })
 
-            console.log(data)
             localStorage.setItem("token", data.token)
             setIsLogin(true)
             setUser(data.user)
 
             navigate("/")
         } catch(error){
-            setIsLogin(false)
             localStorage.removeItem("token")
+            setIsLogin(false)
             setUser(null)
-            console.log(error)
+            toast.error(error.response.data.message)
         }
     }
 

@@ -2,6 +2,7 @@ import { IconLock, IconMail, IconMapPin, IconPhone, IconUserCircle } from "@tabl
 import axios from "axios"
 import { useContext, useRef } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
 import luminousLogo from "../assets/luminous-logo.png"
 import { AuthContext } from "../contexts/AuthContext"
 import goTop from "../utils/goTop"
@@ -22,6 +23,7 @@ function Register(){
     const handleRegister = async(e) => {
         e.preventDefault()
 
+        const phonePattern = /^08\d{8,13}$/
         const [
             fullname, email, phone, address, password, confirmPassword
         ] = [
@@ -30,11 +32,23 @@ function Register(){
             phoneElement.current.value,
             addressElement.current.value,
             passwordElement.current.value,
-            confirmPasswordElement.current.value,
+            confirmPasswordElement.current.value
         ]
 
+        if (password.length < 8){
+            toast.error("Password harus melebihi 8 karakter")
+
+            return
+        }
+
         if (password !== confirmPassword){
-            console.log("Password tidak sama")
+            toast.error("Konfirmasi password tidak cocok")
+
+            return
+        }
+
+        if (!phonePattern.test(phone)){
+            toast.error("No HP tidak sesuai")
 
             return
         }
@@ -43,20 +57,19 @@ function Register(){
             const usersAPIEndpoint = import.meta.env.VITE_USERS_API_ENDPOINT
 
             const { data } = await axios.post(`${usersAPIEndpoint}/register`, {
-                fullname, email, no_hp: phone, address, password
+                fullname, email, phone, address, password
             })
 
-            console.log(data)
             localStorage.setItem("token", data.token)
             setIsLogin(true)
             setUser(data.user)
 
             navigate("/")
         } catch(error){
-            setIsLogin(false)
             localStorage.removeItem("token")
+            setIsLogin(false)
             setUser(null)
-            console.log(error)
+            toast.error(error.response.data.message)
         }
     }
 

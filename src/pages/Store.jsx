@@ -34,11 +34,11 @@ function StoreSearch(){
     const handleSelectCategory = category => {
         setSelectedCategory(category)
 
-        if (category === "All"){
+        if (category === "Semua"){
             setDisplayedProducts(products)
         }
         else {
-            setDisplayedProducts(products.filter(product => product.category.includes(category.toLowerCase())))
+            setDisplayedProducts(products.filter(product => product.categories.includes(category.toLowerCase())))
         }
     }
 

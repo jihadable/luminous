@@ -1,6 +1,7 @@
 import { IconMail, IconMapPin, IconPhone } from "@tabler/icons-react";
 import axios from "axios";
 import { useContext, useRef } from "react";
+import { toast } from "react-toastify";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { AuthContext } from "../contexts/AuthContext";
@@ -43,7 +44,7 @@ function AccountSection(){
         const address = addressElement.current.value == "" ? null : addressElement.current.value
 
         if (!phonePattern.test(phone)){
-            console.log("no hp tidak valid")
+            toast.error("No HP tidak sesuai")
 
             return
         }
@@ -53,7 +54,7 @@ function AccountSection(){
             const token = localStorage.getItem("token")
 
             const { data } = await axios.patch(usersAPIEndpoint, 
-                { no_hp: phone, address },
+                { phone, address },
                 {
                     headers: {
                         "Authorization": "Bearer " + token
@@ -61,9 +62,10 @@ function AccountSection(){
                 }
             )
 
-            console.log(data)
+            toast.success(data.message)
         } catch(error){
             console.log(error)
+            toast.success(error.response.data.message)
         }
     }
 
@@ -80,11 +82,11 @@ function AccountSection(){
                 </div>
                 <div className="w-full flex items-center gap-2 p-2 rounded-md bg-primary/[.1]">
                     <IconPhone stroke={1.5} />
-                    <input type="text" defaultValue={user.no_hp} className="bg-transparent border-none outline-none" ref={phoneElement} />
+                    <input type="text" defaultValue={user.phone} className="bg-transparent border-none outline-none" required ref={phoneElement} />
                 </div>
                 <div className="w-full flex items-center gap-2 p-2 rounded-md bg-primary/[.1]">
                     <IconMapPin stroke={1.5} />
-                    <input type="text" defaultValue={user.address} className="bg-transparent border-none outline-none" ref={addressElement} />
+                    <input type="text" defaultValue={user.address} className="bg-transparent border-none outline-none" required ref={addressElement} />
                 </div>
                 <button type="button" className="w-full flex items-center justify-center text-white gap-2 p-2 rounded-md bg-primary" onClick={updateUserProfile}>Simpan</button>
             </div>

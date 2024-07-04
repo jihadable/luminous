@@ -1,4 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import "react-toastify/ReactToastify.css";
 import AuthProvider from './contexts/AuthContext';
 import ProductsProvider from './contexts/ProductsContext';
 import Account from './pages/Account';
@@ -13,6 +15,14 @@ export default function Router(){
     return (
         <BrowserRouter>
             <AuthProvider>
+            <ToastContainer 
+            position="top-center"
+            autoClose={750}
+            hideProgressBar
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            draggable />
             <ProductsProvider>
                 <Routes>
                     <Route path="/" exact element={<Home />} />
@@ -20,14 +30,6 @@ export default function Router(){
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/store/:id" element={<Product />} />
-                    {/* <Route path="/checkout/product/:id" element={<ProductOutlet />}>
-                        <Route path="/checkout/product/:id" element={
-                            <Checkout />}
-                        />
-                    </Route>
-                    <Route path="/checkout" element={
-                        <Checkout />}
-                    /> */}
                     <Route path="/account" element={<Account />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
