@@ -1,4 +1,4 @@
-import { IconLock, IconMail, IconUserCircle } from "@tabler/icons-react"
+import { IconLock, IconMail, IconMapPin, IconPhone, IconUserCircle } from "@tabler/icons-react"
 import axios from "axios"
 import { useContext, useRef } from "react"
 import { Link, useNavigate } from "react-router-dom"
@@ -14,6 +14,8 @@ function Register(){
 
     const fullnameElement = useRef(null)
     const emailElement = useRef(null)
+    const phoneElement = useRef(null)
+    const addressElement = useRef(null)
     const passwordElement = useRef(null)
     const confirmPasswordElement = useRef(null)
 
@@ -21,10 +23,12 @@ function Register(){
         e.preventDefault()
 
         const [
-            fullname, email, password, confirmPassword
+            fullname, email, phone, address, password, confirmPassword
         ] = [
             fullnameElement.current.value,
             emailElement.current.value,
+            phoneElement.current.value,
+            addressElement.current.value,
             passwordElement.current.value,
             confirmPasswordElement.current.value,
         ]
@@ -39,7 +43,7 @@ function Register(){
             const usersAPIEndpoint = import.meta.env.VITE_USERS_API_ENDPOINT
 
             const { data } = await axios.post(`${usersAPIEndpoint}/register`, {
-                fullname, email, password
+                fullname, email, no_hp: phone, address, password
             })
 
             console.log(data)
@@ -57,7 +61,7 @@ function Register(){
     }
 
     return (
-        <div className="w-[100vw] min-h-[100vh] flex flex-col gap-4 items-center justify-center bg-primary/[.1]">
+        <div className="min-h-[100vh] flex flex-col gap-4 items-center justify-center py-8 bg-primary/[.1]">
             <header className="flex items-center gap-2">
                 <img src={luminousLogo} alt="Luminous" className="w-14"/>
                 <span className="text-4xl">Luminous</span>
@@ -72,6 +76,14 @@ function Register(){
                     <IconMail stroke={1.5} />
                     <input type="email" placeholder="Email" className="bg-transparent outline-none w-[250px] mobile:w-full" required ref={emailElement} />
                 </div>
+                <div className="form-login-phone relative bg-primary/[.1] p-3 flex items-center gap-3 rounded-lg">
+                    <IconPhone stroke={1.5} />
+                    <input type="text" placeholder="No HP" className="bg-transparent outline-none w-[250px] mobile:w-full" required ref={phoneElement} />
+                </div>
+                <div className="form-login-address relative bg-primary/[.1] p-3 flex items-center gap-3 rounded-lg">
+                    <IconMapPin stroke={1.5} />
+                    <input type="text" placeholder="Alamat" className="bg-transparent outline-none w-[250px] mobile:w-full" required ref={addressElement} />
+                </div>
                 <div className="form-login-password relative bg-primary/[.1] p-3 flex items-center gap-3 rounded-lg">
                     <IconLock stroke={1.5} />
                     <input type="password" placeholder="Password" className="bg-transparent outline-none w-[250px] mobile:w-full" required ref={passwordElement} />
@@ -82,7 +94,7 @@ function Register(){
                 </div>
                 <button type="submit" className="py-2 rounded bg-primary text-white">Register</button>
                 <div className="not-have-account">
-                    Already have an account? <Link to={"/login"} onClick={goTop} className="text-primary">Login</Link>
+                    Sudah punya akun? <Link to={"/login"} onClick={goTop} className="text-primary">Login</Link>
                 </div>
             </form>
         </div>

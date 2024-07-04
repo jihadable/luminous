@@ -91,7 +91,7 @@ function Product(){
                             </span>
                             <span className="product-price  p-2 bg-primary text-white-prim rounded">{getIdCurrency(product.price * quantity)}</span>
                         </div>
-                        <div className="w-full flex items-center justify-end gap-4">
+                        <div className="w-full flex items-center justify-end gap-4 mobile:flex-col mobile:items-end">
                             <div className="add-to-cart flex items-center gap-2 p-2 px-3 bg-white cursor-pointer shadow-med rounded-sm" onClick={addToCart}>
                                 <IconShoppingCartPlus stroke={1.5} />
                                 <span>Tambah ke keranjang</span>

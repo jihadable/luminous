@@ -44,8 +44,6 @@ function Navbar({ link }){
 
     const avatarGenerator = import.meta.env.VITE_AVATAR_GENERATOR
 
-    console.log(isLogin)
-
     return (
         <nav className="navbar fixed left-0 right-0 top-0 px-[10vw] py-3 flex items-center bg-white justify-between z-50 mobile:p-2 mobile:px-[5%] tablet:px-[5%]">
             <Link to="/" onClick={goTop} className="navbar-logo flex items-center gap-2">
@@ -53,8 +51,8 @@ function Navbar({ link }){
                 <span className="text-[1.3rem]">Luminous</span>
             </Link>
             <div className="navbar-nav flex gap-8 text-lg mobile:hidden">
-                <Link to={"/"} onClick={goTop} className={`border-b-2 text-xl ${link === "home" ? "border-primary" : "border-white hover:border-primary"}`} >Home</Link>
-                <Link to={"/store"} onClick={goTop} className={`border-b-2 text-xl ${link === "home" ? "border-white hover:border-primary" : "border-primary"}`} >Store</Link>
+                <Link to={"/"} onClick={goTop} className={`border-b-2 text-xl ${link === "home" ? "border-primary" : "border-white hover:border-primary"}`}>Home</Link>
+                <Link to={"/store"} onClick={goTop} className={`border-b-2 text-xl ${link === "home" ? "border-white hover:border-primary" : "border-primary"}`}>Store</Link>
             </div>
             {
                 (showShoppingCart || showMobileMenu) &&

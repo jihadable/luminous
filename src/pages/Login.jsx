@@ -59,7 +59,7 @@ function Login(){
                 </div>
                 <button type="submit" className="py-2 rounded bg-primary text-white">Login</button>
                 <div className="not-have-account">
-                    Do not have an acoount? <Link to={"/register"} onClick={goTop} className="text-primary">Register</Link>
+                    Belum punya akun? <Link to={"/register"} onClick={goTop} className="text-primary">Register</Link>
                 </div>
             </form>
         </div>

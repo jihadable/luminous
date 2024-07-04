@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AuthProvider from './contexts/AuthContext';
 import ProductsProvider from './contexts/ProductsContext';
+import Account from './pages/Account';
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import NotFound from './pages/NotFound';
@@ -27,6 +28,7 @@ export default function Router(){
                     <Route path="/checkout" element={
                         <Checkout />}
                     /> */}
+                    <Route path="/account" element={<Account />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </ProductsProvider>
