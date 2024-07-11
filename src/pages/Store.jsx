@@ -38,7 +38,7 @@ function StoreSearch(){
             setDisplayedProducts(products)
         }
         else {
-            setDisplayedProducts(products.filter(product => product.categories.includes(category.toLowerCase())))
+            setDisplayedProducts(products.filter(product => product.category === category.toLowerCase()))
         }
     }
 
@@ -70,8 +70,8 @@ function StoreGrid({ products }){
             {
                 products &&
                 products.map((product, index) => (
-                    <Link to={`/store/${product.id}`} onClick={goTop} className="product flex flex-col rounded-lg bg-white overflow-hidden border-2 border-primary/[.1] hover:border-primary hover:shadow-none" key={index}>
-                        <img src={`${productImagesAPIEndpoint}/${product.img}`} alt={product.name} loading="lazy" />
+                    <Link to={`/store/${product.slug}`} onClick={goTop} className="product flex flex-col rounded-lg bg-white overflow-hidden border-2 border-primary/[.1] hover:border-primary hover:shadow-none" key={index}>
+                        <img src={`${productImagesAPIEndpoint}/${product.image}`} alt={product.name} loading="lazy" />
                         <div className="info p-4 flex flex-col gap-4">
                             <div className="product-name text-xl font-bold mobile:text-xl tablet:text-xl">{product.name}</div>
                             <div className="product-price text-xl mobile:text-base tablet:text-base">{getIdCurrency(product.price)}</div>

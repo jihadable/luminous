@@ -12,7 +12,7 @@ import NotFound from "./NotFound"
 
 function Product(){
 
-    const { id } = useParams()
+    const { slug } = useParams()
 
     const { isLogin } = useContext(AuthContext)
     const { products, cart, setCart } = useContext(ProductsContext)
@@ -21,9 +21,9 @@ function Product(){
     
     useEffect(() => {
         if (products !== null){
-            setProduct(products.filter(product => product.id === id)[0])
+            setProduct(products.filter(product => product.slug === slug)[0])
         }
-    }, [id, products])
+    }, [slug, products])
     
     const productImagesAPIEndpoint = import.meta.env.VITE_PRODUCT_IMAGES_API_ENDPOINT
     const [quantity, setQuantity] = useState(1)
@@ -60,7 +60,7 @@ function Product(){
                 product !== null &&
                 <section className="product mt-32 flex w-[80vw] mx-auto gap-2 mobile:w-[90vw] mobile:flex-col mobile:items-center tablet:w-[90vw]">
                     <div className="product-img w-[30vw] h-fit rounded overflow-hidden mobile:w-full tablet:w-[30%]">
-                        <img src={`${productImagesAPIEndpoint}/${product.img}`} alt={product.name} />
+                        <img src={`${productImagesAPIEndpoint}/${product.image}`} alt={product.name} />
                     </div>
                     <div className="product-info bg-primary/[.1] flex flex-col items-center gap-8 p-5 rounded text-xl w-[50vw] h-fit mobile:w-full tablet:w-[70%]">
                         <div className="product-name text-3xl font-semibold">{product.name}</div>

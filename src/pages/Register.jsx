@@ -36,13 +36,13 @@ function Register(){
         ]
 
         if (password.length < 8){
-            toast.error("Password harus melebihi 8 karakter")
+            toast.error("Password harus minimal 8 karakter")
 
             return
         }
 
         if (password !== confirmPassword){
-            toast.error("Konfirmasi password tidak cocok")
+            toast.error("Konfirmasi password tidak sesuai")
 
             return
         }
