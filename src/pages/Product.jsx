@@ -1,12 +1,11 @@
 import { IconCash, IconShoppingCartPlus } from "@tabler/icons-react"
 import { useContext, useEffect, useState } from "react"
-import { Link, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
 import { AuthContext } from "../contexts/AuthContext"
 import { ProductsContext } from "../contexts/ProductsContext"
 import { getIdCurrency } from "../utils/getIdCurrency"
-import goTop from "../utils/goTop"
 import { HomeTrendingNow } from "./Home"
 import NotFound from "./NotFound"
 
@@ -36,7 +35,7 @@ function Product(){
 
     const addToCart = () => {
         for (let cartProduct of cart){
-            if (cartProduct.id === product.id){
+            if (cartProduct.slug === product.slug){
                 return
             }
         }
@@ -96,10 +95,10 @@ function Product(){
                                 <IconShoppingCartPlus stroke={1.5} />
                                 <span>Tambah ke keranjang</span>
                             </div>
-                            <Link to={`/checkout/product/${product.id}`} onClick={goTop} className="checkout flex items-center gap-2 p-2 px-3 text-white-prim cursor-pointer shadow-med bg-primary rounded-sm">
+                            <button className="checkout flex items-center gap-2 p-2 px-3 text-white-prim shadow-med bg-primary rounded-sm">
                                 <IconCash stroke={1.5} />
                                 <span>Checkout</span>
-                            </Link>
+                            </button>
                         </div>
                         </>
                     }

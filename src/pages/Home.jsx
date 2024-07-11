@@ -72,31 +72,31 @@ export function HomeTrendingNow(){
 
     const trendingProducts = [
         {
-            id: "66869f9069e9cbc6160c482c",
+            slug: "08dde626-e4d5-4f23-bd05-7a20c07e9d2d",
             name: "La-Z-Sofa",
             price: 250000,
             img: lazySofa
         },
         {
-            id: "66869f9069e9cbc6160c482f",
+            slug: "9fe692ac-d63d-4672-b16c-f3fb1484ef74",
             name: "Meja Samping",
             price: 175000,
             img: sideTable
         },
         {
-            id: "66869f9069e9cbc6160c4835",
+            slug: "0d13f59b-b680-4ac4-bf51-54024bc7a1c0",
             name: "Bantal Leher",
             price: 50000,
             img: neckPillow
         },
         {
-            id: "66869f9069e9cbc6160c4836",
+            slug: "f84a1beb-30da-42f3-9e22-487344c109c3",
             name: "Kursi Malas",
             price: 185000,
             img: beanBag
         },
         {
-            id: "66869f9069e9cbc6160c483f",
+            slug: "cce44d0b-9e5e-4265-948a-99d8ab841ef0",
             name: "Blender Genggam",
             price: 215000,
             img: handBlender
@@ -109,7 +109,7 @@ export function HomeTrendingNow(){
             <div className="trending-now-items grid grid-cols-5 gap-4 mobile:grid-cols-2 tablet:grid-cols-4">
             {
                 trendingProducts.map((product, index) => (
-                    <Link to={`/store/${product.id}`} onClick={goTop} className="trending-now-item flex flex-col rounded-lg bg-white overflow-hidden border-2 hover:border-primary hover:shadow-none" key={index}>
+                    <Link to={`/store/${product.slug}`} onClick={goTop} className="trending-now-item flex flex-col rounded-lg bg-white overflow-hidden border-2 hover:border-primary hover:shadow-none" key={index}>
                         <img src={product.img} alt={product.name} loading="lazy" />
                         <div className="info flex flex-col gap-4 p-4">
                             <div className="trending-item-name text-xl font-bold mobile:text-xl">{product.name}</div>

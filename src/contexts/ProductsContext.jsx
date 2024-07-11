@@ -1,6 +1,5 @@
 import axios from "axios"
 import { createContext, useEffect, useState } from "react"
-import { toast } from "react-toastify"
 
 export const ProductsContext = createContext()
 
@@ -22,7 +21,7 @@ export default function ProductsProvider({ children }){
 
                 setProducts(data.products)
             } catch (error){
-                toast.error(error.response.data.message)
+                console.log(error)
             }
         }
 

@@ -128,8 +128,8 @@ function ShoppingCart({ showShoppingCart, setShowShoppingCart, shoppingCart, sho
         })
     })
 
-    function removeItem(id){
-        setCart(cartItems => cartItems.filter(cartItem => cartItem.id !== id))
+    function removeItem(slug){
+        setCart(cartItems => cartItems.filter(cartItem => cartItem.slug !== slug))
     }
 
     function sumPrice(array){
@@ -142,9 +142,9 @@ function ShoppingCart({ showShoppingCart, setShowShoppingCart, shoppingCart, sho
         return getIdCurrency(price)
     }
 
-    function addQuantity(id){
+    function addQuantity(slug){
         const updatedCartItems = [...cart].map(cartItem => {
-            if (cartItem.id === id){
+            if (cartItem.slug === slug){
                 let quantity = cartItem.quantity + 1
                 let price = cartItem.price + (cartItem.price / (quantity - 1))
 
@@ -157,9 +157,9 @@ function ShoppingCart({ showShoppingCart, setShowShoppingCart, shoppingCart, sho
         setCart(updatedCartItems)
     }
 
-    function minQuantity(id){
+    function minQuantity(slug){
         const updatedCartItems = [...cart].map(cartItem => {
-            if (cartItem.id === id){
+            if (cartItem.slug === slug){
                 if (cartItem.quantity > 1){
                     let quantity = cartItem.quantity - 1
                     let price = cartItem.price - (cartItem.price / (quantity + 1))
@@ -213,15 +213,15 @@ function ShoppingCart({ showShoppingCart, setShowShoppingCart, shoppingCart, sho
                                 <div className="item-info w-3/5 h-full flex flex-col justify-between">
                                     <div className="header flex items-center justify-between">
                                         <span className="item-name font-bold">{product.name}</span>
-                                        <span className="remove-item-btn flex justify-center items-center cursor-pointer p-1 rounded hover:bg-hov" onClick={() => {removeItem(product.id)}} title="Hapus">
+                                        <span className="remove-item-btn flex justify-center items-center cursor-pointer p-1 rounded hover:bg-hov" onClick={() => {removeItem(product.slug)}} title="Hapus">
                                             <IconTrash stroke={1.5} />
                                         </span>
                                     </div>
                                     <div className="footer flex items-center justify-between">
                                         <span className="add-minus-item select-none">
-                                            <span className="add-item cursor-pointer px-2 bg-primary text-white" onClick={() => minQuantity(product.id)}>-</span>
+                                            <span className="add-item cursor-pointer px-2 bg-primary text-white" onClick={() => minQuantity(product.slug)}>-</span>
                                             <span className="px-2 bg-white-prim">{product.quantity}</span>
-                                            <span className="minus-item cursor-pointer px-2 bg-primary text-white" onClick={() => addQuantity(product.id)}>+</span>
+                                            <span className="minus-item cursor-pointer px-2 bg-primary text-white" onClick={() => addQuantity(product.slug)}>+</span>
                                         </span>
                                         <span className="item-total-price">{getIdCurrency(product.price)}</span>
                                     </div>
@@ -238,10 +238,10 @@ function ShoppingCart({ showShoppingCart, setShowShoppingCart, shoppingCart, sho
                     <span className="total-price">
                         <p>{`Total: ${sumPrice(cart)}`}</p>
                     </span>
-                    <Link to={"/checkout"} onClick={goTop} className="p-1 px-2 flex gap-2 items-center rounded bg-primary text-white text-base">
+                    <button className="p-1 px-2 flex gap-2 items-center rounded bg-primary text-white text-base">
                         <IconCash stroke={1.5} />
                         <span>Checkout</span>
-                    </Link>
+                    </button>
                 </div>
             }
         </div>

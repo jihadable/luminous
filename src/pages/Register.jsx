@@ -1,9 +1,10 @@
 import { IconLock, IconMail, IconMapPin, IconPhone, IconUserCircle } from "@tabler/icons-react"
 import axios from "axios"
-import { useContext, useRef } from "react"
+import { useContext, useRef, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import luminousLogo from "../assets/luminous-logo.png"
+import Loader from "../components/Loader"
 import { AuthContext } from "../contexts/AuthContext"
 import goTop from "../utils/goTop"
 
@@ -12,6 +13,8 @@ function Register(){
 
     const { setIsLogin, setUser } = useContext(AuthContext)
     const navigate = useNavigate()
+
+    const [isLoading, setIsLoading] = useState(false)
 
     const fullnameElement = useRef(null)
     const emailElement = useRef(null)
@@ -54,6 +57,8 @@ function Register(){
         }
 
         try {
+            setIsLoading(true)
+
             const usersAPIEndpoint = import.meta.env.VITE_USERS_API_ENDPOINT
 
             const { data } = await axios.post(`${usersAPIEndpoint}/register`, {
@@ -64,8 +69,10 @@ function Register(){
             setIsLogin(true)
             setUser(data.user)
 
+            setIsLoading(false)
             navigate("/")
         } catch(error){
+            setIsLoading(false)
             localStorage.removeItem("token")
             setIsLogin(false)
             setUser(null)
@@ -105,9 +112,15 @@ function Register(){
                     <IconLock stroke={1.5} />
                     <input type="password" placeholder="Confirm password" className="bg-transparent outline-none w-[250px] mobile:w-full" required ref={confirmPasswordElement} />
                 </div>
-                <button type="submit" className="py-2 rounded bg-primary text-white">Register</button>
+                {
+                    isLoading ?
+                    <div className="py-2 rounded bg-primary text-white flex items-center justify-center">
+                        <Loader width={24} height={24} />
+                    </div> :
+                    <button type="submit" className="py-2 rounded bg-primary text-white">Register</button>
+                }
                 <div className="not-have-account">
-                    Sudah punya akun? <Link to={"/login"} onClick={goTop} className="text-primary">Login</Link>
+                    Sudah punya akun? <Link to={"/login"} onClick={goTop} className="text-primary hover:underline">Login</Link>
                 </div>
             </form>
         </div>
