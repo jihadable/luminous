@@ -1,8 +1,9 @@
 import { IconMail, IconMapPin, IconPhone } from "@tabler/icons-react";
 import axios from "axios";
-import { useContext, useRef } from "react";
+import { useContext, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import Footer from "../components/Footer";
+import Loader from "../components/Loader";
 import Navbar from "../components/Navbar";
 import { AuthContext } from "../contexts/AuthContext";
 import NotFound from "./NotFound";
@@ -35,6 +36,8 @@ function AccountSection(){
     const { user } = useContext(AuthContext)
     const avatarGenerator = import.meta.env.VITE_AVATAR_GENERATOR
 
+    const [isLoading, setIsLoading] = useState(false)
+
     const phoneElement = useRef(null)
     const addressElement = useRef(null)
 
@@ -50,6 +53,8 @@ function AccountSection(){
         }
 
         try {
+            setIsLoading(true)
+
             const usersAPIEndpoint = import.meta.env.VITE_USERS_API_ENDPOINT
             const token = localStorage.getItem("token")
 
@@ -62,8 +67,10 @@ function AccountSection(){
                 }
             )
 
+            setIsLoading(false)
             toast.success(data.message)
         } catch(error){
+            setIsLoading(false)
             console.log(error)
             toast.success(error.response.data.message)
         }
@@ -88,7 +95,13 @@ function AccountSection(){
                     <IconMapPin stroke={1.5} />
                     <input type="text" defaultValue={user.address} className="bg-transparent border-none outline-none" required ref={addressElement} />
                 </div>
-                <button type="button" className="w-full flex items-center justify-center text-white gap-2 p-2 rounded-md bg-primary" onClick={updateUserProfile}>Simpan</button>
+                {
+                    isLoading ?
+                    <div className="w-full flex items-center justify-center text-white gap-2 p-2 rounded-md bg-primary">
+                        <Loader width={24} height={24} />
+                    </div> :
+                    <button type="button" className="w-full flex items-center justify-center text-white gap-2 p-2 rounded-md bg-primary" onClick={updateUserProfile}>Simpan</button>
+                }
             </div>
         </section>
     )
