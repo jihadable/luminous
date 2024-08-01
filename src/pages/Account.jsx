@@ -1,4 +1,4 @@
-import { IconMail, IconMapPin, IconPhone } from "@tabler/icons-react";
+import { IconMail, IconMapPin, IconPhone, IconUserCircle } from "@tabler/icons-react";
 import axios from "axios";
 import { useContext, useRef, useState } from "react";
 import { toast } from "react-toastify";
@@ -33,18 +33,26 @@ export default function Account(){
 
 function AccountSection(){
 
-    const { user } = useContext(AuthContext)
+    const { user, setUser } = useContext(AuthContext)
     const avatarGenerator = import.meta.env.VITE_AVATAR_GENERATOR
 
     const [isLoading, setIsLoading] = useState(false)
 
+    const fullnameElement = useRef(null)
     const phoneElement = useRef(null)
     const addressElement = useRef(null)
 
     const updateUserProfile = async() => {
+        const fullname = fullnameElement.current.value
         const phonePattern = /^08\d{8,13}$/
-        const phone = phoneElement.current.value == "" ? null : phoneElement.current.value
-        const address = addressElement.current.value == "" ? null : addressElement.current.value
+        const phone = phoneElement.current.value
+        const address = addressElement.current.value
+
+        if (fullname === "" || phone === "" || address === ""){
+            toast.error("Masih ada kolom yang belum diisi!")
+
+            return
+        }
 
         if (!phonePattern.test(phone)){
             toast.error("No HP tidak sesuai")
@@ -59,7 +67,7 @@ function AccountSection(){
             const token = localStorage.getItem("token")
 
             const { data } = await axios.patch(usersAPIEndpoint, 
-                { phone, address },
+                { fullname, phone, address },
                 {
                     headers: {
                         "Authorization": "Bearer " + token
@@ -67,34 +75,37 @@ function AccountSection(){
                 }
             )
 
+            setUser({...user, fullname, phone, address})
             setIsLoading(false)
             toast.success(data.message)
         } catch(error){
             setIsLoading(false)
-            console.log(error)
             toast.success(error.response.data.message)
         }
     }
 
     return (
-        <section className="account-section w-[80vw] flex flex-col items-center gap-6 my-32 mx-auto mobile:w-full mobile:px-4 tablet:w-[90vw]">
-            <div className="top flex flex-col items-center gap-2">
-                <img src={`${avatarGenerator}name=${user.fullname}`} alt="Akun" className="w-36 rounded-full" />
-                <div className="font-bold text-xl">{user.fullname}</div>
+        <section className="account-section w-[80vw] flex gap-4 my-32 mx-auto mobile:w-full mobile:flex-col mobile:px-4 tablet:w-[90vw]">
+            <div className="img flex items-center justify-center">
+                <img src={`${avatarGenerator}name=${user.fullname}`} alt="Akun" className="w-96 rounded-full mobile:w-3/4" />
             </div>
-            <div className="bottom flex flex-col items-center gap-2">
+            <div className="desc flex flex-col items-center gap-2 w-full">
+                <label className="w-full flex items-center gap-2 p-2 rounded-md bg-primary/[.1]">
+                    <IconUserCircle stroke={1.5} />
+                    <input type="text" defaultValue={user.fullname} placeholder="Nama Lengkap" className="bg-transparent border-none outline-none" required ref={fullnameElement} />
+                </label>
                 <div className="w-full flex items-center gap-2 p-2 rounded-md bg-primary/[.1]">
                     <IconMail stroke={1.5} />
                     <span>{user.email}</span>
                 </div>
-                <div className="w-full flex items-center gap-2 p-2 rounded-md bg-primary/[.1]">
+                <label className="w-full flex items-center gap-2 p-2 rounded-md bg-primary/[.1]">
                     <IconPhone stroke={1.5} />
-                    <input type="text" defaultValue={user.phone} className="bg-transparent border-none outline-none" required ref={phoneElement} />
-                </div>
-                <div className="w-full flex items-center gap-2 p-2 rounded-md bg-primary/[.1]">
+                    <input type="text" defaultValue={user.phone} placeholder="No HP" className="bg-transparent border-none outline-none" required ref={phoneElement} />
+                </label>
+                <label className="w-full flex items-center gap-2 p-2 rounded-md bg-primary/[.1]">
                     <IconMapPin stroke={1.5} />
-                    <input type="text" defaultValue={user.address} className="bg-transparent border-none outline-none" required ref={addressElement} />
-                </div>
+                    <input type="text" defaultValue={user.address} placeholder="Alamat" className="bg-transparent border-none outline-none" required ref={addressElement} />
+                </label>
                 {
                     isLoading ?
                     <div className="w-full flex items-center justify-center text-white gap-2 p-2 rounded-md bg-primary">
