@@ -50,7 +50,7 @@ function Product(){
     }
 
     if (products !== null && product !== undefined && product !== null){
-        document.title = `Luminous | ${product ? product.name : "Product"}` 
+        document.title = `Luminous | ${product ? product.name : "Produk"}` 
 
         return (
             <>
