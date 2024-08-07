@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/ReactToastify.css";
 import AuthProvider from './contexts/AuthContext';
+import CartProductsProvider from './contexts/CartProductsContext';
 import ProductsProvider from './contexts/ProductsContext';
 import Account from './pages/Account';
 import Home from "./pages/Home";
@@ -15,6 +16,8 @@ export default function Router(){
     return (
         <BrowserRouter>
             <AuthProvider>
+            <ProductsProvider>
+            <CartProductsProvider>
             <ToastContainer 
             position="top-center"
             autoClose={750}
@@ -23,7 +26,6 @@ export default function Router(){
             closeOnClick
             rtl={false}
             draggable />
-            <ProductsProvider>
                 <Routes>
                     <Route path="/" exact element={<Home />} />
                     <Route path="/store" element={<Store />} />
@@ -33,6 +35,7 @@ export default function Router(){
                     <Route path="/account" element={<Account />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
+            </CartProductsProvider>
             </ProductsProvider>
             </AuthProvider>
         </BrowserRouter>

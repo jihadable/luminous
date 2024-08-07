@@ -1,16 +1,19 @@
 import { IconCash, IconChevronDown, IconMenu2, IconShoppingCart, IconShoppingCartOff, IconShoppingCartX, IconTrash, IconX } from "@tabler/icons-react"
+import axios from "axios"
 import { useContext, useEffect, useRef, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
 import luminousLogo from "../assets/luminous-logo.png"
 import { AuthContext } from "../contexts/AuthContext"
-import { ProductsContext } from "../contexts/ProductsContext"
+import { CartProductsContext } from "../contexts/CartProductsContext"
 import { getIdCurrency } from "../utils/getIdCurrency"
 import goTop from "../utils/goTop"
+import Loader from "./Loader"
 
 function Navbar({ link }){
 
     const { user, setUser, isLogin, setIsLogin } = useContext(AuthContext)
-    const { cart } = useContext(ProductsContext)
+    const { cartProducts, setCartProducts } = useContext(CartProductsContext)
     const navigate = useNavigate()
 
     const [showShoppingCart, setShowShoppingCart] = useState(false)
@@ -36,9 +39,9 @@ function Navbar({ link }){
 
     const handleLogout = () => {
         localStorage.removeItem("token")
-        localStorage.removeItem("cart")
         setIsLogin(false)
         setUser(null)
+        setCartProducts(null)
 
         navigate("/")
     }
@@ -70,8 +73,9 @@ function Navbar({ link }){
                 <button type="button" className="shopping-cart-btn flex justify-center items-center relative p-1 rounded hover:bg-[rgb(0,0,0,.1)]" onClick={() => {setShowShoppingCart(!showShoppingCart)}} ref={shoppingCartBtn}>
                     <IconShoppingCart stroke={1.5} />
                 {
-                    cart.length > 0 &&
-                    <div className="cart-notify absolute flex justify-center items-center -top-2 -right-2 px-2 py-0 rounded-full text-white-prim text-sm bg-red-500">{cart.length}</div>
+                    cartProducts !== null &&
+                    cartProducts.length > 0 &&
+                    <div className="cart-notify absolute flex justify-center items-center -top-2 -right-2 px-2 py-0 rounded-full text-white-prim text-sm bg-red-500">{cartProducts.length}</div>
                 }
                 </button>
                 <div className="flex relative mobile:hidden">
@@ -118,7 +122,8 @@ function Navbar({ link }){
 
 function ShoppingCart({ showShoppingCart, setShowShoppingCart, shoppingCart, shoppingCartBtn }){
 
-    const { cart, setCart } = useContext(ProductsContext)
+    const { cartProducts, setCartProducts } = useContext(CartProductsContext)
+    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
         document.addEventListener("click", function(e){
@@ -128,73 +133,123 @@ function ShoppingCart({ showShoppingCart, setShowShoppingCart, shoppingCart, sho
         })
     })
 
-    function removeItem(slug){
-        setCart(cartItems => cartItems.filter(cartItem => cartItem.slug !== slug))
-    }
+    const removeCartProduct = async(product_id) => {
+        try {
+            setIsLoading(true)
+            const cartProductsAPIEndpoint = import.meta.env.VITE_CART_PRODUCTS_API_ENDPOINT
+            const token = localStorage.getItem("token")
 
-    function sumPrice(array){
-        let price = 0
-
-        array.forEach(function(item){
-            price += item.price
-        })
-
-        return getIdCurrency(price)
-    }
-
-    function addQuantity(slug){
-        const updatedCartItems = [...cart].map(cartItem => {
-            if (cartItem.slug === slug){
-                let quantity = cartItem.quantity + 1
-                let price = cartItem.price + (cartItem.price / (quantity - 1))
-
-                return {...cartItem, quantity: quantity, price: price}
-            }
-
-            return cartItem
-        })
-
-        setCart(updatedCartItems)
-    }
-
-    function minQuantity(slug){
-        const updatedCartItems = [...cart].map(cartItem => {
-            if (cartItem.slug === slug){
-                if (cartItem.quantity > 1){
-                    let quantity = cartItem.quantity - 1
-                    let price = cartItem.price - (cartItem.price / (quantity + 1))
-
-                    return {...cartItem, quantity: quantity, price: price}
+            await axios.delete(`${cartProductsAPIEndpoint}/${product_id}`, {
+                headers: {
+                    "Authorization": "Bearer " + token
                 }
-            }
+            })
 
-            return cartItem
+            setCartProducts(cartProducts.filter(cartProduct => cartProduct.product.id !== product_id))
+            setIsLoading(false)
+        } catch (error) {
+            setIsLoading(false)
+            toast.error("Gagal menghapus produk dari keranjang")
+        }
+    }
+    
+    const removeAllProductsFromCartProducts = async() => {
+        try {
+            setIsLoading(true)
+            const cartProductsAPIEndpoint = import.meta.env.VITE_CART_PRODUCTS_API_ENDPOINT
+            const token = localStorage.getItem("token")
+            
+            await axios.delete(cartProductsAPIEndpoint, {
+                headers: {
+                    "Authorization": "Bearer " + token
+                }
+            })
+            
+            setCartProducts([])
+            setIsLoading(false)
+        } catch (error) {
+            setIsLoading(false)
+            toast.error("Gagal menghapus semua produk dari keranjang")
+        }
+    }
+
+    const getTotalPrice = () => {
+        let totalPrice = 0
+
+        cartProducts.forEach(({ product }) => {
+            totalPrice += product.price
         })
 
-        setCart(updatedCartItems)
+        return getIdCurrency(totalPrice)
+    }
+
+    function addQuantity(product_id){
+        const updatedCartProducts = [...cartProducts].map(cartProduct => {
+            const product = cartProduct.product
+
+            if (product.id === product_id){
+                let quantity = product.quantity + 1
+                let price = product.price + (product.price / (quantity - 1))
+
+                return {...cartProduct, product: {...product, quantity, price}}
+            }
+
+            return cartProduct
+        })
+
+        setCartProducts(updatedCartProducts)
+    }
+
+    function minQuantity(product_id){
+        const updatedCartProducts = [...cartProducts].map(cartProduct => {
+            const product = cartProduct.product
+
+            if (product.id === product_id && product.quantity > 1){
+                let quantity = product.quantity - 1
+                let price = product.price - (product.price / (quantity + 1))
+
+                return {...cartProduct, product: {...product, quantity, price}}
+            }
+
+            return cartProduct
+        })
+
+        setCartProducts(updatedCartProducts)
     }
 
     const imagesAPIEndpoint = import.meta.env.VITE_PRODUCT_IMAGES_API_ENDPOINT
 
     return (
         <div className={`shopping-cart z-[60] w-[30vw] h-[100vh] flex flex-col absolute top-0 ${showShoppingCart ? "active" : ""} bg-white text-xl mobile:w-full tablet:w-[70vw] tablet:h-[70vh]`} ref={shoppingCart}>
+        {
+            cartProducts !== null &&
+            <>
             <div className="header flex items-center justify-between p-2">
-                <div className="info">Keranjang ({cart.length})</div>
+                <div className="info">Keranjang ({cartProducts.length})</div>
                 <div className="btns flex gap-2 items-center">
                     {
-                        cart.length > 0 &&
-                        <div className="remove-all-btn flex items-center justify-center gap-2 p-1 rounded cursor-pointer bg-red-200" onClick={() => {setCart([])}} title="Kosongkan keranjang">
-                            <IconShoppingCartX stroke={1.5} />
-                        </div>
+                        cartProducts.length > 0 &&
+                        <>
+                        {
+                            isLoading ?
+                            <button type="button" className="flex items-center justify-center gap-2 p-1 rounded">
+                                <Loader width={24} height={24} />
+                            </button> :
+                            <div className="remove-all-btn flex items-center justify-center gap-2 p-1 rounded cursor-pointer bg-red-200" onClick={removeAllProductsFromCartProducts} title="Kosongkan keranjang">
+                                <IconShoppingCartX stroke={1.5} />
+                            </div>
+                        }
+                        
+                        </>
                     }
                     <span className="close-shopping-cart-btn cursor-pointer flex justify-center items-center p-1 rounded hover:bg-hov" onClick={() => setShowShoppingCart(false)} title="Tutup">
                         <IconX stroke={1.5} />
                     </span>
                 </div>
             </div>
-            <div className={`content flex flex-1 ${cart.length > 0 ? "overflow-y-auto scrollbar-hide p-2" : "justify-center items-center"}`}>
+            <div className={`content flex flex-1 ${cartProducts.length > 0 ? "overflow-y-auto scrollbar-hide p-2" : "justify-center items-center"}`}>
                 {
-                    cart.length === 0 &&
+                    cartProducts.length === 0 &&
                     <div className="empty-cart flex flex-col items-center gap-2 h-3/4 justify-center">
                         <IconShoppingCartOff stroke={1.5} width={128} height={128} />
                         <div>Keranjang kosong</div>
@@ -202,10 +257,10 @@ function ShoppingCart({ showShoppingCart, setShowShoppingCart, shoppingCart, sho
                     </div>
                 }
                 {
-                    cart.length > 0 &&
+                    cartProducts.length > 0 &&
                     <div className="items flex flex-col gap-2">
                     {
-                        [...cart].reverse().map((product, index) => (
+                        cartProducts.map(({ product }, index) => (
                             <div className="item w-full flex gap-2 p-2 bg-white rounded border-2 border-[#ccc]" key={index}>
                                 <div className="item-img flex w-2/5">
                                     <img src={`${imagesAPIEndpoint}/${product.image}`} alt="Item" className="rounded" />
@@ -213,15 +268,21 @@ function ShoppingCart({ showShoppingCart, setShowShoppingCart, shoppingCart, sho
                                 <div className="item-info w-3/5 h-full flex flex-col justify-between">
                                     <div className="header flex items-center justify-between">
                                         <span className="item-name font-bold">{product.name}</span>
-                                        <span className="remove-item-btn flex justify-center items-center cursor-pointer p-1 rounded hover:bg-hov" onClick={() => {removeItem(product.slug)}} title="Hapus">
+                                    {
+                                        isLoading ?
+                                        <button type="button" className="flex justify-center items-center p-1 rounded">
+                                            <Loader width={24} height={24} />
+                                        </button> :
+                                        <button type="button" className="remove-item-btn flex justify-center items-center cursor-pointer p-1 rounded hover:bg-hov" onClick={() => {removeCartProduct(product.id)}} title="Hapus">
                                             <IconTrash stroke={1.5} />
-                                        </span>
+                                        </button>
+                                    }
                                     </div>
                                     <div className="footer flex items-center justify-between">
                                         <span className="add-minus-item select-none">
-                                            <span className="add-item cursor-pointer px-2 bg-primary text-white" onClick={() => minQuantity(product.slug)}>-</span>
+                                            <span className="add-item cursor-pointer px-2 bg-primary text-white" onClick={() => minQuantity(product.id)}>-</span>
                                             <span className="px-2 bg-white-prim">{product.quantity}</span>
-                                            <span className="minus-item cursor-pointer px-2 bg-primary text-white" onClick={() => addQuantity(product.slug)}>+</span>
+                                            <span className="minus-item cursor-pointer px-2 bg-primary text-white" onClick={() => addQuantity(product.id)}>+</span>
                                         </span>
                                         <span className="item-total-price">{getIdCurrency(product.price)}</span>
                                     </div>
@@ -233,10 +294,10 @@ function ShoppingCart({ showShoppingCart, setShowShoppingCart, shoppingCart, sho
                 }
             </div>
             {
-                cart.length > 0 &&
+                cartProducts.length > 0 &&
                 <div className="footer flex items-center justify-between p-2 mt-2 border-t-2 border-black border-dashed">
                     <span className="total-price">
-                        <p>{`Total: ${sumPrice(cart)}`}</p>
+                        <p>Total: {getTotalPrice()}</p>
                     </span>
                     <button className="p-1 px-2 flex gap-2 items-center rounded bg-primary text-white text-base">
                         <IconCash stroke={1.5} />
@@ -244,6 +305,8 @@ function ShoppingCart({ showShoppingCart, setShowShoppingCart, shoppingCart, sho
                     </button>
                 </div>
             }
+            </>
+        }
         </div>
     )
 }

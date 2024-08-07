@@ -72,31 +72,31 @@ export function HomeTrendingNow(){
 
     const trendingProducts = [
         {
-            slug: "ae7ac6d0-955c-4a0d-b3f8-1fbe0729ed36",
+            slug: "a3495264-134d-4050-a767-84d1a8a1130f",
             name: "La-Z-Sofa",
             price: 250000,
             img: lazySofa
         },
         {
-            slug: "a49ecf6e-f76e-4059-8151-d69a20b008d7",
+            slug: "6890a820-b709-4eb1-91b4-e42e6b8ee9d7",
             name: "Meja Samping",
             price: 175000,
             img: sideTable
         },
         {
-            slug: "5a569cb6-fc3f-46a2-8b20-bbe8c173865b",
+            slug: "4d7b95b9-ba40-4ede-9d24-a58d2ef37b5d",
             name: "Bantal Leher",
             price: 50000,
             img: neckPillow
         },
         {
-            slug: "01895ec9-ddc0-40a6-b00b-c5b315b69067",
+            slug: "7b34e99a-7489-4e25-8b53-14f23620ce88",
             name: "Kursi Malas",
             price: 185000,
             img: beanBag
         },
         {
-            slug: "42f18ccd-dc20-443e-9f90-abea0f2bd37b",
+            slug: "3094f2eb-e81a-4d02-a31f-e97a0e2233fc",
             name: "Blender Genggam",
             price: 215000,
             img: handBlender
