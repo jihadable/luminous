@@ -1,28 +1,22 @@
 import { Link } from "react-router-dom"
 import bca from "../assets/bca.png"
-import beanBag from "../assets/bean-bag.jpg"
 import bni from "../assets/bni.png"
 import bri from "../assets/bri.png"
 import carlaSofia from "../assets/carla-sofia.jpg"
 import dana from "../assets/dana.png"
 import danielBone from "../assets/daniel-bone.jpg"
 import gopay from "../assets/gopay.png"
-import handBlender from "../assets/hand-blender.jpg"
 import household from "../assets/household.jpg"
 import household2 from "../assets/household2.jpg"
 import johnKean from "../assets/john-kean.jpg"
-import lazySofa from "../assets/lazy-sofa.jpg"
 import linkaja from "../assets/linkaja.png"
 import mandiri from "../assets/mandiri.png"
-import neckPillow from "../assets/neck-pillow.jpg"
 import ovo from "../assets/ovo.png"
 import paypal from "../assets/paypal.png"
 import qris from "../assets/qris.png"
-import sideTable from "../assets/side-table.jpg"
 import spay from "../assets/spay.png"
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
-import { getIdCurrency } from "../utils/getIdCurrency"
 import goTop from "../utils/goTop"
 
 // home
@@ -32,9 +26,8 @@ export default function Home(){
             <Navbar link="home" />
             <HomeHeader />
             <HomeTag />
-            <HomeTrendingNow />
             <HomeTag2 />
-            <HomeReview />
+            {/* <HomeReview /> */}
             <Payments />
             <Footer />
         </>
@@ -60,64 +53,8 @@ function HomeTag(){
             <img src={household} alt="HouseHold" className="w-full rounded-md" loading="lazy" />
             <div className="home-tag-content absolute left-0 right-0 bg-primary/[.1] backdrop-blur-lg p-8 flex flex-col gap-4 mobile:static mobile:p-0">
                 <div className="home-tag-header text-3xl font-bold mobile:text-2xl">Luminous Living</div>
-                <div className="home-tag-tagline text-xl mobile:text-base">Luminous membantu pelanggan menemukan kehendak terbaiknya dalam rumah tangga. Semua produk kami dibuat dengan ukuran standar sehingga Anda dapat memadupadankannya dengan bebas.</div>
-                <Link to="/store" onClick={goTop} className="w-fit py-1 px-2 rounded bg-primary text-white text-xl mobile:text-base">Belanja sekarang</Link>
-            </div>
-        </section>
-    )
-}
-
-// home trending now
-export function HomeTrendingNow(){
-
-    const trendingProducts = [
-        {
-            slug: "a3495264-134d-4050-a767-84d1a8a1130f",
-            name: "La-Z-Sofa",
-            price: 250000,
-            img: lazySofa
-        },
-        {
-            slug: "6890a820-b709-4eb1-91b4-e42e6b8ee9d7",
-            name: "Meja Samping",
-            price: 175000,
-            img: sideTable
-        },
-        {
-            slug: "4d7b95b9-ba40-4ede-9d24-a58d2ef37b5d",
-            name: "Bantal Leher",
-            price: 50000,
-            img: neckPillow
-        },
-        {
-            slug: "7b34e99a-7489-4e25-8b53-14f23620ce88",
-            name: "Kursi Malas",
-            price: 185000,
-            img: beanBag
-        },
-        {
-            slug: "3094f2eb-e81a-4d02-a31f-e97a0e2233fc",
-            name: "Blender Genggam",
-            price: 215000,
-            img: handBlender
-        }
-    ]
-
-    return (
-        <section className="trending-now w-[80vw] flex flex-col items-center gap-6 my-32 mx-auto mobile:w-full mobile:px-4 tablet:w-[90vw]">
-            <div className="trending-now-header text-3xl font-semibold">Produk trending</div>
-            <div className="trending-now-items grid grid-cols-5 gap-4 mobile:grid-cols-2 tablet:grid-cols-4">
-            {
-                trendingProducts.map((product, index) => (
-                    <Link to={`/store/${product.slug}`} onClick={goTop} className="trending-now-item flex flex-col rounded-lg bg-white overflow-hidden border-2 hover:border-primary hover:shadow-none" key={index}>
-                        <img src={product.img} alt={product.name} loading="lazy" />
-                        <div className="info flex flex-col gap-4 p-4">
-                            <div className="trending-item-name text-xl font-bold mobile:text-xl">{product.name}</div>
-                            <div className="trending-item-price text-xl mobile:text-base">{getIdCurrency(product.price)}</div>
-                        </div>
-                    </Link>
-                ))
-            }
+                <div className="home-tag-tagline text-xl mobile:text-base">Luminous help people to find their best will in household. Our products are all made to standard sizes so that you can mix and match them freely</div>
+                <Link to="/store" onClick={goTop} className="w-fit py-1 px-2 rounded bg-primary text-white text-xl mobile:text-base">Shop now</Link>
             </div>
         </section>
     )
@@ -130,8 +67,8 @@ function HomeTag2(){
             <img src={household2} alt="HouseHold" className="w-full rounded-md" loading="lazy" />
             <div className="home-tag-content absolute left-0 right-0 bg-primary/[.1] backdrop-blur-lg p-8 flex flex-col gap-4 mobile:static mobile:p-0">
                 <div className="home-tag-header text-3xl font-bold mobile:text-2xl">Luminous Living</div>
-                <div className="home-tag-tagline text-xl mobile:text-base">Produk kami memiliki ukuran standar, memungkinkan pencampuran dan pencocokan yang mulus untuk sentuhan pribadi pada ruang keluarga Anda. Temukan rumah ideal Anda dengan Luminous.</div>
-                <Link to="/store" onClick={goTop} className="w-fit py-1 px-2 rounded bg-primary text-white text-xl mobile:text-base">Belanja sekarang</Link>
+                <div className="home-tag-tagline text-xl mobile:text-base">Our products boast standardized sizes, allowing seamless mixing and matching for a personalized touch to your living spaces. Discover your ideal home with Luminous</div>
+                <Link to="/store" onClick={goTop} className="w-fit py-1 px-2 rounded bg-primary text-white text-xl mobile:text-base">Shop now</Link>
             </div>
         </section>
     )
@@ -190,7 +127,7 @@ function Payments(){
 
     return (
         <section className="payments mx-auto my-32 w-[80vw] flex flex-col gap-6 items-center">
-            <div className="payments-header text-3xl font-semibold">Metode pembayaran</div>
+            <div className="payments-header text-3xl font-semibold">Payment methods</div>
             <div className="payments-content flex items-center justify-center flex-wrap gap-4">
             {
                 payments.map((payment, index) => (

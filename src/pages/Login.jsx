@@ -24,17 +24,17 @@ function Login(){
         try {
             setIsLoading(true)
 
-            const usersAPIEndpoint = import.meta.env.VITE_USERS_API_ENDPOINT
+            const usersAPIEndpoint = import.meta.env.VITE_API_ENDPOINT
 
             const [email, password] = [emailElement.current.value, passwordElement.current.value]
 
-            const { data } = await axios.post(`${usersAPIEndpoint}/login`, {
+            const { data } = await axios.post(`${usersAPIEndpoint}/api/users/login`, {
                 email, password
             })
 
-            localStorage.setItem("token", data.token)
+            localStorage.setItem("token", data.data.token)
             setIsLogin(true)
-            setUser(data.user)
+            setUser(data.data.user)
 
             setIsLoading(false)
             navigate("/")
@@ -78,7 +78,7 @@ function Login(){
                         <button type="submit" className="py-2 rounded bg-primary text-white">Login</button>
                     }
                     <div className="not-have-account">
-                        Belum punya akun? <Link to={"/register"} onClick={goTop} className="text-primary hover:underline">Register</Link>
+                        Do not have account yet? <Link to={"/register"} onClick={goTop} className="text-primary hover:underline">Register</Link>
                     </div>
                 </form>
             </div>

@@ -31,7 +31,7 @@ export default function Router(){
                     <Route path="/store" element={<Store />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
-                    <Route path="/store/:slug" element={<Product />} />
+                    <Route path="/store/:product_id" element={<Product />} />
                     <Route path="/account" element={<Account />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>

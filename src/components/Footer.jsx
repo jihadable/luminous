@@ -1,7 +1,5 @@
-import { IconBrandTwitter } from "@tabler/icons-react"
+import { IconBrandInstagram, IconBrandTiktok, IconBrandTwitter } from "@tabler/icons-react"
 import logo from "../assets/luminous-logo.png"
-import { IconBrandInstagram } from "@tabler/icons-react"
-import { IconBrandTiktok } from "@tabler/icons-react"
 
 function Footer(){
 
@@ -36,7 +34,7 @@ function Footer(){
                     </div>
                 </div>
             </div>
-            <div className="bottom pt-4 border-t text-center">©2023 Luminous</div>
+            <div className="bottom pt-4 border-t text-center">©2025 Luminous</div>
         </footer>
     )
 }

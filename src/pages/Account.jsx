@@ -38,17 +38,17 @@ function AccountSection(){
 
     const [isLoading, setIsLoading] = useState(false)
 
-    const fullnameElement = useRef(null)
+    const nameElement = useRef(null)
     const phoneElement = useRef(null)
     const addressElement = useRef(null)
 
     const updateUserProfile = async() => {
-        const fullname = fullnameElement.current.value
+        const name = nameElement.current.value
         const phonePattern = /^08\d{8,13}$/
         const phone = phoneElement.current.value
         const address = addressElement.current.value
 
-        if (fullname === "" || phone === "" || address === ""){
+        if (name === "" || phone === "" || address === ""){
             toast.error("Masih ada kolom yang belum diisi!")
 
             return
@@ -63,11 +63,11 @@ function AccountSection(){
         try {
             setIsLoading(true)
 
-            const usersAPIEndpoint = import.meta.env.VITE_USERS_API_ENDPOINT
+            const usersAPIEndpoint = import.meta.env.VITE_API_ENDPOINT
             const token = localStorage.getItem("token")
 
-            const { data } = await axios.patch(usersAPIEndpoint, 
-                { fullname, phone, address },
+            const { data } = await axios.put(`${usersAPIEndpoint}/api/users`, 
+                { name, phone, address },
                 {
                     headers: {
                         "Authorization": "Bearer " + token
@@ -75,7 +75,7 @@ function AccountSection(){
                 }
             )
 
-            setUser({...user, fullname, phone, address})
+            setUser({...user, name, phone, address})
             setIsLoading(false)
             toast.success(data.message)
         } catch(error){
@@ -87,12 +87,12 @@ function AccountSection(){
     return (
         <section className="account-section w-[80vw] flex gap-4 my-32 mx-auto mobile:w-full mobile:flex-col mobile:px-4 tablet:w-[90vw]">
             <div className="img flex items-center justify-center">
-                <img src={`${avatarGenerator}name=${user.fullname}`} alt="Akun" className="w-96 rounded-full mobile:w-3/4" />
+                <img src={`${avatarGenerator}name=${user.name}`} alt="Akun" className="w-96 rounded-full mobile:w-3/4" />
             </div>
             <div className="desc flex flex-col items-center gap-2 w-full">
                 <label className="w-full flex items-center gap-2 p-2 rounded-md bg-primary/[.1]">
                     <IconUserCircle stroke={1.5} />
-                    <input type="text" defaultValue={user.fullname} placeholder="Nama Lengkap" className="bg-transparent border-none outline-none" required ref={fullnameElement} />
+                    <input type="text" defaultValue={user.name} placeholder="Nama Lengkap" className="bg-transparent border-none outline-none" required ref={nameElement} />
                 </label>
                 <div className="w-full flex items-center gap-2 p-2 rounded-md bg-primary/[.1]">
                     <IconMail stroke={1.5} />

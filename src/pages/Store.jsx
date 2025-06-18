@@ -28,24 +28,24 @@ function StoreSearch(){
         setDisplayedProducts(products)
     }, [products])
 
-    const categories = ["Semua", "Furniture", "Kamar tidur", "Dapur", "Elektronik"]
-    const [selectedCategory, setSelectedCategory] = useState("Semua")
+    const categories = ["All", "Furniture", "Bedroom", "Kitchen", "Electronic"]
+    const [selectedCategory, setSelectedCategory] = useState("All")
     
     const handleSelectCategory = category => {
         setSelectedCategory(category)
 
-        if (category === "Semua"){
+        if (category === "All"){
             setDisplayedProducts(products)
         }
         else {
-            setDisplayedProducts(products.filter(product => product.category === category.toLowerCase()))
+            setDisplayedProducts(products.filter(product => product.category.name === category.toLowerCase()))
         }
     }
 
     return (
         <>
         <div className="store-header w-[90vw] mx-auto flex flex-col items-center gap-4">
-            <header className="text-3xl mt-36 font-semibold">Temukan barang impian Anda</header>
+            <header className="text-3xl mt-36 font-semibold">Find your best will</header>
             <div className="category-value flex items-center flex-wrap gap-4 text-base justify-center mobile:w-[90vw]">
             {
                 categories.map(category => (
@@ -63,15 +63,15 @@ function StoreSearch(){
 
 function StoreGrid({ products }){
 
-    const productImagesAPIEndpoint = import.meta.env.VITE_PRODUCT_IMAGES_API_ENDPOINT
+    const productImagesAPIEndpoint = import.meta.env.VITE_STORAGE_API
 
     return (
         <section className="store-grid w-[80vw] my-12 mx-auto grid grid-cols-5 gap-4 mobile:w-full mobile:px-4 mobile:grid-cols-2 tablet:grid-cols-4 tablet:w-[90vw]">
             {
                 products &&
                 products.map((product, index) => (
-                    <Link to={`/store/${product.slug}`} onClick={goTop} className="product flex flex-col rounded-lg bg-white overflow-hidden border-2 border-primary/[.1] hover:border-primary hover:shadow-none" key={index}>
-                        <img src={`${productImagesAPIEndpoint}/${product.image}`} alt={product.name} loading="lazy" />
+                    <Link to={`/store/${product.id}`} onClick={goTop} className="product flex flex-col rounded-lg bg-white overflow-hidden border-2 border-primary/[.1] hover:border-primary hover:shadow-none" key={index}>
+                        <img src={`${productImagesAPIEndpoint}/${product.image_url}`} alt={product.name} loading="lazy" />
                         <div className="info p-4 flex flex-col gap-4">
                             <div className="product-name text-xl font-bold mobile:text-xl tablet:text-xl">{product.name}</div>
                             <div className="product-price text-xl mobile:text-base tablet:text-base">{getIdCurrency(product.price)}</div>

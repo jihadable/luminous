@@ -19,16 +19,16 @@ export default function AuthProvider({ children }){
             }
     
             try {
-                const usersAPIEndpoint = import.meta.env.VITE_USERS_API_ENDPOINT
+                const usersAPIEndpoint = import.meta.env.VITE_API_ENDPOINT
     
-                const { data } = await axios.get(usersAPIEndpoint, {
+                const { data } = await axios.get(`${usersAPIEndpoint}/api/users`, {
                     headers: {
                         "Authorization": "Bearer " + token
                     }
                 })
 
                 setIsLogin(true)
-                setUser(data.user)
+                setUser(data.data.user)
             } catch(error){
                 localStorage.removeItem("token")
                 setIsLogin(false)

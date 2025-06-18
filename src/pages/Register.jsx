@@ -16,7 +16,7 @@ function Register(){
 
     const [isLoading, setIsLoading] = useState(false)
 
-    const fullnameElement = useRef(null)
+    const nameElement = useRef(null)
     const emailElement = useRef(null)
     const phoneElement = useRef(null)
     const addressElement = useRef(null)
@@ -28,9 +28,9 @@ function Register(){
 
         const phonePattern = /^08\d{8,13}$/
         const [
-            fullname, email, phone, address, password, confirmPassword
+            name, email, phone, address, password, confirmPassword
         ] = [
-            fullnameElement.current.value,
+            nameElement.current.value,
             emailElement.current.value,
             phoneElement.current.value,
             addressElement.current.value,
@@ -59,15 +59,15 @@ function Register(){
         try {
             setIsLoading(true)
 
-            const usersAPIEndpoint = import.meta.env.VITE_USERS_API_ENDPOINT
+            const usersAPIEndpoint = import.meta.env.VITE_API_ENDPOINT
 
-            const { data } = await axios.post(`${usersAPIEndpoint}/register`, {
-                fullname, email, phone, address, password
+            const { data } = await axios.post(`${usersAPIEndpoint}/api/users/register`, {
+                name, email, phone, address, password
             })
 
-            localStorage.setItem("token", data.token)
+            localStorage.setItem("token", data.data.token)
             setIsLogin(true)
-            setUser(data.user)
+            setUser(data.data.user)
 
             setIsLoading(false)
             navigate("/")
@@ -97,7 +97,7 @@ function Register(){
                     <div className="form-login-header text-3xl text-center">Register</div>
                     <div className="form-login-email relative bg-primary/[.1] p-3 flex items-center gap-3 rounded-lg">
                         <IconUserCircle stroke={1.5} />
-                        <input type="text" placeholder="Full name" className="bg-transparent outline-none w-[250px] mobile:w-full" required ref={fullnameElement} />
+                        <input type="text" placeholder="Name" className="bg-transparent outline-none w-[250px] mobile:w-full" required ref={nameElement} />
                     </div>
                     <div className="form-login-email relative bg-primary/[.1] p-3 flex items-center gap-3 rounded-lg">
                         <IconMail stroke={1.5} />
@@ -105,11 +105,11 @@ function Register(){
                     </div>
                     <div className="form-login-phone relative bg-primary/[.1] p-3 flex items-center gap-3 rounded-lg">
                         <IconPhone stroke={1.5} />
-                        <input type="text" placeholder="No HP" className="bg-transparent outline-none w-[250px] mobile:w-full" required ref={phoneElement} />
+                        <input type="text" placeholder="Phone" className="bg-transparent outline-none w-[250px] mobile:w-full" required ref={phoneElement} />
                     </div>
                     <div className="form-login-address relative bg-primary/[.1] p-3 flex items-center gap-3 rounded-lg">
                         <IconMapPin stroke={1.5} />
-                        <input type="text" placeholder="Alamat" className="bg-transparent outline-none w-[250px] mobile:w-full" required ref={addressElement} />
+                        <input type="text" placeholder="Address" className="bg-transparent outline-none w-[250px] mobile:w-full" required ref={addressElement} />
                     </div>
                     <div className="form-login-password relative bg-primary/[.1] p-3 flex items-center gap-3 rounded-lg">
                         <IconLock stroke={1.5} />
@@ -127,7 +127,7 @@ function Register(){
                         <button type="submit" className="py-2 rounded bg-primary text-white">Register</button>
                     }
                     <div className="not-have-account">
-                        Sudah punya akun? <Link to={"/login"} onClick={goTop} className="text-primary hover:underline">Login</Link>
+                        Already have an account? <Link to={"/login"} onClick={goTop} className="text-primary hover:underline">Login</Link>
                     </div>
                 </form>
             </div>

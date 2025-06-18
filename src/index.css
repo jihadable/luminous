@@ -1,9 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 *{
-  font-family: 'Blinker', sans-serif;;
+  font-family: 'Blinker', sans-serif;
 }
 
 #root{
@@ -76,3 +74,12 @@
   background-color: #aaa;
   border-radius: 5rem;
 }
+
+@theme {
+  --color-primary: #0853a6;
+  --color-white-prim: #eee;
+  --color-hov: rgb(0,0,0,.1);
+} 
+
+@custom-variant mobile (@media (max-width: 480px));
+@custom-variant tablet (@media (min-width: 481px) and (max-width: 1023px));
