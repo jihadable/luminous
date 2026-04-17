@@ -19,7 +19,7 @@ export default function Account(){
 
         return (
             <>
-            <Navbar />
+            <Navbar link={""} />
             <AccountSection />
             <Footer />
             </>

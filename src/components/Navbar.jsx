@@ -56,7 +56,7 @@ function Navbar({ link }){
             </Link>
             <div className="navbar-nav flex gap-8 text-lg mobile:hidden">
                 <Link to={"/"} onClick={goTop} className={`border-b-2 text-xl ${link === "home" ? "border-primary" : "border-white hover:border-primary"}`}>Home</Link>
-                <Link to={"/store"} onClick={goTop} className={`border-b-2 text-xl ${link === "home" ? "border-white hover:border-primary" : "border-primary"}`}>Store</Link>
+                <Link to={"/store"} onClick={goTop} className={`border-b-2 text-xl ${link === "store" ? "border-primary" : "border-white hover:border-primary"}`}>Store</Link>
             </div>
             {
                 (showShoppingCart || showMobileMenu) &&
