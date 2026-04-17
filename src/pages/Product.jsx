@@ -8,25 +8,31 @@ import Loader from "../components/Loader"
 import Navbar from "../components/Navbar"
 import { AuthContext } from "../contexts/AuthContext"
 import { CartProductsContext } from "../contexts/CartProductsContext"
-import { ProductsContext } from "../contexts/ProductsContext"
 import { getIdCurrency } from "../utils/getIdCurrency"
 import NotFound from "./NotFound"
 
 function Product(){
-
     const { product_id } = useParams()
 
     const { isLogin, user } = useContext(AuthContext)
-    const { products } = useContext(ProductsContext)
     const { cartProducts, setCartProducts } = useContext(CartProductsContext)
     
     const [product, setProduct] = useState(null)
     
     useEffect(() => {
-        if (products !== null){
-            setProduct(products.filter(product => product.id === product_id)[0])
+        const getProduct = async() => {
+            try {
+                const APIEndpoint = import.meta.env.VITE_API_ENDPOINT
+                const { data } = await axios.get(`${APIEndpoint}/api/products/${product_id}`)
+
+                setProduct(data.data.product)
+            } catch(error){
+                console.log(error)
+            }
         }
-    }, [product_id, products])
+
+        getProduct()
+    }, [product_id])
     
     const productImagesAPIEndpoint = import.meta.env.VITE_STORAGE_API
     const [quantity, setQuantity] = useState(1)
@@ -78,11 +84,11 @@ function Product(){
         return false
     }
 
-    if (product === undefined && products !== null){
+    if (product === undefined){
         return <NotFound />
     }
 
-    if (products !== null && product !== undefined && product !== null){
+    if ( product !== undefined && product !== null){
         document.title = `Luminous | Product` 
 
         return (
@@ -148,6 +154,8 @@ function Product(){
             </>
         )
     }
+
+    return null
 }
 
 export default Product;
