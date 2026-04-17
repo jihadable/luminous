@@ -4,6 +4,10 @@
   font-family: 'Blinker', sans-serif;
 }
 
+button {
+  cursor: pointer;
+}
+
 #root{
   width: 100%;
 }

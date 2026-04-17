@@ -43,7 +43,7 @@ function Login(){
             localStorage.removeItem("token")
             setIsLogin(false)
             setUser(null)
-            toast.error(error.response.data.message)
+            toast.error("Email or password incorrect")
         }
     }
 

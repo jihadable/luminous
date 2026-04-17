@@ -66,7 +66,7 @@ function Product(){
         } catch (error) {
             console.log(error)
             setIsLoading(false)
-            toast.error("Gagal menambahakn produk ke keranjang")
+            toast.error("Fail to add to cart")
         }
     }
 
@@ -83,7 +83,7 @@ function Product(){
     }
 
     if (products !== null && product !== undefined && product !== null){
-        document.title = `Luminous | ${product ? product.name : "Produk"}` 
+        document.title = `Luminous | Product` 
 
         return (
             <>

@@ -11,6 +11,7 @@ import NotFound from './pages/NotFound';
 import Product from './pages/Product';
 import Register from './pages/Register';
 import Store from "./pages/Store";
+import VerifyEmail from './pages/VerifyEmail';
 
 export default function Router(){
     return (
@@ -20,7 +21,7 @@ export default function Router(){
             <CartProductsProvider>
             <ToastContainer 
             position="top-center"
-            autoClose={750}
+            autoClose={1000}
             hideProgressBar
             newestOnTop={false}
             closeOnClick
@@ -33,6 +34,7 @@ export default function Router(){
                     <Route path="/register" element={<Register />} />
                     <Route path="/store/:product_id" element={<Product />} />
                     <Route path="/account" element={<Account />} />
+                    <Route path="/verify-email/:token" element={<VerifyEmail />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </CartProductsProvider>

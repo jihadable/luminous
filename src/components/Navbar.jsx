@@ -84,7 +84,7 @@ function Navbar({ link }){
                         <IconChevronDown stroke={1.5} width={16} height={16} />
                     </button>
                     <div className={`menu ${showAccountMenu ? "flex" : "hidden"} flex-col items-end gap-4 absolute top-[105%] right-0 bg-white rounded-md py-2 px-4 border-2 border-primary/[.1]`}>
-                        <Link to={"/account"} className="w-full border-b-2 border-transparent hover:border-primary">Akun</Link>
+                        <Link to={"/account"} className="w-full border-b-2 border-transparent hover:border-primary">Account</Link>
                         <button type="button" className="w-full border-b-2 border-transparent hover:border-primary" onClick={handleLogout}>Logout</button>
                     </div>
                 </div>

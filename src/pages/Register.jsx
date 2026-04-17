@@ -39,19 +39,19 @@ function Register(){
         ]
 
         if (password.length < 8){
-            toast.error("Password harus minimal 8 karakter")
+            toast.error("Password must be equal or greater than 8 characters")
 
             return
         }
 
         if (password !== confirmPassword){
-            toast.error("Konfirmasi password tidak sesuai")
+            toast.error("Password confirmation does not match")
 
             return
         }
 
         if (!phonePattern.test(phone)){
-            toast.error("No HP tidak sesuai")
+            toast.error("Phone number does not match")
 
             return
         }
@@ -76,7 +76,7 @@ function Register(){
             localStorage.removeItem("token")
             setIsLogin(false)
             setUser(null)
-            toast.error(error.response.data.message)
+            toast.error("Registration failed")
         }
     }
 
