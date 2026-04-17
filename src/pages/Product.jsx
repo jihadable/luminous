@@ -88,7 +88,7 @@ function Product(){
         return <NotFound />
     }
 
-    if ( product !== undefined && product !== null){
+    if (product !== undefined && product !== null){
         document.title = `Luminous | Product` 
 
         return (
