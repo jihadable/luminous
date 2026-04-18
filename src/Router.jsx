@@ -5,6 +5,7 @@ import AuthProvider from './contexts/AuthContext';
 import CartProductsProvider from './contexts/CartProductsContext';
 import ProductsProvider from './contexts/ProductsContext';
 import Account from './pages/Account';
+import Dashboard from './pages/Dashboard';
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import NotFound from './pages/NotFound';
@@ -35,6 +36,8 @@ export default function Router(){
                     <Route path="/store/:product_id" element={<Product />} />
                     <Route path="/account" element={<Account />} />
                     <Route path="/verify-email/:token" element={<VerifyEmail />} />
+
+                    <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </CartProductsProvider>

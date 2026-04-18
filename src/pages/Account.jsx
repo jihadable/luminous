@@ -14,7 +14,8 @@ export default function Account(){
     if (isLogin === false){
         return <NotFound />
     }
-    else if (isLogin === true){
+    
+    if (isLogin === true){
         document.title = "Luminous | Account"
 
         return (
@@ -25,9 +26,8 @@ export default function Account(){
             </>
         )
     }
-    else {
-        return null
-    }
+
+    return null
 }
 
 function AccountSection(){

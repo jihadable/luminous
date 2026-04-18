@@ -133,6 +133,8 @@ function Register(){
             </div>
         )
     }
+
+    return null
 }
 
 export default Register

@@ -11,7 +11,6 @@ import goTop from "../utils/goTop"
 import Loader from "./Loader"
 
 function Navbar({ link }){
-
     const { user, setUser, isLogin, setIsLogin } = useContext(AuthContext)
     const { cartProducts, setCartProducts } = useContext(CartProductsContext)
     const navigate = useNavigate()
@@ -70,6 +69,7 @@ function Navbar({ link }){
             {
                 isLogin === true &&
                 <>
+                {user.role == "customer" &&
                 <button type="button" className="shopping-cart-btn flex justify-center items-center relative p-1 rounded hover:bg-[rgb(0,0,0,.1)]" onClick={() => {setShowShoppingCart(!showShoppingCart)}} ref={shoppingCartBtn}>
                     <IconShoppingCart stroke={1.5} />
                 {
@@ -77,15 +77,18 @@ function Navbar({ link }){
                     cartProducts.length > 0 &&
                     <div className="cart-notify absolute flex justify-center items-center -top-2 -right-2 px-2 py-0 rounded-full text-white-prim text-sm bg-red-500">{cartProducts.length}</div>
                 }
-                </button>
+                </button>}
                 <div className="flex relative mobile:hidden">
                     <button type="button" className="flex items-center p-1 bg-primary/[.1] rounded-full" onClick={() => setShowAccountMenu(!showAccountMenu)} ref={accountMenuBtn}>
                         <img src={`${avatarGenerator}name=${user.name}`} alt="User" className="w-8 rounded-full" />
                         <IconChevronDown stroke={1.5} width={16} height={16} />
                     </button>
                     <div className={`menu ${showAccountMenu ? "flex" : "hidden"} flex-col items-end gap-4 absolute top-[105%] right-0 bg-white rounded-md py-2 px-4 border-2 border-primary/[.1]`}>
-                        <Link to={"/account"} className="w-full border-b-2 border-transparent hover:border-primary">Account</Link>
-                        <button type="button" className="w-full border-b-2 border-transparent hover:border-primary" onClick={handleLogout}>Logout</button>
+                        {user.role == "customer" &&
+                        <Link to={"/account"} className="w-full text-end border-b-2 border-transparent hover:border-primary">Account</Link>}
+                        {user.role == "admin" &&
+                        <Link to={"/dashboard"} className="w-full text-end border-b-2 border-transparent hover:border-primary">Dashboard</Link>}
+                        <button type="button" className="w-full text-end border-b-2 border-transparent hover:border-primary" onClick={handleLogout}>Logout</button>
                     </div>
                 </div>
                 </>
@@ -99,7 +102,7 @@ function Navbar({ link }){
                     <IconX stroke={1.5} />
                 </div>
                 <Link to="/" onClick={goTop} className={link === "home" ? "border-b-2 border-primary" : "border-b-2 border-white hover:border-primary"} >Home</Link>
-                <Link to="/store" onClick={goTop} className={link === "home" ? "border-b-2 border-white hover:border-primary" : "border-b-2 border-primary"} >Store</Link>  
+                <Link to="/store" onClick={goTop} className={link === "store" ? "border-b-2 border-primary" : "border-b-2 border-white hover:border-primary"} >Store</Link>  
             {
                 isLogin === false &&
                 <Link to="/login" onClick={goTop} className="border-b-2 border-white hover:border-primary">Login</Link>
@@ -107,13 +110,16 @@ function Navbar({ link }){
             {
                 isLogin === true &&
                 <>
-                <Link to={"/account"} onClick={goTop} className="border-b-2 border-white hover:border-primary">Account</Link>
+                {user.role == "customer" && 
+                <Link to={"/account"} onClick={goTop} className="border-b-2 border-white hover:border-primary">Account</Link>}
+                {user.role == "admin" &&
+                <Link to={"/dashboard"} onClick={goTop} className="border-b-2 border-white hover:border-primary">Dashboard</Link>}
                 <button type="button" className="border-b-2 border-white hover:border-primary" onClick={handleLogout}>Logout</button>
                 </>
             }
             </div>
             {
-                isLogin === true &&
+                isLogin === true && user.role == "customer" &&
                 <ShoppingCart showShoppingCart={showShoppingCart} setShowShoppingCart={setShowShoppingCart} shoppingCart={shoppingCart} shoppingCartBtn={shoppingCartBtn} />
             }
         </nav>

@@ -118,7 +118,7 @@ function Product(){
                             </span>
                         </div>
                     {
-                        isLogin === true &&
+                        isLogin === true && user.role == "customer" &&
                         <>
                         <div className="bg-black/[.3] h-[1px] w-full" />
                         <div className="product-footer w-full flex items-center justify-between">
