@@ -9,13 +9,13 @@ import { AuthContext } from "../contexts/AuthContext";
 import NotFound from "./NotFound";
 
 export default function Account(){
-    const { isLogin } = useContext(AuthContext)
+    const { isLogin, user } = useContext(AuthContext)
 
-    if (isLogin === false){
+    if (isLogin === false || user.role === "admin"){
         return <NotFound />
     }
     
-    if (isLogin === true){
+    if (isLogin === true && user.role === "customer"){
         document.title = "Luminous | Account"
 
         return (
