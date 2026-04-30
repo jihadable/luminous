@@ -21,7 +21,7 @@ ChartJS.register(
 export default function Dashboard(){
     return (
         <section className="dashboard flex">
-            <Sidebar />
+            <Sidebar page={"dashboard"} />
             <Content />
         </section>
     )

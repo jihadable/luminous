@@ -6,6 +6,7 @@ import CartProductsProvider from './contexts/CartProductsContext';
 import ProductsProvider from './contexts/ProductsContext';
 import Account from './pages/Account';
 import Dashboard from './pages/Dashboard';
+import DashboardProducts from './pages/DashboardProducts';
 import DashboardUsers from './pages/DashboardUsers';
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -40,7 +41,8 @@ export default function Router(){
 
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/dashboard/users" element={<DashboardUsers />} />
-                    
+                    <Route path="/dashboard/products" element={<DashboardProducts />} />
+
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </CartProductsProvider>
