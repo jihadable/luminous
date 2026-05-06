@@ -5,7 +5,9 @@ import AuthProvider from './contexts/AuthContext';
 import CartProductsProvider from './contexts/CartProductsContext';
 import ProductsProvider from './contexts/ProductsContext';
 import Account from './pages/Account';
+import AddCategory from './pages/AddCategory';
 import Dashboard from './pages/Dashboard';
+import DashboardCategories from './pages/DashboardCategories';
 import DashboardProducts from './pages/DashboardProducts';
 import DashboardUsers from './pages/DashboardUsers';
 import Home from "./pages/Home";
@@ -42,6 +44,9 @@ export default function Router(){
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/dashboard/users" element={<DashboardUsers />} />
                     <Route path="/dashboard/products" element={<DashboardProducts />} />
+                    <Route path="/dashboard/categories" element={<DashboardCategories />} />
+
+                    <Route path="/dashboard/add-category" element={<AddCategory />} />
 
                     <Route path="*" element={<NotFound />} />
                 </Routes>
