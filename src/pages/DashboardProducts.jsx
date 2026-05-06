@@ -52,6 +52,7 @@ function Content(){
     const [isSortByOptionsShowed, setIsSortByOptionsShowed] = useState(false)
     
     const page = Number(searchParams.get("page")) || 1
+    const limit = 20
     const [totalPages, setTotalPages] = useState(1)
     const [paginationButtons, setPaginationButtons] = useState([1, 2, 3])
 
@@ -211,7 +212,7 @@ function Content(){
                         sort,
                         order,
                         page,
-                        limit: 20,
+                        limit,
                         category: (category == "all" ? undefined : category)
                     }
                 })
@@ -276,7 +277,7 @@ function Content(){
                         <tbody>
                         {products?.map((product, index) => (
                             <tr key={index} className={`border-b border-primary`}>
-                                <td className="p-2">{index + 1}</td>
+                                <td className="p-2">{limit * (page - 1) + index + 1}</td>
                                 <td className="p-2">
                                     <Link to={`/dashboard/products/${product.id}`}>{product.name}</Link>
                                 </td>
@@ -286,7 +287,7 @@ function Content(){
                                     <Link to={`/dashboard/products/edit/${product.id}`} className="p-1 rounded-md bg-yellow-400 text-black">
                                         <IconEdit stroke={1.5} />
                                     </Link>
-                                    <button type="button" className="p-1 rounded-md bg-red-500 text-black">
+                                    <button type="button" className="p-1 rounded-md bg-red-500 text-white">
                                         <IconTrash stroke={1.5} />
                                     </button>
                                 </td>
@@ -294,7 +295,7 @@ function Content(){
                         ))}
                         </tbody>
                     </table>
-                    <article className="pagination rounded-full p-2 w-fit self-center bg-white-prim shadow-2xl flex items-center gap-2">
+                    <article className="pagination rounded-full p-2 w-fit self-center bg-primary/10 flex items-center gap-2">
                         <button type="button" className="flex items-center justify-center hover:bg-primary hover:text-white disabled:text-gray-300 disabled:hover:text-gray-300 disabled:hover:bg-transparent rounded-full p-2 transition-all" disabled={page < 2} onClick={jumpToFirstPage}>
                             <IconChevronsLeft stroke={1.5} />
                         </button>

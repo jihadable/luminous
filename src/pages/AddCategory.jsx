@@ -57,7 +57,7 @@ function Content(){
                         <p className="font-bold">Add category</p>
                     </article>
                     <form className="flex flex-col gap-4 w-1/2" onSubmit={handleAddCategory}>
-                        <article className="form-login-email relative bg-primary/[.1] p-3 flex items-center gap-3 rounded-lg w-full">
+                        <article className="bg-primary/10 p-2 flex items-center gap-2 rounded-lg w-full">
                             <IconLabel stroke={1.5} />
                             <input type="text" placeholder="Category name" className="bg-transparent outline-none w-full" required ref={categoryNameInputElement} />
                         </article>

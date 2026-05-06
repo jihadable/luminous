@@ -55,18 +55,18 @@ function Login(){
         document.title = "Luminous | Login"
         
         return (
-            <div className="w-[100vw] min-h-[100vh] flex flex-col gap-4 items-center justify-center bg-primary/[.1]">
+            <div className="w-[100vw] min-h-[100vh] flex flex-col gap-4 items-center justify-center bg-primary/10">
                 <header className="flex items-center gap-2">
                     <img src={luminousLogo} alt="Luminous" className="w-14"/>
                     <span className="text-4xl">Luminous</span>
                 </header>
                 <form action="" className="flex flex-col item-center p-10 rounded-lg bg-white gap-6 shadow-2xl mobile:w-[90vw] mobile:p-6 tablet:w-[60vw]" onSubmit={handleLogin}>
                     <div className="form-login-header text-3xl text-center">Login</div>
-                    <div className="form-login-email relative bg-primary/[.1] p-3 flex items-center gap-3 rounded-lg">
+                    <div className="form-login-email relative bg-primary/10 p-3 flex items-center gap-3 rounded-lg">
                         <IconMail stroke={1.5} />
                         <input type="email" placeholder="Email" className="bg-transparent outline-none w-[250px] mobile:w-full" required ref={emailElement} />
                     </div>
-                    <div className="form-login-password relative bg-primary/[.1] p-3 flex items-center gap-3 rounded-lg">
+                    <div className="form-login-password relative bg-primary/10 p-3 flex items-center gap-3 rounded-lg">
                         <IconLock stroke={1.5} />
                         <input type="password" placeholder="Password" className="bg-transparent outline-none w-[250px] mobile:w-full" required ref={passwordElement} />
                     </div>

@@ -6,6 +6,7 @@ import CartProductsProvider from './contexts/CartProductsContext';
 import ProductsProvider from './contexts/ProductsContext';
 import Account from './pages/Account';
 import AddCategory from './pages/AddCategory';
+import AddProduct from './pages/AddProduct';
 import Dashboard from './pages/Dashboard';
 import DashboardCategories from './pages/DashboardCategories';
 import DashboardProducts from './pages/DashboardProducts';
@@ -46,6 +47,7 @@ export default function Router(){
                     <Route path="/dashboard/products" element={<DashboardProducts />} />
                     <Route path="/dashboard/categories" element={<DashboardCategories />} />
 
+                    <Route path="/dashboard/add-product" element={<AddProduct />} />
                     <Route path="/dashboard/add-category" element={<AddCategory />} />
 
                     <Route path="*" element={<NotFound />} />

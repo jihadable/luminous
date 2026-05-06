@@ -1,7 +1,9 @@
-import { IconEdit, IconPlus, IconTrash } from "@tabler/icons-react";
+import { IconPlus, IconTrash } from "@tabler/icons-react";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import Loader from "../components/Loader";
 import Sidebar from "../components/Sidebar";
 import { AuthContext } from "../contexts/AuthContext";
 
@@ -35,6 +37,35 @@ function Content(){
         getCategories()
     }, [])
 
+    const [isLoading, setIsLoading] = useState(false)
+
+    const handleDeleteCategory = async(categoryId) => {
+        try {
+            if (!confirm("Delete this category?")){
+                return
+            }
+
+            setIsLoading(true)
+
+            const APIEndpoint = import.meta.env.VITE_API_ENDPOINT
+            const jwt = localStorage.getItem("token")
+
+            await axios.delete(`${APIEndpoint}/api/categories/${categoryId}`, {
+                headers: {
+                    "Authorization": `Bearer ${jwt}`
+                }
+            })
+
+            setCategories(categories => [...categories].filter(category => category.id != categoryId))
+            setIsLoading(false)
+            toast.success("Category deleted successfully")
+        } catch(error){
+            setIsLoading(false)
+            toast.error("Fail to delete category")
+            console.log(error)
+        }
+    }
+
     return (
         <section className="flex flex-col text-xl w-full overflow-y-auto">
             <article className="flex flex-col gap-4 p-4 pb-12 w-full">
@@ -43,12 +74,12 @@ function Content(){
                 </article>
                 <article className="flex flex-col gap-4">
                     <article className="flex">
-                        <Link to={"/dashboard/add-category"} className="flex items-center gap-2 bg-primary text-white p-2 rounded-md">
+                        <Link to={"/dashboard/add-category"} className="flex items-center gap-2 bg-primary text-white p-2 rounded-lg">
                             <IconPlus stroke={1.5} />
                             <span><p>Add category</p></span>
                         </Link>
                     </article>
-                    <table className="rounded-t-md overflow-hidden">
+                    <table className="rounded-t-lg overflow-hidden">
                         <thead>
                             <tr className="bg-primary text-white">
                                 <td className="p-2">No</td>
@@ -60,16 +91,17 @@ function Content(){
                         {categories?.map((category, index) => (
                             <tr key={index} className={`border-b border-primary`}>
                                 <td className="p-2">{index + 1}</td>
-                                <td className="p-2">
-                                    <Link to={`/dashboard/categories/${category.id}`}>{category.name}</Link>
-                                </td>
+                                <td className="p-2">{category.name}</td>
                                 <td className="p-2 text-center flex justify-center gap-1">
-                                    <Link to={`/dashboard/categories/edit/${category.id}`} className="p-1 rounded-md bg-yellow-400 text-black">
-                                        <IconEdit stroke={1.5} />
-                                    </Link>
-                                    <button type="button" className="p-1 rounded-md bg-red-500 text-black">
+                                {
+                                    isLoading ?
+                                    <div className="p-1 rounded-lg bg-red-500 text-white flex items-center justify-center">
+                                        <Loader width={24} height={24} />
+                                    </div> :
+                                    <button type="button" className="p-1 rounded-lg bg-red-500 text-white" title="delete" onClick={() => handleDeleteCategory(category.id)}>
                                         <IconTrash stroke={1.5} />
                                     </button>
+                                }
                                 </td>
                             </tr>
                         ))}
