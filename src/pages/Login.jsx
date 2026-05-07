@@ -24,15 +24,15 @@ function Login(){
         try {
             setIsLoading(true)
 
-            const usersAPIEndpoint = import.meta.env.VITE_API_ENDPOINT
+            const APIEndpoint = import.meta.env.VITE_API_ENDPOINT
 
             const [email, password] = [emailElement.current.value, passwordElement.current.value]
 
-            const { data } = await axios.post(`${usersAPIEndpoint}/api/users/login`, {
+            const { data } = await axios.post(`${APIEndpoint}/users/login`, {
                 email, password
             })
 
-            localStorage.setItem("token", data.data.token)
+            localStorage.setItem("jwt", data.data.jwt)
             setIsLogin(true)
             setUser(data.data.user)
 

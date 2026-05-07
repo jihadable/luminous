@@ -18,7 +18,11 @@ export default function AddProduct(){
 function Content(){
     const { user } = useContext(AuthContext)
     const [isLoading, setIsLoading] = useState(false)
-    const [categories, setCategories] = useState([])
+    const [categories, setCategories] = useState([{
+        id: "",
+        name: "",
+        label: "None"
+    }])
     const [selectedCategory, setSelectedCategory] = useState({
         id: "",
         name: "",
@@ -32,8 +36,17 @@ function Content(){
         stockInputElement,
         weightInputElement,
         textureInputElement,
-        sizeInputElement
+        sizeInputElement,
+        imageFileInputElement,
+        descriptionInputElement,
     ] = [
+        useRef(null),
+        useRef(null),
+        useRef(null),
+        useRef(null),
+        useRef(null),
+        useRef(null),
+        useRef(null),
         useRef(null)
     ]
 
@@ -41,12 +54,20 @@ function Content(){
         const getCategories = async() => {
             try {
                 const APIEndpoint = import.meta.env.VITE_API_ENDPOINT
-                const { data } = await axios.get(`${APIEndpoint}/api/categories`)
+                const { data } = await axios.get(`${APIEndpoint}/categories`)
 
-                setCategories(data.data.categories.map(category => {
+                const formattedCategories = data.data.categories.map(category => {
                     const label = category.name.charAt(0).toUpperCase() + category.name.slice(1)
                     return {...category, label}
-                }))
+                })
+                setCategories([
+                    {
+                        id: "",
+                        name: "",
+                        label: "None"
+                    },
+                    ...formattedCategories
+                ])
             } catch(error){
                 console.log(error)
             }
@@ -66,12 +87,22 @@ function Content(){
 
             setIsLoading(true)
             const APIEndpoint = import.meta.env.VITE_API_ENDPOINT
-            const jwt = localStorage.getItem("token")
-
-            const requestBody = {
-                
+            const jwt = localStorage.getItem("jwt")
+            
+            const requestBody = new FormData()
+            requestBody.append("name", nameInputElement.current.value)
+            requestBody.append("price", priceInputElement.current.value)
+            requestBody.append("stock", stockInputElement.current.value)
+            requestBody.append("weight", weightInputElement.current.value)
+            requestBody.append("texture", textureInputElement.current.value)
+            requestBody.append("size", sizeInputElement.current.value)
+            requestBody.append("image", imageFileInputElement.current.files[0])
+            requestBody.append("description", descriptionInputElement.current.value)
+            if (selectedCategory.label != "None"){
+                requestBody.append("category_id", selectedCategory.id)
             }
-            await axios.post(`${APIEndpoint}/api/products`, requestBody, {
+
+            await axios.post(`${APIEndpoint}/products`, requestBody, {
                 headers: {
                     "Authorization": `Bearer ${jwt}`
                 }
@@ -99,43 +130,43 @@ function Content(){
                     <form className="flex flex-col gap-4 w-1/2" onSubmit={handleAddProduct}>
                         <article className="bg-primary/10 p-2 flex items-center gap-2 rounded-lg w-full">
                             <IconShoppingBag stroke={1.5} />
-                            <input type="text" placeholder="Name" className="bg-transparent outline-none w-full" required />
+                            <input type="text" placeholder="Name" className="bg-transparent outline-none w-full" required ref={nameInputElement} />
                         </article>
                         <article className="bg-primary/10 p-2 flex items-center gap-2 rounded-lg w-full">
                             <IconTag stroke={1.5} />
-                            <input type="number" min={1} placeholder="Price (Rp)" className="bg-transparent outline-none w-full" required />
+                            <input type="number" min={1} placeholder="Price (Rp)" className="bg-transparent outline-none w-full" required ref={priceInputElement} />
                         </article>
                         <article className="bg-primary/10 p-2 flex items-center gap-2 rounded-lg w-full">
                             <IconStack2 stroke={1.5} />
-                            <input type="number" min={1} placeholder="Stock" className="bg-transparent outline-none w-full" required />
+                            <input type="number" min={1} placeholder="Stock" className="bg-transparent outline-none w-full" required ref={stockInputElement} />
                         </article>
                         <article className="bg-primary/10 p-2 flex items-center gap-2 rounded-lg w-full">
                             <IconWeight stroke={1.5} />
-                            <input type="number" placeholder="Weight (kg)" className="bg-transparent outline-none w-full" required />
+                            <input type="number" placeholder="Weight (kg)" className="bg-transparent outline-none w-full" required ref={weightInputElement} />
                         </article>
                         <article className="bg-primary/10 p-2 flex items-center gap-2 rounded-lg w-full">
                             <IconTexture stroke={1.5} />
-                            <input type="text" placeholder="Texture" className="bg-transparent outline-none w-full" required />
+                            <input type="text" placeholder="Texture" className="bg-transparent outline-none w-full" required ref={textureInputElement} />
                         </article>
                         <article className="bg-primary/10 p-2 flex items-center gap-2 rounded-lg w-full">
                             <IconRuler2 stroke={1.5} />
-                            <input type="text" placeholder="Size" className="bg-transparent outline-none w-full" required />
+                            <input type="text" placeholder="Size" className="bg-transparent outline-none w-full" required ref={sizeInputElement} />
                         </article>
                         <article className="bg-primary/10 p-2 flex items-center gap-2 rounded-lg w-full">
                             <label className="flex items-center gap-2 w-full cursor-pointer">
                                 <IconPhoto stroke={1.5} />
                                 <p>Image</p>
-                                <input type="file" placeholder="Image" className="bg-transparent outline-none w-full" required hidden />
+                                <input type="file" placeholder="Image" className="bg-transparent outline-none w-full" required hidden ref={imageFileInputElement} />
                             </label>
                         </article>
                         <article className="bg-primary/10 p-2 flex gap-2 rounded-lg w-full">
                             <div className="flex">
                                 <IconClipboardText stroke={1.5} />
                             </div>
-                            <textarea rows={7} placeholder="Description" className="bg-transparent outline-none w-full resize-none"></textarea>
+                            <textarea rows={7} placeholder="Description" className="bg-transparent outline-none w-full resize-none" required ref={descriptionInputElement}></textarea>
                         </article>
                         <article className="flex relative">
-                            <button type="button" className="flex items-center gap-2 bg-primary p-2 rounded-lg text-white" onClick={() => setIsCategoryOptionsShowed(!isCategoryOptionsShowed)}>
+                            <button type="button" className="flex items-center gap-2 bg-primary p-2 rounded-lg text-white w-full justify-between" onClick={() => setIsCategoryOptionsShowed(!isCategoryOptionsShowed)}>
                                 <span>Category: {selectedCategory.label}</span>
                                 <IconChevronDown stroke={1.5} className={`transition-all ${isCategoryOptionsShowed ? "rotate-180" : ""}`} />
                             </button>

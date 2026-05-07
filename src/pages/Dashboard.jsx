@@ -43,15 +43,14 @@ function Content(){
         const getDashboard = async() => {
             try {
                 const APIEndpoint = import.meta.env.VITE_API_ENDPOINT
-                const jwt = localStorage.getItem("token")
+                const jwt = localStorage.getItem("jwt")
 
-                const { data } = await axios.get(`${APIEndpoint}/api/dashboard`, {
+                const { data } = await axios.get(`${APIEndpoint}/dashboard`, {
                     headers: {
                         "Authorization": `Bearer ${jwt}`
                     }
                 })
 
-                console.log(data.data)
                 setDashboardData(data.data)
                 const labels = data.data.products_per_category.map(category => category.name)
                 const totalProducts = data.data.products_per_category.map(category => category.total_products)

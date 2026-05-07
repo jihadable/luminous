@@ -20,7 +20,7 @@ export default function VerifyEmail(){
         const handleVerifyEmail = async() => {
             try {
                 const APIEndpoint = import.meta.env.VITE_API_ENDPOINT
-                await axios.post(`${APIEndpoint}/api/email-verifications/verify-email`, {
+                await axios.post(`${APIEndpoint}/email-verifications/verify-email`, {
                     token
                 })
 

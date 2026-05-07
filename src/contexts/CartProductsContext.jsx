@@ -16,12 +16,12 @@ export default function CartProductsProvider({ children }){
         const getAllCartProducts = async() => {
             if (isLogin === true){
                 try {
-                    const cartProductsAPIEndpoint = import.meta.env.VITE_API_ENDPOINT
-                    const token = localStorage.getItem("token")
+                    const APIEndpoint = import.meta.env.VITE_API_ENDPOINT
+                    const jwt = localStorage.getItem("jwt")
     
-                    const { data } = await axios.get(`${cartProductsAPIEndpoint}/api/carts/${user.cart.id}`, {
+                    const { data } = await axios.get(`${APIEndpoint}/carts/${user.cart.id}`, {
                         headers: {
-                            "Authorization": "Bearer " + token
+                            "Authorization": `Bearer ${jwt}`
                         }
                     })
     

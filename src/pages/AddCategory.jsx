@@ -26,12 +26,12 @@ function Content(){
 
             setIsLoading(true)
             const APIEndpoint = import.meta.env.VITE_API_ENDPOINT
-            const jwt = localStorage.getItem("token")
+            const jwt = localStorage.getItem("jwt")
 
             const requestBody = {
                 name: categoryNameInputElement.current.value
             }
-            await axios.post(`${APIEndpoint}/api/categories`, requestBody, {
+            await axios.post(`${APIEndpoint}/categories`, requestBody, {
                 headers: {
                     "Authorization": `Bearer ${jwt}`
                 }

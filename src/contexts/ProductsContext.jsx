@@ -9,9 +9,9 @@ export default function ProductsProvider({ children }){
     useEffect(() => {
         const getAllProducts = async() => {
             try {
-                const producstAPIEndpoint = import.meta.env.VITE_API_ENDPOINT
+                const APIEndpoint = import.meta.env.VITE_API_ENDPOINT
 
-                const { data } = await axios.get(`${producstAPIEndpoint}/api/products`)
+                const { data } = await axios.get(`${APIEndpoint}/products`)
 
                 setProducts(data.data.products)
             } catch (error){

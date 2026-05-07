@@ -70,7 +70,7 @@ function Content(){
         const getCategories = async() => {
             try {
                 const APIEndpoint = import.meta.env.VITE_API_ENDPOINT
-                const { data } = await axios.get(`${APIEndpoint}/api/categories`)
+                const { data } = await axios.get(`${APIEndpoint}/categories`)
 
                 const formattedCategories = data.data.categories.map(category => ({
                     label: category.name.charAt(0).toUpperCase() + category.name.slice(1),
@@ -191,7 +191,7 @@ function Content(){
         try {
             const APIEndpoint = import.meta.env.VITE_API_ENDPOINT
             const jwt = localStorage.getItem("token")
-            await axios.delete(`${APIEndpoint}/api/products/${productId}`, {
+            await axios.delete(`${APIEndpoint}/products/${productId}`, {
                 headers: {
                     Authorization: `Bearer ${jwt}`
                 }
@@ -207,7 +207,7 @@ function Content(){
         const getProducts = async() => {
             try {
                 const APIEndpoint = import.meta.env.VITE_API_ENDPOINT
-                const { data } = await axios.get(`${APIEndpoint}/api/products`, {
+                const { data } = await axios.get(`${APIEndpoint}/products`, {
                     params: {
                         sort,
                         order,

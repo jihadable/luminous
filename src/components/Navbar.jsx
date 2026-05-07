@@ -37,7 +37,7 @@ function Navbar({ link }){
     })
 
     const handleLogout = () => {
-        localStorage.removeItem("token")
+        localStorage.removeItem("jwt")
         setIsLogin(false)
         setUser(null)
         setCartProducts(null)
@@ -143,43 +143,44 @@ function ShoppingCart({ showShoppingCart, setShowShoppingCart, shoppingCart, sho
     const removeCartProduct = async(productId) => {
         try {
             setIsLoading(true)
-            const cartProductsAPIEndpoint = import.meta.env.VITE_API_ENDPOINT
-            const token = localStorage.getItem("token")
+            const APIEndpoint = import.meta.env.VITE_API_ENDPOINT
+            const jwt = localStorage.getItem("jwt")
 
-            await axios.delete(`${cartProductsAPIEndpoint}/api/carts/${user.cart.id}/products/${productId}`, {
+            await axios.delete(`${APIEndpoint}/carts/${user.cart.id}/products/${productId}`, {
                 headers: {
-                    "Authorization": `Bearer ${token}`
+                    "Authorization": `Bearer ${jwt}`
                 }
             })
 
             setCartProducts(cartProducts.filter(cartProduct => cartProduct.product.id !== productId))
             setIsLoading(false)
+            toast.success("Product removed from cart successfully")
         } catch (error) {
             console.log(error)
             setIsLoading(false)
-            toast.error("Gagal menghapus produk dari keranjang")
+            toast.error("Fail to remove product from cart")
         }
     }
     
-    const removeAllProductsFromCartProducts = async() => {
-        try {
-            setIsLoading(true)
-            const cartProductsAPIEndpoint = import.meta.env.VITE_CART_PRODUCTS_API_ENDPOINT
-            const token = localStorage.getItem("token")
+    // const removeAllProductsFromCartProducts = async() => {
+    //     try {
+    //         setIsLoading(true)
+    //         const cartProductsAPIEndpoint = import.meta.env.VITE_CART_PRODUCTS_API_ENDPOINT
+    //         const token = localStorage.getItem("token")
             
-            await axios.delete(cartProductsAPIEndpoint, {
-                headers: {
-                    "Authorization": "Bearer " + token
-                }
-            })
+    //         await axios.delete(cartProductsAPIEndpoint, {
+    //             headers: {
+    //                 "Authorization": "Bearer " + token
+    //             }
+    //         })
             
-            setCartProducts([])
-            setIsLoading(false)
-        } catch (error) {
-            setIsLoading(false)
-            toast.error("Gagal menghapus semua produk dari keranjang")
-        }
-    }
+    //         setCartProducts([])
+    //         setIsLoading(false)
+    //     } catch (error) {
+    //         setIsLoading(false)
+    //         toast.error("Gagal menghapus semua produk dari keranjang")
+    //     }
+    // }
 
     const getTotalPrice = () => {
         let totalPrice = 0
@@ -196,16 +197,16 @@ function ShoppingCart({ showShoppingCart, setShowShoppingCart, shoppingCart, sho
         try {
             if (quantity === 0) return
 
-            const token = localStorage.getItem("token")
+            const jwt = localStorage.getItem("jwt")
             const APIEndpoint = import.meta.env.VITE_API_ENDPOINT
 
             const requestBody = {
                 product_id: productId,
                 quantity
             }
-            await axios.put(`${APIEndpoint}/api/carts/${user.cart.id}`, requestBody, {
+            await axios.put(`${APIEndpoint}/carts/${user.cart.id}`, requestBody, {
                 headers: {
-                    "Authorization": `Bearer ${token}`
+                    "Authorization": `Bearer ${jwt}`
                 }
             })
 

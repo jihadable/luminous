@@ -59,13 +59,13 @@ function Register(){
         try {
             setIsLoading(true)
 
-            const usersAPIEndpoint = import.meta.env.VITE_API_ENDPOINT
+            const APIEndpoint = import.meta.env.VITE_API_ENDPOINT
 
-            const { data } = await axios.post(`${usersAPIEndpoint}/api/users/register`, {
+            const { data } = await axios.post(`${APIEndpoint}/users/register`, {
                 name, email, phone, address, password
             })
 
-            localStorage.setItem("token", data.data.token)
+            localStorage.setItem("jwt", data.data.jwt)
             setIsLogin(true)
             setUser(data.data.user)
 

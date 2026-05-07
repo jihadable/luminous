@@ -23,7 +23,7 @@ function Product(){
         const getProduct = async() => {
             try {
                 const APIEndpoint = import.meta.env.VITE_API_ENDPOINT
-                const { data } = await axios.get(`${APIEndpoint}/api/products/${product_id}`)
+                const { data } = await axios.get(`${APIEndpoint}/products/${product_id}`)
 
                 setProduct(data.data.product)
             } catch(error){
@@ -53,13 +53,13 @@ function Product(){
         try {
             setIsLoading(true)
             const cartProductsAPIEndpoint = import.meta.env.VITE_API_ENDPOINT
-            const token = localStorage.getItem("token")
+            const jwt = localStorage.getItem("jwt")
 
-            const { data } = await axios.post(`${cartProductsAPIEndpoint}/api/carts/${user.cart.id}`, 
+            const { data } = await axios.post(`${cartProductsAPIEndpoint}/carts/${user.cart.id}`, 
                 { product_id: product.id },
                 {
                     headers: {
-                        "Authorization": "Bearer " + token
+                        "Authorization": `Bearer ${jwt}`
                     }
                 }
             )

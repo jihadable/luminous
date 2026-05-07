@@ -34,7 +34,7 @@ function Footer(){
                     </div>
                 </div>
             </div>
-            <div className="bottom pt-4 border-t text-center">©2025 Luminous</div>
+            <div className="bottom pt-4 border-t text-center">©2026 Luminous</div>
         </footer>
     )
 }

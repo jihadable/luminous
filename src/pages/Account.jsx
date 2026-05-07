@@ -47,13 +47,13 @@ function AccountSection(){
         const address = addressElement.current.value
 
         if (name === "" || phone === "" || address === ""){
-            toast.error("Masih ada kolom yang belum diisi!")
+            toast.error("Please fill the column")
 
             return
         }
 
         if (!phonePattern.test(phone)){
-            toast.error("No HP tidak sesuai")
+            toast.error("Phone number does not match")
 
             return
         }
@@ -61,14 +61,14 @@ function AccountSection(){
         try {
             setIsLoading(true)
 
-            const usersAPIEndpoint = import.meta.env.VITE_API_ENDPOINT
-            const token = localStorage.getItem("token")
+            const APIEndpoint = import.meta.env.VITE_API_ENDPOINT
+            const jwt = localStorage.getItem("jwt")
 
-            await axios.put(`${usersAPIEndpoint}/api/users`, 
+            await axios.put(`${APIEndpoint}/users`, 
                 { name, phone, address },
                 {
                     headers: {
-                        "Authorization": "Bearer " + token
+                        "Authorization": `Bearer ${jwt}`
                     }
                 }
             )
@@ -87,11 +87,11 @@ function AccountSection(){
             setIsLoading(true)
 
             const APIEndpoint = import.meta.env.VITE_API_ENDPOINT
-            const token = localStorage.getItem("token")
+            const jwt = localStorage.getItem("jwt")
 
-            await axios.post(`${APIEndpoint}/api/email-verifications/send-email-verification`, null, {
+            await axios.post(`${APIEndpoint}/email-verifications/send-email-verification`, null, {
                 headers: {
-                    "Authorization": `Bearer ${token}`
+                    "Authorization": `Bearer ${jwt}`
                 }
             })
 

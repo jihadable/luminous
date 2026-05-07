@@ -9,9 +9,9 @@ export default function AuthProvider({ children }){
 
     useEffect(() => {
         const auth = async() => {
-            const token = localStorage.getItem("token")
+            const jwt = localStorage.getItem("jwt")
 
-            if (!token){
+            if (!jwt){
                 setIsLogin(false)
                 setUser(null)
                 
@@ -19,18 +19,18 @@ export default function AuthProvider({ children }){
             }
     
             try {
-                const usersAPIEndpoint = import.meta.env.VITE_API_ENDPOINT
+                const APIEndpoint = import.meta.env.VITE_API_ENDPOINT
     
-                const { data } = await axios.get(`${usersAPIEndpoint}/api/users`, {
+                const { data } = await axios.get(`${APIEndpoint}/users`, {
                     headers: {
-                        "Authorization": "Bearer " + token
+                        "Authorization": `Bearer ${jwt}`
                     }
                 })
 
                 setIsLogin(true)
                 setUser(data.data.user)
             } catch(error){
-                localStorage.removeItem("token")
+                localStorage.removeItem("jwt")
                 setIsLogin(false)
                 setUser(null)
             }

@@ -26,7 +26,7 @@ function Content(){
             try {
                 const APIEndpoint = import.meta.env.VITE_API_ENDPOINT
 
-                const { data } = await axios.get(`${APIEndpoint}/api/categories`)
+                const { data } = await axios.get(`${APIEndpoint}/categories`)
 
                 setCategories(data.data.categories)
             } catch(error){
@@ -48,9 +48,9 @@ function Content(){
             setIsLoading(true)
 
             const APIEndpoint = import.meta.env.VITE_API_ENDPOINT
-            const jwt = localStorage.getItem("token")
+            const jwt = localStorage.getItem("jwt")
 
-            await axios.delete(`${APIEndpoint}/api/categories/${categoryId}`, {
+            await axios.delete(`${APIEndpoint}/categories/${categoryId}`, {
                 headers: {
                     "Authorization": `Bearer ${jwt}`
                 }
