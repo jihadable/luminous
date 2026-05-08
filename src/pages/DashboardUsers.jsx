@@ -1,4 +1,4 @@
-import { IconChevronDown, IconTrash } from "@tabler/icons-react";
+import { IconChevronDown } from "@tabler/icons-react";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
@@ -51,6 +51,29 @@ function Content(){
         setIsRoleOptionsShowed(false)
     }
 
+    const statusOptions = [
+        {
+            label: "All",
+            name: "all"
+        },
+        {
+            label: "Verified",
+            name: "verified"
+        },
+        {
+            label: "Not verified",
+            name: "not verified"
+        }
+    ]
+    const [selectedStatusOption, setSelectedStatusOption] = useState("All")
+    const [isStatusOptionsShowed, setIsStatusOptionsShowed] = useState(false)
+    const status = searchParams.get("status") || "all"
+    const updateSelectedStatusOption = statusOption => {
+        updateQuery({ status: statusOption.name })
+        setSelectedStatusOption(statusOption.label)
+        setIsStatusOptionsShowed(false)
+    }
+
     useEffect(() => {
         const getUsers = async() => {
             try {
@@ -61,6 +84,9 @@ function Content(){
                 const params = {}
                 if (role != "all"){
                     params.role = role
+                }
+                if (status != "all"){
+                    params.is_email_verified = status == "verified"
                 }
                 const { data } = await axios.get(`${APIEndpoint}/users`, {
                     headers: {
@@ -76,7 +102,7 @@ function Content(){
         }
 
         getUsers()
-    }, [role])
+    }, [role, status])
 
     return (
         <section className="flex flex-col text-xl w-full overflow-y-auto">
@@ -98,15 +124,15 @@ function Content(){
                             </article>
                         </article>
                         <article className="flex relative">
-                            {/* <button type="button" className="flex items-center gap-2 bg-primary p-2 rounded-lg text-white" onClick={() => setIsCategoryOptionsShowed(!isCategoryOptionsShowed)}>
-                                <span>Verification status: {selectedCategory}</span>
-                                <IconChevronDown stroke={1.5} className={`transition-all ${isCategoryOptionsShowed ? "rotate-180" : ""}`} />
+                            <button type="button" className="flex items-center gap-2 bg-primary p-2 rounded-lg text-white" onClick={() => setIsStatusOptionsShowed(!isStatusOptionsShowed)}>
+                                <span>Status: {selectedStatusOption}</span>
+                                <IconChevronDown stroke={1.5} className={`transition-all ${isStatusOptionsShowed ? "rotate-180" : ""}`} />
                             </button>
-                            <article className={`${isCategoryOptionsShowed ? "flex" : "hidden"} flex-col absolute top-full left-0 bg-white shadow-2xl rounded-md overflow-hidden`}>
-                            {categoryOptions.map((category, index) => (
-                                <button type="button" className="text-left p-2 whitespace-nowrap hover:bg-primary/5" key={index} onClick={() => updateSelectedCategoryOption(category)}>{category.label}</button>
+                            <article className={`${isStatusOptionsShowed ? "flex" : "hidden"} flex-col absolute top-full left-0 bg-white shadow-2xl rounded-md overflow-hidden`}>
+                            {statusOptions.map((status, index) => (
+                                <button type="button" className="text-left p-2 whitespace-nowrap hover:bg-primary/5" key={index} onClick={() => updateSelectedStatusOption(status)}>{status.label}</button>
                             ))}
-                            </article> */}
+                            </article>
                         </article>
                     </article>
                     <table className="rounded-t-lg overflow-hidden">
@@ -116,28 +142,15 @@ function Content(){
                                 <td className="p-2">Email</td>
                                 <td className="p-2">Name</td>
                                 <td className="p-2">Role</td>
-                                <td className="p-2 text-center">Actions</td>
                             </tr>
                         </thead>
                         <tbody>
                         {users?.map((user, index) => (
                             <tr key={index} className={`border-b border-primary`}>
-                                {/* <td className="p-2">{limit * (page - 1) + index + 1}</td> */}
                                 <td className="p-2">{index + 1}</td>
                                 <td className="p-2">{user.email}</td>
                                 <td className="p-2">{user.name}</td>
                                 <td className="p-2">{user.role}</td>
-                                <td className="p-2 text-center flex justify-center">
-                                {/* {
-                                    isLoading ?
-                                    <div className="p-1 rounded-lg bg-red-500 text-white flex items-center justify-center">
-                                        <Loader width={24} height={24} />
-                                    </div> :
-                                } */}
-                                    <button type="button" className="p-1 rounded-md bg-red-500 text-white">
-                                        <IconTrash stroke={1.5} />
-                                    </button>
-                                </td>
                             </tr>
                         ))}
                         </tbody>
