@@ -2,6 +2,8 @@ import { IconChevronDown, IconChevronLeft, IconChevronRight, IconChevronsLeft, I
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import Loader from "../components/Loader";
 import Sidebar from "../components/Sidebar";
 import { AuthContext } from "../contexts/AuthContext";
 
@@ -187,18 +189,30 @@ function Content(){
         }
     }
 
+    const [isLoading, setIsLoading] = useState(false)
+
     const handleDeleteProduct = async(productId) => {
         try {
+            if (!confirm("Delete this product?")){
+                return
+            }
+
+            setIsLoading(true)
+
             const APIEndpoint = import.meta.env.VITE_API_ENDPOINT
-            const jwt = localStorage.getItem("token")
+            const jwt = localStorage.getItem("jwt")
             await axios.delete(`${APIEndpoint}/products/${productId}`, {
                 headers: {
                     Authorization: `Bearer ${jwt}`
                 }
             })
 
-
+            setProducts(products => [...products].filter(product => product.id != productId))
+            setIsLoading(false)
+            toast.success("Product deleted successfully")
         } catch(error){
+            setIsLoading(false)
+            toast.error("Fail to delete product")
             console.log(error)
         }
     }
@@ -287,9 +301,15 @@ function Content(){
                                     <Link to={`/dashboard/products/edit/${product.id}`} className="p-1 rounded-md bg-yellow-400 text-black">
                                         <IconEdit stroke={1.5} />
                                     </Link>
-                                    <button type="button" className="p-1 rounded-md bg-red-500 text-white">
+                                {
+                                    isLoading ?
+                                    <div className="p-1 rounded-lg bg-red-500 text-white flex items-center justify-center">
+                                        <Loader width={24} height={24} />
+                                    </div> :
+                                    <button type="button" className="p-1 rounded-md bg-red-500 text-white" onClick={() => handleDeleteProduct(product.id)}>
                                         <IconTrash stroke={1.5} />
                                     </button>
+                                }
                                 </td>
                             </tr>
                         ))}

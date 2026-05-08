@@ -49,6 +49,7 @@ function Content(){
         useRef(null),
         useRef(null)
     ]
+    const [imagePreview, setImagePreview] = useState(null)
 
     useEffect(() => {
         const getCategories = async() => {
@@ -81,9 +82,42 @@ function Content(){
         setIsCategoryOptionsShowed(false)
     }
 
+    const handleImagePreview = () => {
+        const imageFile = imageFileInputElement.current.files[0]
+        console.log(imageFile)
+
+        if (imageFile) {
+            const allowedExtensions = ["jpg", "jpeg", "png"]
+            const extension = imageFile.name.split(".").pop()?.toLowerCase()
+        
+            if (extension && allowedExtensions.includes(extension)){
+                if (imageFile.size > 1024 * 1024){
+                    toast.warn("Image size can not larger than 1MB")
+
+                    return
+                }
+
+                const imagePreviewURL = URL.createObjectURL(imageFile)
+                console.log(imagePreviewURL)
+                setImagePreview(imagePreviewURL)
+            } 
+            else {
+                toast.warn("Unsupported image extension")
+
+                return
+            }
+        }
+    }
+
     const handleAddProduct = async(event) => {
         try {
             event.preventDefault()
+
+            if (!imageFileInputElement.current.files.length){
+                toast.warn("Please fill the image input")
+
+                return
+            }
 
             setIsLoading(true)
             const APIEndpoint = import.meta.env.VITE_API_ENDPOINT
@@ -110,6 +144,17 @@ function Content(){
 
             setIsLoading(false)
             toast.success("Product added successfully")
+
+            nameInputElement.current.value = ""
+            priceInputElement.current.value = ""
+            stockInputElement.current.value = ""
+            weightInputElement.current.value = ""
+            textureInputElement.current.value = ""
+            sizeInputElement.current.value = ""
+            imageFileInputElement.current.value = ""
+            setImagePreview(null)
+            descriptionInputElement.current.value = ""
+            setSelectedCategory({ id: "", name: "", label: "None" })
         } catch(error){
             toast.error("Fail to add product")
             setIsLoading(false)
@@ -152,12 +197,16 @@ function Content(){
                             <IconRuler2 stroke={1.5} />
                             <input type="text" placeholder="Size" className="bg-transparent outline-none w-full" required ref={sizeInputElement} />
                         </article>
-                        <article className="bg-primary/10 p-2 flex items-center gap-2 rounded-lg w-full">
-                            <label className="flex items-center gap-2 w-full cursor-pointer">
+                        <article className="flex flex-col gap-2 w-full">
+                            <label className="bg-primary/10 p-2 rounded-lg flex items-center gap-2 w-full cursor-pointer">
                                 <IconPhoto stroke={1.5} />
-                                <p>Image</p>
-                                <input type="file" placeholder="Image" className="bg-transparent outline-none w-full" required hidden ref={imageFileInputElement} />
+                                <p>{imagePreview ? "Change image" : "Image"}</p>
+                                <input type="file" className="bg-transparent outline-none w-full" hidden name="image-file" ref={imageFileInputElement} onChange={handleImagePreview} />
                             </label>
+                            {imagePreview &&
+                            <article className="flex w-full">
+                                <img src={imagePreview} alt="Image Preview" className="rounded-md" />
+                            </article>}
                         </article>
                         <article className="bg-primary/10 p-2 flex gap-2 rounded-lg w-full">
                             <div className="flex">
