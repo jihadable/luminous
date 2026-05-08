@@ -21,7 +21,7 @@ export default function AuthProvider({ children }){
             try {
                 const APIEndpoint = import.meta.env.VITE_API_ENDPOINT
     
-                const { data } = await axios.get(`${APIEndpoint}/users`, {
+                const { data } = await axios.get(`${APIEndpoint}/users/auth`, {
                     headers: {
                         "Authorization": `Bearer ${jwt}`
                     }

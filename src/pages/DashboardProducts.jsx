@@ -46,6 +46,7 @@ function Content(){
             order: "desc"
         }
     ]
+
     const [searchParams, setSearchParams] = useSearchParams()
 
     const sort = searchParams.get("sort") || "name"
@@ -93,16 +94,16 @@ function Content(){
         getCategories()
     }, [])
 
-    useEffect(() => {
-        if (searchParams.size == 0) {
-            setSearchParams({
-                sort: "name",
-                order: "asc",
-                page: 1,
-                category: "all"
-            })
-        }
-    }, [searchParams, setSearchParams])
+    // useEffect(() => {
+    //     if (searchParams.size == 0) {
+    //         setSearchParams({
+    //             sort: "name",
+    //             order: "asc",
+    //             page: 1,
+    //             category: "all"
+    //         })
+    //     }
+    // }, [searchParams, setSearchParams])
 
     const updateQuery = payload => {
         setSearchParams({
@@ -221,14 +222,14 @@ function Content(){
         const getProducts = async() => {
             try {
                 const APIEndpoint = import.meta.env.VITE_API_ENDPOINT
+                const params = {
+                    sort, order, page, limit
+                }
+                if (category != "all"){
+                    params.category = category
+                }
                 const { data } = await axios.get(`${APIEndpoint}/products`, {
-                    params: {
-                        sort,
-                        order,
-                        page,
-                        limit,
-                        category: (category == "all" ? undefined : category)
-                    }
+                    params
                 })
 
                 setProducts(data.data.products)
