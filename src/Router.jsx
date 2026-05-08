@@ -11,6 +11,7 @@ import Dashboard from './pages/Dashboard';
 import DashboardCategories from './pages/DashboardCategories';
 import DashboardProducts from './pages/DashboardProducts';
 import DashboardUsers from './pages/DashboardUsers';
+import EditProduct from './pages/EditProduct';
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import NotFound from './pages/NotFound';
@@ -49,6 +50,8 @@ export default function Router(){
 
                     <Route path="/dashboard/add-product" element={<AddProduct />} />
                     <Route path="/dashboard/add-category" element={<AddCategory />} />
+
+                    <Route path="/dashboard/edit-product/:product_id" element={<EditProduct />} />
 
                     <Route path="*" element={<NotFound />} />
                 </Routes>

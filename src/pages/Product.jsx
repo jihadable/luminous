@@ -18,6 +18,7 @@ function Product(){
     const { cartProducts, setCartProducts } = useContext(CartProductsContext)
     
     const [product, setProduct] = useState(null)
+    const [notFound, setNotFound] = useState(false)
     
     useEffect(() => {
         const getProduct = async() => {
@@ -27,6 +28,7 @@ function Product(){
 
                 setProduct(data.data.product)
             } catch(error){
+                setNotFound(true)
                 console.log(error)
             }
         }
@@ -84,7 +86,7 @@ function Product(){
         return false
     }
 
-    if (product === undefined){
+    if (notFound){
         return <NotFound />
     }
 

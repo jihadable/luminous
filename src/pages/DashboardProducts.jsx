@@ -296,10 +296,10 @@ function Content(){
                                 <td className="p-2">
                                     <Link to={`/dashboard/products/${product.id}`}>{product.name}</Link>
                                 </td>
-                                <td className="p-2 text-center">{product.price}</td>
+                                <td className="p-2 text-center">{(Number(product.price)).toLocaleString("id-ID")}</td>
                                 <td className="p-2 text-center">{product.stock}</td>
                                 <td className="p-2 text-center flex justify-center gap-1">
-                                    <Link to={`/dashboard/products/edit/${product.id}`} className="p-1 rounded-md bg-yellow-400 text-black">
+                                    <Link to={`/dashboard/edit-product/${product.id}`} className="p-1 rounded-md bg-yellow-400 text-black">
                                         <IconEdit stroke={1.5} />
                                     </Link>
                                 {
