@@ -84,7 +84,6 @@ function Content(){
 
     const handleImagePreview = () => {
         const imageFile = imageFileInputElement.current.files[0]
-        console.log(imageFile)
 
         if (imageFile) {
             const allowedExtensions = ["jpg", "jpeg", "png"]
@@ -98,7 +97,6 @@ function Content(){
                 }
 
                 const imagePreviewURL = URL.createObjectURL(imageFile)
-                console.log(imagePreviewURL)
                 setImagePreview(imagePreviewURL)
             } 
             else {

@@ -9,6 +9,7 @@ import AddCategory from './pages/AddCategory';
 import AddProduct from './pages/AddProduct';
 import Dashboard from './pages/Dashboard';
 import DashboardCategories from './pages/DashboardCategories';
+import DashboardProduct from './pages/DashboardProduct';
 import DashboardProducts from './pages/DashboardProducts';
 import DashboardUsers from './pages/DashboardUsers';
 import EditProduct from './pages/EditProduct';
@@ -47,6 +48,8 @@ export default function Router(){
                     <Route path="/dashboard/users" element={<DashboardUsers />} />
                     <Route path="/dashboard/products" element={<DashboardProducts />} />
                     <Route path="/dashboard/categories" element={<DashboardCategories />} />
+
+                    <Route path="/dashboard/products/:product_id" element={<DashboardProduct />} />
 
                     <Route path="/dashboard/add-product" element={<AddProduct />} />
                     <Route path="/dashboard/add-category" element={<AddCategory />} />
