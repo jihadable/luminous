@@ -1,7 +1,7 @@
 import { IconChevronDown, IconClipboardText, IconPhoto, IconRuler2, IconShoppingBag, IconStack2, IconTag, IconTexture, IconWeight } from "@tabler/icons-react";
 import axios from "axios";
 import { useContext, useEffect, useRef, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loader from "../components/Loader";
 import Sidebar from "../components/Sidebar";
@@ -47,6 +47,7 @@ export default function EditProduct(){
 function Content({ product }){
     const { user } = useContext(AuthContext)
     const productImagesAPIEndpoint = import.meta.env.VITE_STORAGE_API
+    const navigate = useNavigate()
 
     const [isLoading, setIsLoading] = useState(false)
     const [
@@ -168,6 +169,7 @@ function Content({ product }){
 
             setIsLoading(false)
             toast.success("Product updated successfully")
+            navigate("/dashboard/products")
         } catch(error){
             setIsLoading(false)
             toast.error("Fail to update product")

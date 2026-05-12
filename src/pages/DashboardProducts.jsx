@@ -252,7 +252,7 @@ function Content(){
                     <article className="flex">
                         <Link to={"/dashboard/add-product"} className="flex items-center gap-2 bg-primary text-white p-2 rounded-lg">
                             <IconPlus stroke={1.5} />
-                            <span><p>Add product</p></span>
+                            <p>Add product</p>
                         </Link>
                     </article>
                     <article className="flex items-center gap-4">

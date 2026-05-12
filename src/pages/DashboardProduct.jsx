@@ -1,7 +1,9 @@
-import { IconClipboardText, IconRuler2, IconShoppingBag, IconStack2, IconTag, IconTexture, IconWeight } from "@tabler/icons-react";
+import { IconClipboardText, IconEdit, IconRuler2, IconShoppingBag, IconStack2, IconTag, IconTexture, IconTrash, IconWeight } from "@tabler/icons-react";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import Loader from "../components/Loader";
 import Sidebar from "../components/Sidebar";
 import { AuthContext } from "../contexts/AuthContext";
 import NotFound from "./NotFound";
@@ -45,6 +47,32 @@ export default function DashboardProduct(){
 function Content({ product }){
     const { user } = useContext(AuthContext)
 
+    const navigate = useNavigate()
+    const [isLoading, setIsLoading] = useState(false)
+
+    const handleDeleteProduct = async() => {
+        try {
+            setIsLoading(true)
+
+            const APIEndpoint = import.meta.env.VITE_API_ENDPOINT
+            const jwt = localStorage.getItem("jwt")
+
+            await axios.delete(`${APIEndpoint}/products/${product.id}`, {
+                headers: {
+                    "Authorization": `Bearer ${jwt}`
+                }
+            })
+
+            setIsLoading(false)
+            toast.success("Product deleted successfully")
+            navigate("/dashboard/products")
+        } catch(error){
+            setIsLoading(false)
+            toast.error("Fail to delete product")
+            console.log(error)
+        }
+    }
+
     return (
         <section className="flex flex-col text-xl w-full overflow-y-auto">
             <article className="flex flex-col gap-4 p-4 pb-12 w-full">
@@ -52,6 +80,22 @@ function Content({ product }){
                     <p className="font-bold">{user?.name}</p>
                 </article>
                 <article className="flex flex-col gap-4">
+                    <article className="flex items-center gap-4 w-1/2">
+                        <Link to={`/dashboard/edit-product/${product.id}`} className="flex items-center justify-center gap-2 bg-yellow-400 p-2 rounded-lg w-1/2">
+                            <IconEdit stroke={1.5} />
+                            <p>Edit product</p>
+                        </Link>
+                    {
+                        isLoading ?
+                        <div className="py-2.5 rounded-lg bg-red-500 text-white flex items-center justify-center w-1/2">
+                            <Loader width={24} height={24} />
+                        </div> :
+                        <button type="button" className="flex items-center justify-center gap-2 bg-red-500 text-white p-2 rounded-lg w-1/2" onClick={handleDeleteProduct}>
+                            <IconTrash stroke={1.5} />
+                            <p>Delete product</p>
+                        </button>
+                    }
+                    </article>
                     <article className="flex flex-col gap-4 w-1/2">
                         <article className="bg-primary/10 p-2 flex items-center gap-2 rounded-lg w-full">
                             <IconShoppingBag stroke={1.5} />

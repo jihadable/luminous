@@ -76,7 +76,7 @@ function Content(){
                     <article className="flex">
                         <Link to={"/dashboard/add-category"} className="flex items-center gap-2 bg-primary text-white p-2 rounded-lg">
                             <IconPlus stroke={1.5} />
-                            <span><p>Add category</p></span>
+                            <p>Add category</p>
                         </Link>
                     </article>
                     <table className="rounded-t-lg overflow-hidden">
