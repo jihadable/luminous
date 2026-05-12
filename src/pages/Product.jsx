@@ -120,16 +120,21 @@ function Product(){
                             </span>
                         </div>
                     {
+                        isLogin === false &&
+                        <article className="self-end">
+                            <p className="p-2 rounded bg-primary text-white">{getIdCurrency(Number(product.price))}</p>
+                        </article>
+                    }
+                    {
                         isLogin === true && user.role == "customer" &&
                         <>
-                        <div className="bg-black/[.3] h-[1px] w-full" />
                         <div className="product-footer w-full flex items-center justify-between">
                             <span className="add-minus-product select-none">
                                 <span className="add-product cursor-pointer py-2 px-4 bg-primary text-white-prim" onClick={reduceQuantity}>-</span>
                                 <span className="py-2 px-4 bg-white">{quantity}</span>
                                 <span className="minus-product cursor-pointer py-2 px-4 bg-primary text-white-prim" onClick={() => setQuantity(quantity => quantity + 1)}>+</span>
                             </span>
-                            <span className="product-price  p-2 bg-primary text-white-prim rounded">{getIdCurrency(product.price * quantity)}</span>
+                            <span className="product-price p-2 bg-primary text-white-prim rounded">{getIdCurrency(product.price * quantity)}</span>
                         </div>
                         <div className="w-full flex items-center justify-end gap-4 mobile:flex-col mobile:items-end">
                         {

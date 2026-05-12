@@ -206,7 +206,7 @@ function StoreGrid({ products }){
                     <img src={`${productImagesAPIEndpoint}/${product.image_url}`} alt={product.name} loading="lazy" />
                     <div className="info p-4 flex flex-col gap-4">
                         <div className="product-name text-xl font-bold mobile:text-xl tablet:text-xl">{product.name}</div>
-                        <div className="product-price text-xl mobile:text-base tablet:text-base">{getIdCurrency(product.price)}</div>
+                        <div className="product-price text-xl mobile:text-base tablet:text-base">{getIdCurrency(Number(product.price))}</div>
                     </div>
                 </Link>
             ))}
