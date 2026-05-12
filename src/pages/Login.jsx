@@ -70,6 +70,9 @@ function Login(){
                         <IconLock stroke={1.5} />
                         <input type="password" placeholder="Password" className="bg-transparent outline-none w-[250px] mobile:w-full" required ref={passwordElement} />
                     </div>
+                    <article>
+                        <Link to={"/forget-password"} className="text-primary hover:underline">Forget password?</Link>
+                    </article>
                     {
                         isLoading ?
                         <div className="py-2 rounded bg-primary text-white flex items-center justify-center">
