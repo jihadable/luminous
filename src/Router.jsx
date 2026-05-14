@@ -13,11 +13,13 @@ import DashboardProduct from './pages/DashboardProduct';
 import DashboardProducts from './pages/DashboardProducts';
 import DashboardUsers from './pages/DashboardUsers';
 import EditProduct from './pages/EditProduct';
+import ForgetPassword from './pages/ForgetPassword';
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import NotFound from './pages/NotFound';
 import Product from './pages/Product';
 import Register from './pages/Register';
+import ResetPassword from './pages/ResetPassword';
 import Store from "./pages/Store";
 import VerifyEmail from './pages/VerifyEmail';
 
@@ -43,6 +45,8 @@ export default function Router(){
                     <Route path="/store/:product_id" element={<Product />} />
                     <Route path="/account" element={<Account />} />
                     <Route path="/verify-email/:token" element={<VerifyEmail />} />
+                    <Route path="/forget-password" element={<ForgetPassword />} />
+                    <Route path="/reset-password/:token" element={<ResetPassword />} />
 
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/dashboard/users" element={<DashboardUsers />} />
