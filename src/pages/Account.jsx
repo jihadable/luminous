@@ -21,7 +21,7 @@ export default function Account(){
         return (
             <>
             <Navbar />
-            <AccountSection />
+            <AccountSection user={user} />
             <Footer />
             </>
         )
@@ -30,8 +30,8 @@ export default function Account(){
     return null
 }
 
-function AccountSection(){
-    const { user, setUser } = useContext(AuthContext)
+function AccountSection({ user }){
+    const { setUser } = useContext(AuthContext)
     const avatarGenerator = import.meta.env.VITE_AVATAR_GENERATOR
 
     const [isLoading, setIsLoading] = useState(false)
@@ -111,7 +111,7 @@ function AccountSection(){
             <div className="desc flex flex-col items-center gap-2 w-full">
                 <label className="w-full flex items-center gap-2 p-2 rounded-md bg-primary/[.1]">
                     <IconUserCircle stroke={1.5} />
-                    <input type="text" defaultValue={user.name} placeholder="Nama Lengkap" className="bg-transparent border-none outline-none" required ref={nameElement} />
+                    <input type="text" defaultValue={user.name} placeholder="Full name" className="bg-transparent border-none outline-none" required ref={nameElement} />
                 </label>
                 <div className="w-full flex items-center gap-2 p-2 rounded-md bg-primary/[.1]">
                     <IconMail stroke={1.5} />
@@ -129,18 +129,18 @@ function AccountSection(){
                 </>}
                 <label className="w-full flex items-center gap-2 p-2 rounded-md bg-primary/[.1]">
                     <IconPhone stroke={1.5} />
-                    <input type="text" defaultValue={user.phone} placeholder="No HP" className="bg-transparent border-none outline-none" required ref={phoneElement} />
+                    <input type="text" defaultValue={user.phone} placeholder="Phone number" className="bg-transparent border-none outline-none" required ref={phoneElement} />
                 </label>
                 <label className="w-full flex items-center gap-2 p-2 rounded-md bg-primary/[.1]">
                     <IconMapPin stroke={1.5} />
-                    <input type="text" defaultValue={user.address} placeholder="Alamat" className="bg-transparent border-none outline-none" required ref={addressElement} />
+                    <input type="text" defaultValue={user.address} placeholder="Address" className="bg-transparent border-none outline-none" required ref={addressElement} />
                 </label>
                 {
                     isLoading ?
                     <div className="w-full flex items-center justify-center text-white gap-2 p-2 rounded-md bg-primary">
                         <Loader width={24} height={24} />
                     </div> :
-                    <button type="button" className="w-full flex items-center justify-center text-white gap-2 p-2 rounded-md bg-primary" onClick={updateUserProfile}>Simpan</button>
+                    <button type="button" className="w-full flex items-center justify-center text-white gap-2 p-2 rounded-md bg-primary" onClick={updateUserProfile}>Save</button>
                 }
             </div>
         </section>
