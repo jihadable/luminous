@@ -6,18 +6,28 @@ import { toast } from "react-toastify";
 import Loader from "../components/Loader";
 import Sidebar from "../components/Sidebar";
 import { AuthContext } from "../contexts/AuthContext";
+import NotFound from "./NotFound";
 
 export default function DashboardProducts(){
-    return (
-        <section className="dashboard flex h-screen">
-            <Sidebar page={"products"} />
-            <Content />
-        </section>
-    )
+    const { isLogin, user } = useContext(AuthContext)
+    
+    if (isLogin === false || user?.role == "customer"){
+        return <NotFound />
+    }
+
+    if (isLogin === true && user?.role == "admin"){
+        return (
+            <section className="dashboard flex h-screen">
+                <Sidebar page={"products"} />
+                <Content user={user} />
+            </section>
+        )
+    }
+
+    return null
 }
 
-function Content(){
-    const { user } = useContext(AuthContext)
+function Content({ user }){
     const [products, setProducts] = useState(null)
     const sortByOptions = [
         {

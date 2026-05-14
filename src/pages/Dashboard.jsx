@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
 import Sidebar from "../components/Sidebar";
 import { AuthContext } from "../contexts/AuthContext";
+import NotFound from "./NotFound";
 
 ChartJS.register(
     CategoryScale,
@@ -19,16 +20,25 @@ ChartJS.register(
 );
 
 export default function Dashboard(){
-    return (
-        <section className="dashboard flex">
-            <Sidebar page={"dashboard"} />
-            <Content />
-        </section>
-    )
+    const { isLogin, user } = useContext(AuthContext)
+
+    if (isLogin === false || user?.role == "customer"){
+        return <NotFound />
+    }
+
+    if (isLogin === true && user?.role == "admin"){
+        return (
+            <section className="dashboard flex">
+                <Sidebar page={"dashboard"} />
+                <Content user={user} />
+            </section>
+        )
+    }
+
+    return null
 }
 
-function Content(){
-    const { user } = useContext(AuthContext)
+function Content({ user }){
     const [dashboardData, setDashboardData] = useState(null)
     const [categories, setCategories] = useState({
         datasets: [{

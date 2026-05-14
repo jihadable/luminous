@@ -4,19 +4,28 @@ import { useContext, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import { AuthContext } from "../contexts/AuthContext";
+import NotFound from "./NotFound";
 
 export default function DashboardUsers(){
-    return (
-        <section className="dashboard flex h-screen">
-            <Sidebar page={"users"} />
-            <Content />
-        </section>
-    )
+    const { isLogin, user } = useContext(AuthContext)
+    
+    if (isLogin === false || user?.role == "customer"){
+        return <NotFound />
+    }
+
+    if (isLogin === true && user?.role == "admin"){
+        return (
+            <section className="dashboard flex h-screen">
+                <Sidebar page={"users"} />
+                <Content user={user} />
+            </section>
+        )
+    }
+
+    return null
 }
 
-function Content(){
-    const { user } = useContext(AuthContext)
-
+function Content({ user }){
     const [users, setUsers] = useState([])
 
     const [searchParams, setSearchParams] = useSearchParams()

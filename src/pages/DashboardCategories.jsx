@@ -6,19 +6,28 @@ import { toast } from "react-toastify";
 import Loader from "../components/Loader";
 import Sidebar from "../components/Sidebar";
 import { AuthContext } from "../contexts/AuthContext";
+import NotFound from "./NotFound";
 
 export default function DashboardCategories(){
-    return (
-        <section className="dashboard flex h-screen">
-            <Sidebar page={"categories"} />
-            <Content />
-        </section>
-    )
+    const { isLogin, user } = useContext(AuthContext)
+    
+    if (isLogin === false || user?.role == "customer"){
+        return <NotFound />
+    }
+
+    if (isLogin === true && user?.role == "admin"){
+        return (
+            <section className="dashboard flex h-screen">
+                <Sidebar page={"categories"} />
+                <Content user={user} />
+            </section>
+        )
+    }
+
+    return null
 }
 
-function Content(){
-    const { user } = useContext(AuthContext)
-
+function Content({ user }){
     const [categories, setCategories] = useState([])
 
     useEffect(() => {

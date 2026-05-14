@@ -12,6 +12,7 @@ export default function EditProduct(){
     const { product_id } = useParams()
     const [product, setProduct] = useState(null)
     const [notFound, setNotFound] = useState(false)
+    const { isLogin, user } = useContext(AuthContext)
 
     useEffect(() => {
         const getProduct = async() => {
@@ -29,14 +30,14 @@ export default function EditProduct(){
         getProduct()
     }, [])
 
-    if (notFound){
+    if (notFound || isLogin === false || user?.role == "customer"){
         return <NotFound />
     }
-    if (product !== undefined && product !== null){
+    if (product !== undefined && product !== null && isLogin === true && user?.role == "admin"){
         return (
             <section className="edit-product flex h-screen">
                 <Sidebar page={"products"} />
-                <Content product={product} />
+                <Content user={user} product={product} />
             </section>
         )
     }
@@ -44,8 +45,7 @@ export default function EditProduct(){
     return null
 }
 
-function Content({ product }){
-    const { user } = useContext(AuthContext)
+function Content({ user, product }){
     const productImagesAPIEndpoint = import.meta.env.VITE_STORAGE_API
     const navigate = useNavigate()
 

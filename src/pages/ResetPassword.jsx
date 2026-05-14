@@ -1,24 +1,34 @@
 import { IconLock } from "@tabler/icons-react";
+import axios from "axios";
 import { useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Footer from "../components/Footer";
 import Loader from "../components/Loader";
 import Navbar from "../components/Navbar";
+import NotFound from "./NotFound";
 
 export default function ResetPassword(){
-    return (
-        <>
-        <Navbar />
-        <ResetPasswordSection />
-        <Footer />
-        </>
-    )
-}
-
-function ResetPasswordSection(){
     const { token } = useParams()
 
+    if (!token){
+        return <NotFound />
+    } 
+    
+    if (token) {
+        return (
+            <>
+            <Navbar />
+            <ResetPasswordSection token={token} />
+            <Footer />
+            </>
+        )
+    }
+
+    return null
+}
+
+function ResetPasswordSection({ token }){
     const [
         newPasswordInputElement,
         newPasswordConfirmationInputElement
@@ -33,10 +43,26 @@ function ResetPasswordSection(){
         try {
             event.preventDefault()
 
+            const newPassword = newPasswordInputElement.current.value
+            const newPasswordConfirmation = newPasswordConfirmationInputElement.current.value
+            if (newPassword != newPasswordConfirmation){
+                toast.warn("New password confirmation does not match!")
+
+                return
+            }
+
             setIsLoading(true)
 
-            // setIsLoading(false)
-            // toast.success("Password reset successfully")
+            const APIEndpoint = import.meta.env.VITE_API_ENDPOINT
+
+            const requestBody = {
+                token,
+                new_password: newPassword
+            }
+            await axios.post(`${APIEndpoint}/password-reset/reset-password`, requestBody)
+
+            setIsLoading(false)
+            toast.success("Password reset successfully")
         } catch(error){
             setIsLoading(false)
             toast.error("Fail to reset password")
@@ -45,8 +71,8 @@ function ResetPasswordSection(){
     }
 
     return (
-        <section className="flex items-center justify-center h-screen w-full text-xl">
-            <article className="flex flex-col items-center gap-4 w-1/2">
+        <section className="flex items-center justify-center h-screen w-full text-xl mobile:p-4">
+            <article className="flex flex-col items-center gap-4 w-1/2 mobile:w-full">
                 <p className="font-bold text-2xl text-center">Reset password</p>
                 <form className="flex flex-col gap-4 w-full" onSubmit={handleResetPassword}>
                     <article className="bg-primary/10 p-2 flex items-center gap-2 rounded-lg w-full">
