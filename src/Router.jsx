@@ -3,7 +3,6 @@ import { ToastContainer } from 'react-toastify';
 import "react-toastify/ReactToastify.css";
 import AuthProvider from './contexts/AuthContext';
 import CartProductsProvider from './contexts/CartProductsContext';
-import ProductsProvider from './contexts/ProductsContext';
 import Account from './pages/Account';
 import AddCategory from './pages/AddCategory';
 import AddProduct from './pages/AddProduct';
@@ -27,7 +26,6 @@ export default function Router(){
     return (
         <BrowserRouter>
             <AuthProvider>
-            <ProductsProvider>
             <CartProductsProvider>
             <ToastContainer 
             position="top-center"
@@ -63,7 +61,6 @@ export default function Router(){
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </CartProductsProvider>
-            </ProductsProvider>
             </AuthProvider>
         </BrowserRouter>
     )
