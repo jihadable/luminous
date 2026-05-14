@@ -28,6 +28,8 @@ export default function DashboardProducts(){
 }
 
 function Content({ user }){
+    document.title = "Luminous | Products"
+
     const [products, setProducts] = useState(null)
     const sortByOptions = [
         {

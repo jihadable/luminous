@@ -27,6 +27,8 @@ export default function AddCategory(){
 }
 
 function Content({ user }){
+    document.title = "Luminous | Add category"
+
     const categoryNameInputElement = useRef(null)
     const [isLoading, setIsLoading] = useState(false)
 

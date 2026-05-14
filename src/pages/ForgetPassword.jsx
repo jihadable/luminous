@@ -17,6 +17,8 @@ export default function ForgetPassword(){
 }
 
 function ForgetPasswordSection(){
+    document.title = "Luminous | Forget password"
+    
     const emailInputElement = useRef(null)
 
     const [isLoading, setIsLoading] = useState(false)

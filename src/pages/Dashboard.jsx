@@ -39,6 +39,8 @@ export default function Dashboard(){
 }
 
 function Content({ user }){
+    document.title = "Luminous | Dashboard"
+
     const [dashboardData, setDashboardData] = useState(null)
     const [categories, setCategories] = useState({
         datasets: [{

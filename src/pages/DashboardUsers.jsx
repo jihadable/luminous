@@ -26,6 +26,8 @@ export default function DashboardUsers(){
 }
 
 function Content({ user }){
+    document.title = "Luminous | Users"
+
     const [users, setUsers] = useState([])
 
     const [searchParams, setSearchParams] = useSearchParams()

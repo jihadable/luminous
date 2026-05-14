@@ -46,6 +46,7 @@ export default function DashboardProduct(){
 }
 
 function Content({ user, product }){
+    document.title = "Luminous | Product"
 
     const navigate = useNavigate()
     const [isLoading, setIsLoading] = useState(false)

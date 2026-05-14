@@ -9,7 +9,7 @@ import NotFound from "./NotFound"
 
 export default function VerifyEmail(){
     const { token } = useParams()
-    const [status, setStatus] = useState("error")
+    const [status, setStatus] = useState("loading")
     const { user, setUser, isLogin } = useContext(AuthContext)
 
     if (!token){
@@ -39,6 +39,8 @@ export default function VerifyEmail(){
     }, [token])
     
     if (status == "loading"){
+        document.title = "Luminous | Verify email"
+        
         return (
             <section className="flex flex-col h-screen w-screen items-center justify-center">
                 <Loader width={24} height={24} />
@@ -46,6 +48,8 @@ export default function VerifyEmail(){
         )
     }
     if (status == "error"){
+        document.title = "Luminous | Verify email"
+        
         return (
             <section className="flex flex-col h-screen w-screen items-center justify-center p-2">
                 <div className="text-xl font-bold text-center">Luminous</div>
@@ -60,6 +64,8 @@ export default function VerifyEmail(){
         )
     }
     if (status == "success"){
+        document.title = "Luminous | Verify email"
+        
         return (
             <section className="flex flex-col h-screen w-screen items-center justify-center p-2">
                 <div className="text-xl font-bold text-center">Luminous</div>

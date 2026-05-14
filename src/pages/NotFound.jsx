@@ -3,6 +3,8 @@ import notFoundImg from "../assets/404.png"
 import goTop from "../utils/goTop"
 
 export default function NotFound(){
+    document.title = "Luminous | Not found"
+    
     return (
         <div className="not-found w-full h-screen flex flex-col justify-center items-center gap-6 bg-primary">
             <div className="flex flex-col items-center text-xl bg-white p-8 rounded-lg">

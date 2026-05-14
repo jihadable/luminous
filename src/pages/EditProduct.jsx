@@ -46,6 +46,8 @@ export default function EditProduct(){
 }
 
 function Content({ user, product }){
+    document.title = "Luminous | Edit product"
+
     const productImagesAPIEndpoint = import.meta.env.VITE_STORAGE_API
     const navigate = useNavigate()
 

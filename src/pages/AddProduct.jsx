@@ -27,6 +27,8 @@ export default function AddProduct(){
 }
 
 function Content({ user }){
+    document.title = "Luminous | Add product"
+
     const [isLoading, setIsLoading] = useState(false)
     const [categories, setCategories] = useState([{
         id: "",

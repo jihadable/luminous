@@ -29,6 +29,8 @@ export default function ResetPassword(){
 }
 
 function ResetPasswordSection({ token }){
+    document.title = "Luminous | Reset password"
+
     const [
         newPasswordInputElement,
         newPasswordConfirmationInputElement

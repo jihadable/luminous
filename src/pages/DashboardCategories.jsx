@@ -28,6 +28,8 @@ export default function DashboardCategories(){
 }
 
 function Content({ user }){
+    document.title = "Luminous | Categories"
+
     const [categories, setCategories] = useState([])
 
     useEffect(() => {

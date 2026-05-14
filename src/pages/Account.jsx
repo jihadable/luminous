@@ -11,16 +11,16 @@ import NotFound from "./NotFound";
 export default function Account(){
     const { isLogin, user } = useContext(AuthContext)
 
-    if (isLogin === false || user.role === "admin"){
+    if (isLogin === false || user?.role === "admin"){
         return <NotFound />
     }
     
-    if (isLogin === true && user.role === "customer"){
+    if (isLogin === true && user?.role === "customer"){
         document.title = "Luminous | Account"
 
         return (
             <>
-            <Navbar link={""} />
+            <Navbar />
             <AccountSection />
             <Footer />
             </>
