@@ -21,6 +21,8 @@ import goTop from "../utils/goTop"
 
 // home
 export default function Home(){
+    document.title = "Luminous"
+    
     return (
         <>
             <Navbar link="home" />
