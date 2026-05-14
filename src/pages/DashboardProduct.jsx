@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import Loader from "../components/Loader";
 import Sidebar from "../components/Sidebar";
 import { AuthContext } from "../contexts/AuthContext";
+import goTop from "../utils/goTop";
 import NotFound from "./NotFound";
 
 export default function DashboardProduct(){
@@ -82,20 +83,18 @@ function Content({ user, product }){
                 </article>
                 <article className="flex flex-col gap-4">
                     <article className="flex items-center gap-4 w-1/2">
-                        <Link to={`/dashboard/edit-product/${product.id}`} className="flex items-center justify-center gap-2 bg-yellow-400 p-2 rounded-lg w-1/2">
+                        <Link to={`/dashboard/edit-product/${product.id}`} className="flex items-center justify-center gap-2 bg-yellow-400 p-2 rounded-lg w-1/2" onClick={goTop}>
                             <IconEdit stroke={1.5} />
                             <p>Edit product</p>
                         </Link>
-                    {
-                        isLoading ?
+                        {isLoading ?
                         <div className="py-2.5 rounded-lg bg-red-500 text-white flex items-center justify-center w-1/2">
                             <Loader width={24} height={24} />
                         </div> :
                         <button type="button" className="flex items-center justify-center gap-2 bg-red-500 text-white p-2 rounded-lg w-1/2" onClick={handleDeleteProduct}>
                             <IconTrash stroke={1.5} />
                             <p>Delete product</p>
-                        </button>
-                    }
+                        </button>}
                     </article>
                     <article className="flex flex-col gap-4 w-1/2">
                         <article className="bg-primary/10 p-2 flex items-center gap-2 rounded-lg w-full">

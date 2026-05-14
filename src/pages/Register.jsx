@@ -119,13 +119,11 @@ function Register(){
                         <IconLock stroke={1.5} />
                         <input type="password" placeholder="Confirm password" className="bg-transparent outline-none w-[250px] mobile:w-full" required ref={confirmPasswordElement} />
                     </div>
-                    {
-                        isLoading ?
-                        <div className="py-2 rounded bg-primary text-white flex items-center justify-center">
-                            <Loader width={24} height={24} />
-                        </div> :
-                        <button type="submit" className="py-2 rounded bg-primary text-white">Register</button>
-                    }
+                    {isLoading ?
+                    <div className="py-2 rounded bg-primary text-white flex items-center justify-center">
+                        <Loader width={24} height={24} />
+                    </div> :
+                    <button type="submit" className="py-2 rounded bg-primary text-white">Register</button>}
                     <div className="not-have-account">
                         Already have an account? <Link to={"/login"} onClick={goTop} className="text-primary hover:underline">Login</Link>
                     </div>

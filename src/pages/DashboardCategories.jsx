@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import Loader from "../components/Loader";
 import Sidebar from "../components/Sidebar";
 import { AuthContext } from "../contexts/AuthContext";
+import goTop from "../utils/goTop";
 import NotFound from "./NotFound";
 
 export default function DashboardCategories(){
@@ -85,7 +86,7 @@ function Content({ user }){
                 </article>
                 <article className="flex flex-col gap-4">
                     <article className="flex">
-                        <Link to={"/dashboard/add-category"} className="flex items-center gap-2 bg-primary text-white p-2 rounded-lg">
+                        <Link to={"/dashboard/add-category"} className="flex items-center gap-2 bg-primary text-white p-2 rounded-lg" onClick={goTop}>
                             <IconPlus stroke={1.5} />
                             <p>Add category</p>
                         </Link>
@@ -99,23 +100,20 @@ function Content({ user }){
                             </tr>
                         </thead>
                         <tbody>
-                        {categories?.map((category, index) => (
+                            {categories?.map((category, index) => (
                             <tr key={index} className={`border-b border-primary`}>
                                 <td className="p-2">{index + 1}</td>
                                 <td className="p-2">{category.name}</td>
                                 <td className="p-2 text-center flex justify-center gap-1">
-                                {
-                                    isLoading ?
+                                    {isLoading ?
                                     <div className="p-1 rounded-lg bg-red-500 text-white flex items-center justify-center">
                                         <Loader width={24} height={24} />
                                     </div> :
                                     <button type="button" className="p-1 rounded-lg bg-red-500 text-white" title="delete" onClick={() => handleDeleteCategory(category.id)}>
                                         <IconTrash stroke={1.5} />
-                                    </button>
-                                }
+                                    </button>}
                                 </td>
-                            </tr>
-                        ))}
+                            </tr>))}
                         </tbody>
                     </table>
                 </article>

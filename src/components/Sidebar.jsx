@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/luminous-logo.png";
 import { AuthContext } from "../contexts/AuthContext";
 import { CartProductsContext } from "../contexts/CartProductsContext";
+import goTop from "../utils/goTop";
 
 export default function Sidebar({ page }){
     const { setIsLogin, setUser } = useContext(AuthContext)
@@ -28,7 +29,7 @@ export default function Sidebar({ page }){
                         <p>Luminous</p>
                     </span>
                 </article>
-                <Link to={"/dashboard"} className={`flex items-center gap-2 p-4 pr-20 hover:bg-primary hover:text-white transition-all w-full ${page == "dashboard" ? "text-primary" : ""}`}>
+                <Link to={"/dashboard"} className={`flex items-center gap-2 p-4 pr-20 hover:bg-primary hover:text-white transition-all w-full ${page == "dashboard" ? "text-primary" : ""}`} onClick={goTop}>
                     <span className="flex">
                         <IconLayoutDashboard stroke={1.5} />
                     </span>
@@ -36,7 +37,7 @@ export default function Sidebar({ page }){
                         <p>Dashboard</p>
                     </span>
                 </Link>
-                <Link to={"/dashboard/users"} className={`flex items-center gap-2 p-4 pr-20 hover:bg-primary hover:text-white transition-all w-full ${page == "users" ? "text-primary" : ""}`}>
+                <Link to={"/dashboard/users"} className={`flex items-center gap-2 p-4 pr-20 hover:bg-primary hover:text-white transition-all w-full ${page == "users" ? "text-primary" : ""}`} onClick={goTop}>
                     <span className="flex">
                         <IconUsers stroke={1.5} />
                     </span>
@@ -44,7 +45,7 @@ export default function Sidebar({ page }){
                         <p>Users</p>
                     </span>
                 </Link>
-                <Link to={"/dashboard/products"} className={`flex items-center gap-2 p-4 pr-20 hover:bg-primary hover:text-white transition-all w-full ${page == "products" ? "text-primary" : ""}`}>
+                <Link to={"/dashboard/products"} className={`flex items-center gap-2 p-4 pr-20 hover:bg-primary hover:text-white transition-all w-full ${page == "products" ? "text-primary" : ""}`} onClick={goTop}>
                     <span className="flex">
                         <IconShoppingBag stroke={1.5} />
                     </span>
@@ -52,7 +53,7 @@ export default function Sidebar({ page }){
                         <p>Products</p>
                     </span>
                 </Link>
-                <Link to={"/dashboard/categories"} className={`flex items-center gap-2 p-4 pr-20 hover:bg-primary hover:text-white transition-all w-full ${page == "categories" ? "text-primary" : ""}`}>
+                <Link to={"/dashboard/categories"} className={`flex items-center gap-2 p-4 pr-20 hover:bg-primary hover:text-white transition-all w-full ${page == "categories" ? "text-primary" : ""}`} onClick={goTop}>
                     <span className="flex">
                         <IconLabel stroke={1.5} />
                     </span>

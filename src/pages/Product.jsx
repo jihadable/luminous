@@ -137,16 +137,14 @@ function Product(){
                             <span className="product-price p-2 bg-primary text-white-prim rounded">{getIdCurrency(product.price * quantity)}</span>
                         </div>
                         <div className="w-full flex items-center justify-end gap-4 mobile:flex-col mobile:items-end">
-                        {
-                            isLoading ? 
+                            {isLoading ? 
                             <button type="button" className="flex items-center gap-2 p-2 px-24 bg-white shadow-med rounded-sm">
                                 <Loader width={28} height={28} />
                             </button> :
                             <button type="button" className="add-to-cart flex items-center gap-2 p-2 px-3 bg-white cursor-pointer shadow-med rounded-sm" onClick={addToCart}>
                                 <IconShoppingCartPlus stroke={1.5} />
                                 <span>Add to cart</span>
-                            </button>
-                        }
+                            </button>}
                             <button className="checkout flex items-center gap-2 p-2 px-3 text-white-prim shadow-med bg-primary rounded-sm">
                                 <IconCash stroke={1.5} />
                                 <span>Checkout</span>

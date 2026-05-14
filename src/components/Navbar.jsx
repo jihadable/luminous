@@ -85,7 +85,7 @@ function Navbar({ link }){
                     </button>
                     <div className={`menu ${showAccountMenu ? "flex" : "hidden"} flex-col items-end gap-4 absolute top-[105%] right-0 bg-white rounded-md py-2 px-4 border-2 border-primary/[.1]`}>
                         {user.role == "customer" &&
-                        <Link to={"/account"} className="w-full text-end border-b-2 border-transparent hover:border-primary">Account</Link>}
+                        <Link to={"/account"} className="w-full text-end border-b-2 border-transparent hover:border-primary" onClick={goTop}>Account</Link>}
                         {user.role == "admin" &&
                         <Link to={"/dashboard"} className="w-full text-end border-b-2 border-transparent hover:border-primary">Dashboard</Link>}
                         <button type="button" className="w-full text-end border-b-2 border-transparent hover:border-primary" onClick={handleLogout}>Logout</button>
@@ -127,7 +127,6 @@ function Navbar({ link }){
 }
 
 function ShoppingCart({ showShoppingCart, setShowShoppingCart, shoppingCart, shoppingCartBtn }){
-
     const { user } = useContext(AuthContext)
     const { cartProducts, setCartProducts } = useContext(CartProductsContext)
     const [isLoading, setIsLoading] = useState(false)

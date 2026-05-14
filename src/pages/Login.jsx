@@ -73,13 +73,11 @@ function Login(){
                     <article>
                         <Link to={"/forget-password"} className="text-primary hover:underline">Forget password?</Link>
                     </article>
-                    {
-                        isLoading ?
-                        <div className="py-2 rounded bg-primary text-white flex items-center justify-center">
-                            <Loader width={24} height={24} />
-                        </div> :
-                        <button type="submit" className="py-2 rounded bg-primary text-white">Login</button>
-                    }
+                    {isLoading ?
+                    <div className="py-2 rounded bg-primary text-white flex items-center justify-center">
+                        <Loader width={24} height={24} />
+                    </div> :
+                    <button type="submit" className="py-2 rounded bg-primary text-white">Login</button>}
                     <div className="not-have-account">
                         Do not have account yet? <Link to={"/register"} onClick={goTop} className="text-primary hover:underline">Register</Link>
                     </div>

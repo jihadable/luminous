@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import Loader from "../components/Loader";
 import Sidebar from "../components/Sidebar";
 import { AuthContext } from "../contexts/AuthContext";
+import goTop from "../utils/goTop";
 import NotFound from "./NotFound";
 
 export default function DashboardProducts(){
@@ -262,7 +263,7 @@ function Content({ user }){
                 </article>
                 <article className="flex flex-col gap-4">
                     <article className="flex">
-                        <Link to={"/dashboard/add-product"} className="flex items-center gap-2 bg-primary text-white p-2 rounded-lg">
+                        <Link to={"/dashboard/add-product"} className="flex items-center gap-2 bg-primary text-white p-2 rounded-lg" onClick={goTop}>
                             <IconPlus stroke={1.5} />
                             <p>Add product</p>
                         </Link>
@@ -306,23 +307,21 @@ function Content({ user }){
                             <tr key={index} className={`border-b border-primary`}>
                                 <td className="p-2">{limit * (page - 1) + index + 1}</td>
                                 <td className="p-2">
-                                    <Link to={`/dashboard/products/${product.id}`}>{product.name}</Link>
+                                    <Link to={`/dashboard/products/${product.id}`} onClick={goTop}>{product.name}</Link>
                                 </td>
                                 <td className="p-2 text-center">{(Number(product.price)).toLocaleString("id-ID")}</td>
                                 <td className="p-2 text-center">{product.stock}</td>
                                 <td className="p-2 text-center flex justify-center gap-1">
-                                    <Link to={`/dashboard/edit-product/${product.id}`} className="p-1 rounded-md bg-yellow-400 text-black">
+                                    <Link to={`/dashboard/edit-product/${product.id}`} className="p-1 rounded-md bg-yellow-400 text-black" onClick={goTop}>
                                         <IconEdit stroke={1.5} />
                                     </Link>
-                                {
-                                    isLoading ?
+                                    {isLoading ?
                                     <div className="p-1 rounded-lg bg-red-500 text-white flex items-center justify-center">
                                         <Loader width={24} height={24} />
                                     </div> :
                                     <button type="button" className="p-1 rounded-md bg-red-500 text-white" onClick={() => handleDeleteProduct(product.id)}>
                                         <IconTrash stroke={1.5} />
-                                    </button>
-                                }
+                                    </button>}
                                 </td>
                             </tr>
                         ))}
@@ -335,11 +334,10 @@ function Content({ user }){
                         <button type="button" className="flex items-center justify-center hover:bg-primary hover:text-white disabled:text-gray-300 disabled:hover:text-gray-300 disabled:hover:bg-transparent rounded-full p-2 transition-all" disabled={page < 2} onClick={jumpToPreviousPage}>
                             <IconChevronLeft stroke={1.5} />
                         </button>
-                    {paginationButtons.map(number => (
+                        {paginationButtons.map(number => (
                         <button type="button" className={`px-4 hover:bg-primary hover:text-white rounded-md p-2 transition-all ${page == number ? "border border-primary" : ""}`} onClick={() => updatePage(`${number}`)} key={number}>
                             <p>{number}</p>
-                        </button>
-                    ))}
+                        </button>))}
                         <button type="button" className="flex items-center justify-center hover:bg-primary hover:text-white disabled:text-gray-300 disabled:hover:text-gray-300 disabled:hover:bg-transparent rounded-full p-2 transition-all" disabled={page > totalPages - 1} onClick={jumpToNextPage}>
                             <IconChevronRight stroke={1.5} />
                         </button>

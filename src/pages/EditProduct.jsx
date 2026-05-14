@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import Loader from "../components/Loader";
 import Sidebar from "../components/Sidebar";
 import { AuthContext } from "../contexts/AuthContext";
+import goTop from "../utils/goTop";
 import NotFound from "./NotFound";
 
 export default function EditProduct(){
@@ -236,20 +237,17 @@ function Content({ user, product }){
                                 <IconChevronDown stroke={1.5} className={`transition-all ${isCategoryOptionsShowed ? "rotate-180" : ""}`} />
                             </button>
                             <article className={`${isCategoryOptionsShowed ? "flex" : "hidden"} flex-col absolute top-full left-0 bg-white shadow-2xl rounded-md overflow-hidden`}>
-                            {categoryOptions.map((category, index) => (
-                                <button type="button" className="text-left p-2 whitespace-nowrap hover:bg-primary/5" key={index} onClick={() => updateSelectedCategory(category)}>{category.label}</button>
-                            ))}
+                                {categoryOptions.map((category, index) => (
+                                <button type="button" className="text-left p-2 whitespace-nowrap hover:bg-primary/5" key={index} onClick={() => updateSelectedCategory(category)}>{category.label}</button>))}
                             </article>
                         </article>
                         <article className="flex items-center gap-4">
-                            <Link to={"/dashboard/products"} className="py-2 rounded-lg w-full bg-red-500 text-white text-center">Cancel</Link>
-                        {
-                            isLoading ?
+                            <Link to={"/dashboard/products"} className="py-2 rounded-lg w-full bg-red-500 text-white text-center" onClick={goTop}>Cancel</Link>
+                            {isLoading ?
                             <div className="py-2.5 w-full rounded-lg bg-primary text-white flex items-center justify-center">
                                 <Loader width={24} height={24} />
                             </div> :
-                            <button type="submit" className="py-2 rounded-lg w-full bg-primary text-white">Submit</button>
-                        }
+                            <button type="submit" className="py-2 rounded-lg w-full bg-primary text-white">Submit</button>}
                         </article>
                     </form>
                 </article>

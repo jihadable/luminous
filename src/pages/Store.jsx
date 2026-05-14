@@ -164,12 +164,11 @@ function StoreSearch(){
         <>
         <article className="store-header w-[90vw] mx-auto flex flex-col items-center gap-4">
             <header className="text-3xl mt-36 font-semibold">Find your best will</header>
-            <article className="category-value flex items-center flex-wrap gap-4 text-base justify-center mobile:w-[90vw]">
-            {categoryOptions.map((categoryOption, index) => (
+            <article className="category-value flex items-center flex-wrap gap-4 justify-center text-xl mobile:w-[90vw]">
+                {categoryOptions.map((categoryOption, index) => (
                 <button type="button" className={`flex gap-1 items-center py-1 px-4 rounded border-2 transition-all cursor-pointer ${selectedCategory === categoryOption.label ? "border-primary bg-primary text-white-prim" : "border-primary/[.1] hover:bg-hov"}`} key={index} onClick={() => updateSelectedCategoryOption(categoryOption)}>
                     {categoryOption.label}
-                </button>
-            ))}
+                </button>))}
             </article>
         </article>
         <StoreGrid products={products} />
@@ -202,17 +201,15 @@ function StoreGrid({ products }){
     return (
         <article className="store-grid w-[80vw] my-12 mx-auto grid grid-cols-5 gap-4 mobile:w-full mobile:px-4 mobile:grid-cols-2 tablet:grid-cols-4 tablet:w-[90vw]">
             {products && products.map((product, index) => (
-                <Link to={`/store/${product.id}`} onClick={goTop} className="product flex flex-col rounded-lg bg-white overflow-hidden border-2 border-primary/[.1] hover:border-primary hover:shadow-none" key={index}>
-                    <img src={`${productImagesAPIEndpoint}/${product.image_url}`} alt={product.name} loading="lazy" />
-                    <div className="info p-4 flex flex-col gap-4">
-                        <div className="product-name text-xl font-bold mobile:text-xl tablet:text-xl">{product.name}</div>
-                        <div className="product-price text-xl mobile:text-base tablet:text-base">{getIdCurrency(Number(product.price))}</div>
-                    </div>
-                </Link>
-            ))}
+            <Link to={`/store/${product.id}`} onClick={goTop} className="product flex flex-col rounded-lg bg-white overflow-hidden border-2 border-primary/[.1] hover:border-primary hover:shadow-none" key={index}>
+                <img src={`${productImagesAPIEndpoint}/${product.image_url}`} alt={product.name} loading="lazy" />
+                <article className="p-4 flex flex-col gap-4 text-xl">
+                    <p className="font-bold">{product.name}</p>
+                    <p>{getIdCurrency(Number(product.price))}</p>
+                </article>
+            </Link>))}
             {!products && [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(item => (
-                <ItemSkeleton key={item} />
-            ))}
+            <ItemSkeleton key={item} />))}
         </article>
     )
 }

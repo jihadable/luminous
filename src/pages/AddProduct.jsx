@@ -235,13 +235,11 @@ function Content({ user }){
                             ))}
                             </article>
                         </article>
-                    {
-                        isLoading ?
+                        {isLoading ?
                         <div className="py-2.5 rounded-lg bg-primary text-white flex items-center justify-center">
                             <Loader width={24} height={24} />
                         </div> :
-                        <button type="submit" className="py-2 rounded-lg bg-primary text-white">Submit</button>
-                    }
+                        <button type="submit" className="py-2 rounded-lg bg-primary text-white">Submit</button>}
                     </form>
                 </article>
             </article>
