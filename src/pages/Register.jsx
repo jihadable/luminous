@@ -93,40 +93,40 @@ function Register(){
                     <img src={luminousLogo} alt="Luminous" className="w-14"/>
                     <span className="text-4xl">Luminous</span>
                 </header>
-                <form action="" className="flex flex-col item-center p-10 rounded-lg bg-white gap-6 shadow-2xl mobile:w-[90vw] mobile:p-6 tablet:w-[60vw]" onSubmit={handleRegister}>
-                    <div className="form-login-header text-3xl text-center">Register</div>
-                    <div className="bg-primary/10 p-3 flex items-center gap-3 rounded-lg">
+                <form action="" className="flex flex-col item-center p-10 rounded-lg bg-white gap-6 shadow-2xl text-xl mobile:w-[90vw] mobile:p-6 tablet:w-[60vw]" onSubmit={handleRegister}>
+                    <p className="form-login-header text-3xl text-center">Register</p>
+                    <article className="bg-primary/10 p-3 flex items-center gap-3 rounded-lg">
                         <IconUserCircle stroke={1.5} />
                         <input type="text" placeholder="Name" className="bg-transparent outline-none w-[250px] mobile:w-full" required ref={nameElement} />
-                    </div>
-                    <div className="bg-primary/10 p-3 flex items-center gap-3 rounded-lg">
+                    </article>
+                    <article className="bg-primary/10 p-3 flex items-center gap-3 rounded-lg">
                         <IconMail stroke={1.5} />
                         <input type="email" placeholder="Email" className="bg-transparent outline-none w-[250px] mobile:w-full" required ref={emailElement} />
-                    </div>
-                    <div className="bg-primary/10 p-3 flex items-center gap-3 rounded-lg">
+                    </article>
+                    <article className="bg-primary/10 p-3 flex items-center gap-3 rounded-lg">
                         <IconPhone stroke={1.5} />
                         <input type="text" placeholder="Phone" className="bg-transparent outline-none w-[250px] mobile:w-full" required ref={phoneElement} />
-                    </div>
-                    <div className="bg-primary/10 p-3 flex items-center gap-3 rounded-lg">
+                    </article>
+                    <article className="bg-primary/10 p-3 flex items-center gap-3 rounded-lg">
                         <IconMapPin stroke={1.5} />
                         <input type="text" placeholder="Address" className="bg-transparent outline-none w-[250px] mobile:w-full" required ref={addressElement} />
-                    </div>
-                    <div className="bg-primary/10 p-3 flex items-center gap-3 rounded-lg">
+                    </article>
+                    <article className="bg-primary/10 p-3 flex items-center gap-3 rounded-lg">
                         <IconLock stroke={1.5} />
                         <input type="password" placeholder="Password" className="bg-transparent outline-none w-[250px] mobile:w-full" required ref={passwordElement} />
-                    </div>
-                    <div className="bg-primary/10 p-3 flex items-center gap-3 rounded-lg">
+                    </article>
+                    <article className="bg-primary/10 p-3 flex items-center gap-3 rounded-lg">
                         <IconLock stroke={1.5} />
                         <input type="password" placeholder="Confirm password" className="bg-transparent outline-none w-[250px] mobile:w-full" required ref={confirmPasswordElement} />
-                    </div>
+                    </article>
                     {isLoading ?
                     <div className="py-2 rounded bg-primary text-white flex items-center justify-center">
                         <Loader width={24} height={24} />
                     </div> :
-                    <button type="submit" className="py-2 rounded bg-primary text-white">Register</button>}
-                    <div className="not-have-account">
+                    <button type="submit" className="py-2 rounded-lg bg-primary text-white">Register</button>}
+                    <article className="not-have-account">
                         Already have an account? <Link to={"/login"} onClick={goTop} className="text-primary hover:underline">Login</Link>
-                    </div>
+                    </article>
                 </form>
             </div>
         )

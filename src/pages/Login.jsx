@@ -60,16 +60,16 @@ function Login(){
                     <img src={luminousLogo} alt="Luminous" className="w-14"/>
                     <span className="text-4xl">Luminous</span>
                 </header>
-                <form action="" className="flex flex-col item-center p-10 rounded-lg bg-white gap-6 shadow-2xl mobile:w-[90vw] mobile:p-6 tablet:w-[60vw]" onSubmit={handleLogin}>
-                    <div className="form-login-header text-3xl text-center">Login</div>
-                    <div className="form-login-email relative bg-primary/10 p-3 flex items-center gap-3 rounded-lg">
+                <form action="" className="flex flex-col item-center p-10 rounded-lg bg-white gap-6 shadow-2xl text-xl mobile:w-[90vw] mobile:p-6 tablet:w-[60vw]" onSubmit={handleLogin}>
+                    <p className="form-login-header text-3xl text-center">Login</p>
+                    <article className="form-login-email relative bg-primary/10 p-3 flex items-center gap-3 rounded-lg">
                         <IconMail stroke={1.5} />
                         <input type="email" placeholder="Email" className="bg-transparent outline-none w-[250px] mobile:w-full" required ref={emailElement} />
-                    </div>
-                    <div className="form-login-password relative bg-primary/10 p-3 flex items-center gap-3 rounded-lg">
+                    </article>
+                    <article className="form-login-password relative bg-primary/10 p-3 flex items-center gap-3 rounded-lg">
                         <IconLock stroke={1.5} />
                         <input type="password" placeholder="Password" className="bg-transparent outline-none w-[250px] mobile:w-full" required ref={passwordElement} />
-                    </div>
+                    </article>
                     <article>
                         <Link to={"/forget-password"} className="text-primary hover:underline">Forget password?</Link>
                     </article>
@@ -77,10 +77,10 @@ function Login(){
                     <div className="py-2 rounded bg-primary text-white flex items-center justify-center">
                         <Loader width={24} height={24} />
                     </div> :
-                    <button type="submit" className="py-2 rounded bg-primary text-white">Login</button>}
-                    <div className="not-have-account">
+                    <button type="submit" className="py-2 rounded-lg bg-primary text-white">Login</button>}
+                    <article className="not-have-account">
                         Do not have account yet? <Link to={"/register"} onClick={goTop} className="text-primary hover:underline">Register</Link>
-                    </div>
+                    </article>
                 </form>
             </div>
         )
